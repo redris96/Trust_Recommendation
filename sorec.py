@@ -14,11 +14,26 @@ def dbound(x):
 	y = numpy.exp(x)
 	return y/pow((1 + y),2)
 
-def matrix_factorize(R, C, U, V, Z, K, steps=1000000, alpha=0.01, beta=0.001, gamma = 10):
+def bou(R):
+	for i in xrange(len(R)):
+		for j in xrange(len(R[i])):
+			a = bound(R[i][j])
+			R[i][j] = a
+	return R
+
+def get(R):
+	for i in xrange(len(R)):
+		for j in xrange(len(R[i])):
+			if R[i][j] > 0:
+				R[i][j] = (R[i][j] * 4.0) + 1
+	return R
+def matrix_factorize(R, C, U, V, Z, K, steps=10000, alpha=0.1, beta=0.001, gamma = 10):
 	V = V.T
 	Z = Z.T
 	e = 0
+	# ne = 0
 	for step in xrange(steps):
+		ne = 0
 		for i in xrange(len(R)):
 			for j in xrange(len(R[i])):
 				if R[i][j] > 0:
@@ -26,9 +41,11 @@ def matrix_factorize(R, C, U, V, Z, K, steps=1000000, alpha=0.01, beta=0.001, ga
 					a = bound(y)
 					b = dbound(y)
 					eij = (R[i][j] - a)
+					# ne += eij * eij
 					for k in xrange(K):
 						U[i][k] = U[i][k] + alpha * (b * eij * V[k][j] - beta * U[i][k])
 						V[k][j] = V[k][j] + alpha * (b * eij * U[i][k] - beta * V[k][j])
+						# ne += beta * (U[i][k]*U[i][k] + V[k][j]*V[k][j])
 			for j in xrange(len(C[i])):
 				if C[i][j] > 0:
 					y = numpy.dot(U[i,:], Z[:,j])
@@ -37,11 +54,14 @@ def matrix_factorize(R, C, U, V, Z, K, steps=1000000, alpha=0.01, beta=0.001, ga
 					jminus = numpy.count_nonzero(C[:,j])
 					iplus = numpy.count_nonzero(C[i,:])
 					weight = numpy.sqrt(jminus/ (iplus+jminus + 0.0))
+					weight = 1
 					eij = (C[i][j] * weight - a)
+					# ne += gamma * eij * eij
 					for k in xrange(K):
 						U[i][k] = U[i][k] + alpha * (gamma * b * eij * Z[k][j]) 
 						Z[k][j] = Z[k][j] + alpha * (gamma * b * eij * U[i][k] - beta * Z[k][j])
-		eprev = e
+						# ne += gamma * Z[k][j] * Z[k][j]
+		# ne = ne * 0.5
 		e = 0
 		for i in xrange(len(R)):
 			for j in xrange(len(R[i])):
@@ -59,17 +79,15 @@ def matrix_factorize(R, C, U, V, Z, K, steps=1000000, alpha=0.01, beta=0.001, ga
 					jminus = numpy.count_nonzero(C[:,j])
 					iplus = numpy.count_nonzero(C[i,:])
 					weight = numpy.sqrt(jminus/ (iplus+jminus + 0.0))
+					weight = 1
 					e = e + (gamma/2)*pow(C[i][j] * weight - a, 2)
 					for k in xrange(K):
 						e = e + (beta/2) * (pow(Z[k][j],2))
-		# if e < 1.8903:
-		# 	print "no way"
-		# 	break
 		if e < 0.001:
-			print e
+			# print e
 			break
 		else:
-			print e
+			# print e
 			pass
 	return U, V.T , Z.T, e
 
@@ -106,9 +124,14 @@ V = numpy.random.rand(M,K)
 Z = numpy.random.rand(N,K)
 
 nU, nV, nZ, e = matrix_factorize(R, C, U, V, Z, K)
-print nU, "\n", nV
+# print nU, "\n", nV
 nR = numpy.dot(nU,nV.T)
-print nR, "\n", R
+nnR = bou(nR)
+aR = get(nnR)
+# print nnR, "\n", R
+print aR
 nC = numpy.dot(nU,nZ.T)
-print nC, "\n", C
-print e
+nnC = bou(nC)
+# print nnC
+# print nC, "\n", C
+print "error", e
