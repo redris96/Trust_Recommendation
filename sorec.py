@@ -41,11 +41,13 @@ def matrix_factorize(R, C, U, V, Z, K, steps=10000, alpha=0.1, beta=0.001, gamma
 					a = bound(y)
 					b = dbound(y)
 					eij = (R[i][j] - a)
-					# ne += eij * eij
-					for k in xrange(K):
-						U[i][k] = U[i][k] + alpha * (b * eij * V[k][j] - beta * U[i][k])
-						V[k][j] = V[k][j] + alpha * (b * eij * U[i][k] - beta * V[k][j])
-						# ne += beta * (U[i][k]*U[i][k] + V[k][j]*V[k][j])
+					ne += eij * eij
+					# for k in xrange(K):
+					# 	U[i][k] = U[i][k] + alpha * (b * eij * V[k][j] - beta * U[i][k])
+					# 	V[k][j] = V[k][j] + alpha * (b * eij * U[i][k] - beta * V[k][j])
+					U[i,:] = U[i,:] + alpha * (b * eij * V[:,j] - beta * U[i,:])
+					V[:,j] = V[:,j] + alpha * (b * eij * U[i,:] - beta * V[:,j])
+					ne += beta * (U[i,:]*U[i,:] + V[:,j]*V[:,j])
 			for j in xrange(len(C[i])):
 				if C[i][j] > 0:
 					y = numpy.dot(U[i,:], Z[:,j])
@@ -57,9 +59,11 @@ def matrix_factorize(R, C, U, V, Z, K, steps=10000, alpha=0.1, beta=0.001, gamma
 					weight = 1
 					eij = (C[i][j] * weight - a)
 					# ne += gamma * eij * eij
-					for k in xrange(K):
-						U[i][k] = U[i][k] + alpha * (gamma * b * eij * Z[k][j]) 
-						Z[k][j] = Z[k][j] + alpha * (gamma * b * eij * U[i][k] - beta * Z[k][j])
+					# for k in xrange(K):
+					# 	U[i][k] = U[i][k] + alpha * (gamma * b * eij * Z[k][j]) 
+					# 	Z[k][j] = Z[k][j] + alpha * (gamma * b * eij * U[i][k] - beta * Z[k][j])
+					U[i,:] = U[i,:] + alpha * (gamma * b * eij * Z[:,j]) 
+					Z[:,j] = Z[:,j] + alpha * (gamma * b * eij * U[i,:] - beta * Z[:,j])
 						# ne += gamma * Z[k][j] * Z[k][j]
 		# ne = ne * 0.5
 		e = 0
