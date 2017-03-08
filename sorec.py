@@ -87,7 +87,7 @@ def matrix_factorize(R, C, U, V, Z, K, steps=10000, alpha=0.1, beta=0.001, gamma
 			# print e
 			break
 		else:
-			# print e
+			print e
 			pass
 	return U, V.T , Z.T, e
 
