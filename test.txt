@@ -1,0 +1,64 @@
+Different cases with a user with no rating and trust network
+
+#Case1: Highly trusted users rate an item highly
+#Expected Output: Rating of that particular item is high.
+
+R = [
+	 [5.0,2,0,3,0,4,0,0],
+	 [4,3,0,0,5.0,0,0,0],
+	 [4,0,2,0,0,0,2,4],
+	 [0,0,0,0,0,0,0,0],
+	 [5,1,2,0,4,3,0,0],
+	 [4,3,0,2,4,0,3,5],
+	]
+
+C = [
+	 [0,0,0,0,0,0],
+	 [0,0,0,1,0,0],
+	 [0.8,0,0,0,0,0],
+	 [0.8,1,0,0,0.6,0],
+	 [0,0,0.4,0,0,0.8],
+	 [0,0,0,0,0,0],
+	]
+
+#Case2: Highly trusted users rate an item low.
+#Expected Output: Rating of that particular item is low.
+
+R = [
+	 [3.0,2,0,3,0,2,0,0],
+	 [2,3,0,0,5.0,2,0,0],
+	 [4,0,2,0,0,0,1,4],
+	 [0,0,0,0,0,0,0,0],
+	 [5,1,2,0,4,3,2,0],
+	 [4,3,0,2,4,0,2,5],
+	]
+
+C = [
+	 [0,0,0,0,0,0],
+	 [0,0,0,1,0,0],
+	 [0,0,0.8,0,0,0],
+	 [1,0.7,0,0,0,0.9],
+	 [0,0,0,0,0.6,0.8],
+	 [0,0,0,0,0,0],
+	]
+
+#Case1: Different highly trusted users rate an item highly and poorely respectively.
+#Expected Output: Corresponding high and low rating predictions.
+
+R = [
+	 [5.0,2,0,3,0,2,0,0],
+	 [4,3,0,0,5.0,1,0,0],
+	 [4,0,2,0,0,0,2,4],
+	 [0,0,0,0,0,0,0,0],
+	 [5,1,2,0,4,3,1,0],
+	 [4,3,0,2,4,0,3,5],
+	]
+
+C = [
+	 [0,0,0,0,0,0],
+	 [0,0,0,1,0,0],
+	 [0.8,0,0,0,0,0],
+	 [0.8,1,0,0,0.6,0],
+	 [0,0,0.4,0,0,0.8],
+	 [0,0,0,0,0,0],
+	]

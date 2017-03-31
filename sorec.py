@@ -1,4 +1,7 @@
 import numpy as np
+from scipy import sparse as sp
+import sys
+from sklearn.model_selection import train_test_split
 
 def norm(R):
 	for i in xrange(len(R)):
@@ -28,7 +31,7 @@ def get(R):
 				R[i][j] = (R[i][j] * 4.0) + 1
 	return R
 
-def matrix_factorize(R, C, U, V, Z, K, steps=10000, alpha=0.1, beta=0.001, gamma = 10):
+def matrix_factorize(R, C, U, V, Z, K, steps=200, alpha=0.1, beta=0.001, gamma = 10):
 	V = V.T
 	Z = Z.T
 	e = 0
@@ -53,8 +56,9 @@ def matrix_factorize(R, C, U, V, Z, K, steps=10000, alpha=0.1, beta=0.001, gamma
 					b = dbound(y)
 					jminus = np.count_nonzero(C[:,j])
 					iplus = np.count_nonzero(C[i,:])
-					weight = np.sqrt(jminus/ (iplus+jminus + 0.0))
-					weight = 1
+					weight = np.sqrt(jminus/ (iplus+jminus + 0.0))	
+					# print "w for ", i, weight		
+					# weight = 1
 					eij = (C[i][j] * weight - a)
 					ne += gamma * eij * eij
 					U[i,:] = U[i,:] + alpha * (gamma * b * eij * Z[:,j]) 
@@ -64,28 +68,106 @@ def matrix_factorize(R, C, U, V, Z, K, steps=10000, alpha=0.1, beta=0.001, gamma
 		if ne < 0.001:
 			break
 		else:
-			print ne
+			# print ne
 			pass
 	return U, V.T , Z.T, ne
 
+def mae(R, test, u, itm):
+	e = 0.0
+	ke = 0.0
+	for i in test:
+		try:
+			e += np.absolute(R[u[i[0]]][itm[i[1]]] - i[2])
+		except KeyError:
+			ke += 1
+	if ke > 0:
+		print "KeyErrors", ke
+	return e, e/len(test)
 
-R = [
-	 [5.0,2,0,3,0,4,0,0],
-	 [4,3,0,0,5.0,0,0,0],
-	 [4,0,2,0,0,0,2,4],
-	 [0,0,0,0,0,0,0,0],
-	 [5,1,2,0,4,3,0,0],
-	 [4,3,0,2,4,0,3,5],
-	]
 
-C = [
-	 [0,0,0,0,0,0],
-	 [0,0,0,1,0,0],
-	 [0.8,0,0,0,0,0],
-	 [0.8,1,0,0,0.6,0],
-	 [0,0,0.4,0,0,0.8],
-	 [0,0,0,0,0,0],
-	]
+
+# R = [
+# 	 [5.0,2,1,3,0,4,0,0],
+# 	 [4,3,0,0,5.0,0,0,0],
+# 	 [4,0,2,0,0,0,2,4],
+# 	 [0,0,0,0,0,0,0,0],
+# 	 [5,1,2,0,4,3,0,0],
+# 	 [4,3,0,2,4,0,3,5],
+# 	]
+
+# C = [
+# 	 [0,0,0,0,0,0],
+# 	 [0,0,0,1,0,0],
+# 	 [0.8,0,0,0,0,0],
+# 	 [0.8,1,0,0,0.6,0],
+# 	 [0,0,0.4,0,0,0.8],
+# 	 [0,0,0,0,0,0],
+# 	]
+
+
+def data(f,sh, ud, itm,flag):
+	# print len(f[:,2]), len(f[:,[0]])
+	# a = sp.csr_matrix((f[:,2], (f[:,0],f[:,1])), shape=sh)
+	a = np.zeros(sh)
+	# itm = {}
+	# if flag == 0:
+	# 	u = {}
+	# else:
+	u = ud
+	itm = itm
+	j = 0
+	k = 0
+	for i in f:
+		if u.has_key(i[0]) == False:
+			u[i[0]] = j
+			j += 1
+		if flag == 1:
+			if u.has_key(i[1]) == False:
+				u[i[1]] = j
+				j += 1
+			a[u[i[0]]][u[i[1]]] = i[2]
+		else:
+			if itm.has_key(i[1]) == False:
+				itm[i[1]] = k
+				k += 1
+			a[u[i[0]]][itm[i[1]]] = i[2]
+		# print i[2]
+		# sys.exit()
+	return a, u, itm
+
+def create_dic(r):
+	u = {}
+	itm = {}
+	j = 0
+	k = 0
+	for i in r:
+		if u.has_key(i[0]) == False:
+			u[i[0]] = j
+			j += 1
+		if itm.has_key(i[1]) == False:
+			itm[i[1]] = k
+			k += 1
+	return u, itm
+
+#data
+r_data = np.genfromtxt('rating_short_7_21.txt', dtype=int, delimiter=' ')
+t_data = np.genfromtxt('trust_short_7_21.txt', dtype=int, delimiter=' ')
+r_train, r_test = train_test_split(r_data, test_size=0.3, random_state=42)
+# print r_train.shape, r_test.shape
+# print r_train[:10]
+# sys.exit()
+# r_train, r_test = r_data[train], r_data[test]
+# print r_train[:2]
+# sys.exit()
+ud, itm = create_dic(r_data)
+# sys.exit()
+
+R, ud, itm = data(r_train, (7000,21000), ud, itm, 0)
+C, ud, itm = data(t_data, (7000,7000), ud, itm, 1)
+
+# print type(C)
+# quit()
+
 
 R = np.array(R)
 R = norm(R)
@@ -100,11 +182,20 @@ U = np.random.rand(N,K)
 V = np.random.rand(M,K)
 Z = np.random.rand(N,K)
 
-nU, nV, nZ, e = matrix_factorize(R, C, U, V, Z, K)
+print "finished data pre-processing"
+
+nU, nV, nZ, em = matrix_factorize(R, C, U, V, Z, K)
 nR = np.dot(nU,nV.T)
 nnR = bou(nR)
 aR = get(nnR)
-print aR
-nC = np.dot(nU,nZ.T)
-nnC = bou(nC)
-print "error", e
+# print aR
+
+# nC = np.dot(nU,nZ.T)
+# nnC = bou(nC)
+print "process error", em
+
+print "calculating MAE"
+
+t, e, ke = mae(nR, r_test, ud, itm)
+print "test len", r_test.shape
+print "total", t, "MAE", e
