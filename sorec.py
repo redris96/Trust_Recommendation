@@ -70,6 +70,8 @@ def matrix_factorize(R, C, U, V, Z, K, steps=200, alpha=0.1, beta=0.001, gamma =
 		else:
 			# print ne
 			pass
+	if step % 10:
+		print step, "iterations done."
 	return U, V.T , Z.T, ne
 
 def mae(R, test, u, itm):

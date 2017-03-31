@@ -14,17 +14,9 @@ def dbound(x):
 	y = numpy.exp(x)
 	return y/pow((1 + y),2)
 
-def matrix_factorize(R, P, Q, C, K, steps=5000, alpha=0.0002, beta=0.001,w=0.4):
+def matrix_factorize(R, P, Q, C, K, steps=200, alpha=0.2, beta=0.001,w=0.4):
 	Q = Q.T
-	for i in xrange(len(R)):
-		for j in xrange(len(R[i])):
-			if R[i][j] > 0:
-				v = numpy.dot(P[i,:], Q[:,j]) * w
-				tot = 0
-				for k in xrange(len(R)):
-					if C[i][j] > 0:
-						tot += numpy.dot(P[k,:], Q[:,j]) * C[i][j]
-				v += tot * (1-w)
+	ra = np.zeros(R.shape)
 	for step in xrange(steps):
 		for i in xrange(len(R)):
 			for j in xrange(len(R[i])):
@@ -34,10 +26,20 @@ def matrix_factorize(R, P, Q, C, K, steps=5000, alpha=0.0002, beta=0.001,w=0.4):
 					for k in xrange(len(R)):
 						if C[i][j] > 0:
 							tot += numpy.dot(P[k,:], Q[:,j]) * C[i][j]
+					v += tot * (1-w)
+					ra[i][j] = v
+		for i in xrange(len(R)):
+			for j in xrange(len(R[i])):
+				if R[i][j] > 0:
+					v = numpy.dot(P[i,:], Q[:,j]) * w
+					tot = 0
+					for k in xrange(len(R)):
+						if C[i][j] > 0:
+							tot += numpy;.dot(P[k,:], Q[:,j]) * C[i][j]
 					v += (1-w)*tot
 					a = bound(v)
 					b = dbound(v)
-					eij = R[i][j] - a 
+					eij = a - R[i][j]
 					for k in xrange(K):
 						P[i][k] = P[i][k] + alpha * (w* b * eij * Q[k][j] + (1-w)*eij* - beta * P[i][k])
 						dtot = 0
