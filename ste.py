@@ -33,20 +33,26 @@ def matrix_factorize(R, U, V, C, K, steps=200, alpha=0.1, beta=0.001,w=0.4):
 	ra = np.zeros(R.shape)
 	ne = 0
 	for step in xrange(steps):
+		# for i in xrange(len(R)):
+		# 	for j in xrange(len(R[i])):
+		# 		if R[i][j] > 0:
+		# 			v = np.dot(U[i,:], V[:,j]) * w
+		# 			tot = 0
+		# 			for k in xrange(len(R)):
+		# 				if C[i][k] > 0:
+		# 					tot += np.dot(U[k,:], V[:,j]) * C[i][k]
+		# 			v += tot * (1-w)
+		# 			ra[i][j] = v
 		for i in xrange(len(R)):
 			for j in xrange(len(R[i])):
 				if R[i][j] > 0:
+					# v = ra[i][j]
 					v = np.dot(U[i,:], V[:,j]) * w
 					tot = 0
 					for k in xrange(len(R)):
 						if C[i][k] > 0:
 							tot += np.dot(U[k,:], V[:,j]) * C[i][k]
 					v += tot * (1-w)
-					ra[i][j] = v
-		for i in xrange(len(R)):
-			for j in xrange(len(R[i])):
-				if R[i][j] > 0:
-					v = ra[i][j]
 					a = bound(v)
 					b = dbound(v)
 					eij = a - R[i][j]
@@ -54,11 +60,18 @@ def matrix_factorize(R, U, V, C, K, steps=200, alpha=0.1, beta=0.001,w=0.4):
 					tot = np.zeros(K)
 					for k in xrange(len(R)):
 						if C[k][i] > 0:
-							v = ra[k][j]
-							ak = bound(v)
-							bk = dbound(v)
-							keij = ak - R[k][j]
-							tot += keij*bk*C[k][i]*V[:,j]
+							if R[k][j] > 0:
+								# v = ra[k][j]
+								v = np.dot(U[k,:], V[:,j]) * w
+								tota = 0
+								for p in xrange(len(R)):
+									if C[k][p] > 0:
+										tota += np.dot(U[p,:], V[:,j]) * C[k][p]
+								v += tota * (1-w)
+								ak = bound(v)
+								bk = dbound(v)
+								keij = ak - R[k][j]
+								tot += keij*bk*C[k][i]*V[:,j]
 					U[i,:] = U[i,:] - alpha*(w*b*eij*V[:,j] + (1-w)*tot + beta*U[i,:])
 					tot = 0
 					for k in xrange(len(R)):
@@ -67,6 +80,7 @@ def matrix_factorize(R, U, V, C, K, steps=200, alpha=0.1, beta=0.001,w=0.4):
 					# tot = np.dot(C[i,:], U)
 					V[:,j] = V[:,j] - alpha*(eij*b*(w*U[i,:] + (1-w)*tot) + beta*V[:,j])
 					ne += beta * (np.dot(U[i,:],U[i,:]) + np.dot(V[:,j], V[:,j]))
+		ne *= 0.5
 		if ne < 0.001 or ne > 50:
 			break
 		else:
