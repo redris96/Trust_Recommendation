@@ -37,8 +37,6 @@ def matrix_factorize(R, U, V, C, K, steps=200, alpha=0.1, beta=0.001,w=0.4):
 			for j in xrange(len(R[i])):
 				if R[i][j] > 0:
 					v = np.dot(U[i,:], V[:,j]) * w
-					# tot = np.dot(U, V[:,j])
-					# tem = (1-w)*np.dot(C[i,:],tot)
 					tot = 0
 					for k in xrange(len(R)):
 						if C[i][k] > 0:
@@ -57,10 +55,10 @@ def matrix_factorize(R, U, V, C, K, steps=200, alpha=0.1, beta=0.001,w=0.4):
 					for k in xrange(len(R)):
 						if C[k][i] > 0:
 							v = ra[k][j]
-							a = bound(v)
-							b = dbound(v)
-							eij = a - R[k][j]
-							tot += eij*b*C[k][i]*V[:,j]
+							ak = bound(v)
+							bk = dbound(v)
+							keij = ak - R[k][j]
+							tot += keij*bk*C[k][i]*V[:,j]
 					U[i,:] = U[i,:] - alpha*(w*b*eij*V[:,j] + (1-w)*tot + beta*U[i,:])
 					tot = 0
 					for k in xrange(len(R)):
@@ -68,7 +66,7 @@ def matrix_factorize(R, U, V, C, K, steps=200, alpha=0.1, beta=0.001,w=0.4):
 							tot += C[i][k] * U[k,:]
 					# tot = np.dot(C[i,:], U)
 					V[:,j] = V[:,j] - alpha*(eij*b*(w*U[i,:] + (1-w)*tot) + beta*V[:,j])
-					ne += beta * (np.dot(U[i,:],U[i,:]) + np.dot(V[:,j],
+					ne += beta * (np.dot(U[i,:],U[i,:]) + np.dot(V[:,j], V[:,j]))
 		if ne < 0.001 or ne > 50:
 			break
 		else:
