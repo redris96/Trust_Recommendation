@@ -70,8 +70,8 @@ def matrix_factorize(R, C, U, V, Z, K, steps=200, alpha=0.1, beta=0.001, gamma =
 		else:
 			# print ne
 			pass
-	if step % 10:
-		print step, "iterations done."
+		if step % 10 == 0:
+			print step, "iterations done."
 	return U, V.T , Z.T, ne
 
 def mae(R, test, u, itm):
@@ -152,8 +152,8 @@ def create_dic(r):
 	return u, itm
 
 #data
-r_data = np.genfromtxt('rating_short_7_21.txt', dtype=int, delimiter=' ')
-t_data = np.genfromtxt('trust_short_7_21.txt', dtype=int, delimiter=' ')
+r_data = np.genfromtxt('rating_short.txt', dtype=int, delimiter=' ')
+t_data = np.genfromtxt('trust_short.txt', dtype=int, delimiter=' ')
 r_train, r_test = train_test_split(r_data, test_size=0.3, random_state=42)
 # print r_train.shape, r_test.shape
 # print r_train[:10]
@@ -164,8 +164,8 @@ r_train, r_test = train_test_split(r_data, test_size=0.3, random_state=42)
 ud, itm = create_dic(r_data)
 # sys.exit()
 
-R, ud, itm = data(r_train, (7000,21000), ud, itm, 0)
-C, ud, itm = data(t_data, (7000,7000), ud, itm, 1)
+R, ud, itm = data(r_train, (1000,3000), ud, itm, 0)
+C, ud, itm = data(t_data, (1000,1000), ud, itm, 1)
 
 # print type(C)
 # quit()
@@ -198,6 +198,6 @@ print "process error", em
 
 print "calculating MAE"
 
-t, e, ke = mae(nR, r_test, ud, itm)
+t, e = mae(nR, r_test, ud, itm)
 print "test len", r_test.shape
 print "total", t, "MAE", e
