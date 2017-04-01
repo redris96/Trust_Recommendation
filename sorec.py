@@ -1,5 +1,4 @@
 import numpy as np
-from scipy import sparse as sp
 import sys
 from sklearn.model_selection import train_test_split
 
