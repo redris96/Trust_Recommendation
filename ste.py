@@ -175,7 +175,7 @@ r_train, r_test = train_test_split(r_data, test_size=0.3, random_state=42)
 ud, itm = create_dic(r_data)
 
 R, ud, itm = data(r_train, (7000,21000), ud, itm, 0)
-C, ud, itm = data(t_data, (7000,21000), ud, itm, 1)
+C, ud, itm = data(t_data, (7000,7000), ud, itm, 1)
 
 R = np.array(R)
 R = norm(R)
