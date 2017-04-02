@@ -1,12 +1,14 @@
 import numpy as np
 import sys
 from sklearn.model_selection import train_test_split
+from scipy.sparse import coo_matrix
 
 def norm(R):
 	for i in xrange(len(R)):
-		for j in xrange(len(R[i])):
-			if R[i][j] > 0:
-				R[i][j] = (R[i][j] - 0)/5.0
+		R[i] = (R[i] - 0.0)/5.0
+		# for j in xrange(len(R[i])):
+		# 	if R[i][j] > 0:
+		# 		R[i][j] = (R[i][j] - 0)/5.0
 	return R
 
 def bound(x):
@@ -49,34 +51,34 @@ def matrix_factorize(R, C, U, V, Z, K, steps=200, alpha=0.1, beta=0.001, gamma =
 	Z = Z.T
 	e = 0
 	ne = 0
-	nz = np.array(np.nonzero(R)).T
-	cnz = np.array(np.nonzero(C)).T
+	# nz = np.array(np.nonzero(R)).T
+	# cnz = np.array(np.nonzero(C)).T
 	for step in xrange(steps):
 		ne = 0
 		# for i in xrange(len(R)):
 		# 	for j in xrange(len(R[i])):
-		for i,j in nz:
+		for i,j,val in zip(R.row, R.col, R.data):
 			# if R[i][j] > 0:
 			y = np.dot(U[i,:], V[:,j])
 			a = bound(y)
 			b = dbound(y)
-			eij = (R[i][j] - a)
+			eij = (val - a)
 			ne += eij * eij
 			U[i,:] = U[i,:] + alpha * (b * eij * V[:,j] - beta * U[i,:])
 			V[:,j] = V[:,j] + alpha * (b * eij * U[i,:] - beta * V[:,j])
 			ne += beta * (np.dot(U[i,:],U[i,:]) + np.dot(V[:,j],V[:,j]))
-
-		for i,j in cnz:
+		crow, ccol, cdata = C.row, C.col, C.data
+		for i,j,val in zip(crow, ccol, cdata):
 			# if C[i][j] > 0:
 			y = np.dot(U[i,:], Z[:,j])
 			a = bound(y)
 			b = dbound(y)
-			jminus = np.count_nonzero(C[:,j])
-			iplus = np.count_nonzero(C[i,:])
+			jminus = np.count_nonzero(ccol == j)
+			iplus = np.count_nonzero(crow == i)
 			weight = np.sqrt(jminus/ (iplus+jminus + 0.0))	
 			# print "w for ", i, weight		
 			# weight = 1
-			eij = (C[i][j] * weight - a)
+			eij = (val * weight - a)
 			ne += gamma * eij * eij
 			U[i,:] = U[i,:] + alpha * ((gamma * b * eij) * Z[:,j]) 
 			Z[:,j] = Z[:,j] + alpha * ((gamma * b * eij) * U[i,:] - beta * Z[:,j])
@@ -162,27 +164,39 @@ def create_dic(r):
 	return u, itm
 
 #data
-n_u = 7
-r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=int, delimiter=' ')
-t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=int, delimiter=' ')
+# n_u = 7
+# r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=int, delimiter=' ')
+# t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=int, delimiter=' ')
+# r_train, r_test = train_test_split(r_data, test_size=0.3, random_state=42)
+
+# ud, itm = create_dic(r_data)
+
+# R, ud, itm = data(r_train, (n_u * 1000,n_u * 3000), ud, itm, 0)
+# C, ud, itm = data(t_data, (n_u * 1000,n_u * 1000), ud, itm, 1)
+# print "for",n_u*1000, "users and", n_u*3000, "items"
+
+# M = 49290
+# N = 139738
+r_data = np.genfromtxt('dataset/ratings_data.txt', dtype=int, delimiter=' ')
+t_data = np.genfromtxt('dataset/trust_data.txt', dtype=int, delimiter=' ')
 r_train, r_test = train_test_split(r_data, test_size=0.3, random_state=42)
 
-ud, itm = create_dic(r_data)
+# R = np.array(R)
+# i,j,rdata = np.hsplit(r_train, 3)
+# i = i.flatten
+# j = j.flatten
+# rdata = rdata.flatten
+r_train[:,2] = norm(r_train[:,2])
+# print r_train[:,0][:5]
+# sys.exit()
+R = coo_matrix((r_train[:,0],(r_train[:,1],r_train[:,2]))) #, shape = (M+1, N+1))
+C = coo_matrix((t_data[:,0],(t_data[:,1],t_data[:,2]))) #, shape = (M+1, M+1))
 
-R, ud, itm = data(r_train, (n_u * 1000,n_u * 3000), ud, itm, 0)
-C, ud, itm = data(t_data, (n_u * 1000,n_u * 1000), ud, itm, 1)
-print "for",n_u*1000, "users and", n_u*3000, "items"
-
-# print type(C)
-# quit()
-
-
-R = np.array(R)
-R = norm(R)
-C = np.array(C)
-
-N = len(R)
-M = len(R[0])
+# N = len(R)
+# M = len(R[0])
+s = R.shape
+N = s[0]
+M = s[1]
 
 K = 5
 
