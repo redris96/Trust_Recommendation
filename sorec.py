@@ -49,34 +49,38 @@ def matrix_factorize(R, C, U, V, Z, K, steps=200, alpha=0.1, beta=0.001, gamma =
 	Z = Z.T
 	e = 0
 	ne = 0
+	nz = np.array(np.nonzero(R)).T
+	cnz = np.array(np.nonzero(C)).T
 	for step in xrange(steps):
 		ne = 0
-		for i in xrange(len(R)):
-			for j in xrange(len(R[i])):
-				if R[i][j] > 0:
-					y = np.dot(U[i,:], V[:,j])
-					a = bound(y)
-					b = dbound(y)
-					eij = (R[i][j] - a)
-					ne += eij * eij
-					U[i,:] = U[i,:] + alpha * (b * eij * V[:,j] - beta * U[i,:])
-					V[:,j] = V[:,j] + alpha * (b * eij * U[i,:] - beta * V[:,j])
-					ne += beta * (np.dot(U[i,:],U[i,:]) + np.dot(V[:,j],V[:,j]))
-			for j in xrange(len(C[i])):
-				if C[i][j] > 0:
-					y = np.dot(U[i,:], Z[:,j])
-					a = bound(y)
-					b = dbound(y)
-					jminus = np.count_nonzero(C[:,j])
-					iplus = np.count_nonzero(C[i,:])
-					weight = np.sqrt(jminus/ (iplus+jminus + 0.0))	
-					# print "w for ", i, weight		
-					# weight = 1
-					eij = (C[i][j] * weight - a)
-					ne += gamma * eij * eij
-					U[i,:] = U[i,:] + alpha * (gamma * b * eij * Z[:,j]) 
-					Z[:,j] = Z[:,j] + alpha * (gamma * b * eij * U[i,:] - beta * Z[:,j])
-					ne += beta * np.dot(Z[:,j] , Z[:,j])
+		# for i in xrange(len(R)):
+		# 	for j in xrange(len(R[i])):
+		for i,j in nz:
+			# if R[i][j] > 0:
+			y = np.dot(U[i,:], V[:,j])
+			a = bound(y)
+			b = dbound(y)
+			eij = (R[i][j] - a)
+			ne += eij * eij
+			U[i,:] = U[i,:] + alpha * (b * eij * V[:,j] - beta * U[i,:])
+			V[:,j] = V[:,j] + alpha * (b * eij * U[i,:] - beta * V[:,j])
+			ne += beta * (np.dot(U[i,:],U[i,:]) + np.dot(V[:,j],V[:,j]))
+
+		for i,j in cnz:
+			# if C[i][j] > 0:
+			y = np.dot(U[i,:], Z[:,j])
+			a = bound(y)
+			b = dbound(y)
+			jminus = np.count_nonzero(C[:,j])
+			iplus = np.count_nonzero(C[i,:])
+			weight = np.sqrt(jminus/ (iplus+jminus + 0.0))	
+			# print "w for ", i, weight		
+			# weight = 1
+			eij = (C[i][j] * weight - a)
+			ne += gamma * eij * eij
+			U[i,:] = U[i,:] + alpha * ((gamma * b * eij) * Z[:,j]) 
+			Z[:,j] = Z[:,j] + alpha * ((gamma * b * eij) * U[i,:] - beta * Z[:,j])
+			ne += beta * np.dot(Z[:,j] , Z[:,j])
 		ne = ne * 0.5
 		if ne < 0.001:
 			break
@@ -158,14 +162,16 @@ def create_dic(r):
 	return u, itm
 
 #data
-r_data = np.genfromtxt('rating_short_1_3.txt', dtype=int, delimiter=' ')
-t_data = np.genfromtxt('trust_short_1_3.txt', dtype=int, delimiter=' ')
+n_u = 7
+r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=int, delimiter=' ')
+t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=int, delimiter=' ')
 r_train, r_test = train_test_split(r_data, test_size=0.3, random_state=42)
 
 ud, itm = create_dic(r_data)
 
-R, ud, itm = data(r_train, (1000,3000), ud, itm, 0)
-C, ud, itm = data(t_data, (1000,1000), ud, itm, 1)
+R, ud, itm = data(r_train, (n_u * 1000,n_u * 3000), ud, itm, 0)
+C, ud, itm = data(t_data, (n_u * 1000,n_u * 1000), ud, itm, 1)
+print "for",n_u*1000, "users and", n_u*3000, "items"
 
 # print type(C)
 # quit()
@@ -187,11 +193,11 @@ Z = np.random.rand(N,K)
 print "finished data pre-processing"
 
 nU, nV, nZ, em = matrix_factorize(R, C, U, V, Z, K)
-nR = np.dot(nU,nV.T)
-print nR
-nnR = bou(nR)
-aR = get(nnR)
-print aR
+# nR = np.dot(nU,nV.T)
+# print nR
+# nnR = bou(nR)
+# aR = get(nnR)
+# print aR
 
 # nC = np.dot(nU,nZ.T)
 # nnC = bou(nC)
@@ -201,6 +207,6 @@ print "process error", em
 
 print "calculating MAE"
 
-t, e = maen(nU, nV, r_test, ud, itm)
+t, e = mae(nU, nV, r_test, ud, itm)
 print "test len", r_test.shape
 print "total", t, "MAE", e
