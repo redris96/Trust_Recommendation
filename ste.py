@@ -30,7 +30,21 @@ def get(R):
 				R[i][j] = (R[i][j] * 5.0)
 	return R
 
-def matrix_factorize(R, U, V, C, K, steps=200, alpha=0.1, beta=0.001,w=0.4):
+def mae(U, V, test, u, itm):
+	e = 0.0
+	ke = 0.0
+	for i in test:
+		try:
+			val = np.dot(U[u[i[0]],:],V[itm[i[1]],:].T)
+			val = bound(val) * 5
+			e += np.absolute(val - i[2])
+		except KeyError:
+			ke += 1
+	if ke > 0:
+		print "KeyErrors", ke
+	return e, e/len(test)
+
+def matrix_factorize(R, U, V, C, K, steps=200, alpha=0.3, beta=0.001,w=0.4):
 	V = V.T
 	ra = np.zeros(R.shape)
 	ne = 0
@@ -90,20 +104,13 @@ def matrix_factorize(R, U, V, C, K, steps=200, alpha=0.1, beta=0.001,w=0.4):
 			pass
 		if step % 10 == 0:
 			print step, "iterations done."
+			print "process error", ne
+			print "calculating MAE"
+			global r_test
+			t, e = mae(U, V.T, r_test, ud, itm)
+			print "total", t, "MAE", e
+
 	return U, V.T, ne 
-
-
-def mae(R, test, u, itm):
-	e = 0.0
-	ke = 0.0
-	for i in test:
-		try:
-			e += np.absolute(R[u[i[0]]][itm[i[1]]] - i[2])
-		except KeyError:
-			ke += 1
-	if ke > 0:
-		print "KeyErrors", ke
-	return e, e/len(test)
 
 # R = [
 # 	 [5.0,2,0,3,0,4,0,0],
@@ -168,14 +175,14 @@ def create_dic(r):
 	return u, itm
 
 #data
-r_data = np.genfromtxt('rating_short_7_21.txt', dtype=int, delimiter=' ')
-t_data = np.genfromtxt('trust_short_7_21.txt', dtype=int, delimiter=' ')
+r_data = np.genfromtxt('rating_short_3_9.txt', dtype=int, delimiter=' ')
+t_data = np.genfromtxt('trust_short_3_9.txt', dtype=int, delimiter=' ')
 r_train, r_test = train_test_split(r_data, test_size=0.3, random_state=42)
 
 ud, itm = create_dic(r_data)
 
-R, ud, itm = data(r_train, (7000,21000), ud, itm, 0)
-C, ud, itm = data(t_data, (7000,7000), ud, itm, 1)
+R, ud, itm = data(r_train, (3000,9000), ud, itm, 0)
+C, ud, itm = data(t_data, (3000,3000), ud, itm, 1)
 
 R = np.array(R)
 R = norm(R)
@@ -195,12 +202,12 @@ nU, nV, em = matrix_factorize(R, U, V, C, K)
 nR = np.dot(nU,nV.T)
 nnR = bou(nR)
 aR = get(nnR)
-# print aR
+print aR
 
 print "process error", em
 
 print "calculating MAE"
 
-t, e = mae(nR, r_test, ud, itm)
+t, e = maen(nU, nV, r_test, ud, itm)
 print "test len", r_test.shape
 print "total", t, "MAE", e
