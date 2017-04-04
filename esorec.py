@@ -46,7 +46,7 @@ def mae(U, V, test, u, itm):
 		print "KeyErrors", ke
 	return e, e/len(test)
 
-def matrix_factorize(R, C, U, V, Z, K, steps=200, alpha=0.1, beta=0.001, gamma = 10):
+def matrix_factorize(R, C, U, V, Z, K, steps=1200, alpha=0.1, beta=0.001, gamma = 10):
 	V = V.T
 	Z = Z.T
 	e = 0
@@ -164,9 +164,9 @@ def create_dic(r):
 	return u, itm
 
 #data
-n_u = 1
-r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=int, delimiter=' ')
-t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=int, delimiter=' ')
+n_u = 3
+r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
+t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
 
 user = np.unique(np.append(r_data[:,0],[t_data[:,0], t_data[:,1]]))
 items = np.unique(r_data[:,1])
@@ -179,13 +179,15 @@ M = items.shape[0]
 # sys.exit()
 ud = dict(zip(user, np.arange(N)))
 itm = dict(zip(items, np.arange(M)))
+# print len(ud), len(itm)
 # print ud
+# sys.exit()
 # i,j,rdata = np.hsplit(r_train, 3)
 # i = i.flatten
 # j = j.flatten
 # rdata = rdata.flatten
 
-r_train, r_test = train_test_split(r_data, test_size=0.3, random_state=42)
+r_train, r_test = train_test_split(r_data, test_size=0.2, random_state=42)
 
 # ud, itm = create_dic(r_data)
 
@@ -235,6 +237,15 @@ K = 5
 U = np.random.rand(N,K)
 V = np.random.rand(M,K)
 Z = np.random.rand(N,K)
+
+# print ud[277]
+# k = 0
+# for i,j,val in zip(R.row, R.col, R.data):
+# 	print i, k, val
+# 	k+=1
+# 	if k == 10:
+# 		break
+# sys.exit()
 
 print "finished data pre-processing"
 

@@ -1,8 +1,8 @@
 import random
 import sys
 
-users_index = random.sample(range(1,49290), 3000)
-items_index = random.sample(range(1,139738), 9000)
+users_index = random.sample(range(1,49290), 7000)
+items_index = random.sample(range(1,139738), 21000)
 
 ratings_file = "dataset/ratings_data.txt"
 trust_file = "dataset/trust_data.txt"

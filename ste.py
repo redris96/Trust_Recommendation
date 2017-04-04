@@ -50,6 +50,7 @@ def matrix_factorize(R, U, V, C, K, steps=200, alpha=0.1, beta=0.001,w=0.4):
 	ne = 0
 	nz = np.array(np.nonzero(R)).T
 	cnz = np.array(np.nonzero(C)).T
+	pre_e = 10
 	for step in xrange(steps):
 		ne = 0
 		for i,j in nz:
@@ -114,6 +115,10 @@ def matrix_factorize(R, U, V, C, K, steps=200, alpha=0.1, beta=0.001,w=0.4):
 			global r_test
 			t, e = mae(U, V.T, r_test, ud, itm)
 			print "total", t, "MAE", e
+			if pre_e < e:
+				print pre_e, e
+				break
+			pre_e = e
 
 	return U, V.T, ne 
 
@@ -180,9 +185,9 @@ def create_dic(r):
 	return u, itm
 
 #data
-n_u = 1
-r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=int, delimiter=' ')
-t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=int, delimiter=' ')
+n_u = 3
+r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
+t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
 r_train, r_test = train_test_split(r_data, test_size=0.3, random_state=42)
 
 ud, itm = create_dic(r_data)
@@ -193,6 +198,14 @@ print "for",n_u*1000, "users and", n_u*3000, "items"
 
 R = np.array(R)
 R = norm(R)
+# nz = np.array(np.nonzero(R)).T
+# k = 0
+# for i,j in nz:
+# 	print R[i][j]
+# 	k+=1
+# 	if k== 10:
+# 		break
+# sys.exit()
 C = np.array(C)
 
 N = len(R)

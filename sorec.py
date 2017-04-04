@@ -44,7 +44,7 @@ def mae(U, V, test, u, itm):
 		print "KeyErrors", ke
 	return e, e/len(test)
 
-def matrix_factorize(R, C, U, V, Z, K, steps=200, alpha=0.1, beta=0.001, gamma = 10):
+def matrix_factorize(R, C, U, V, Z, K, steps=1400, alpha=0.1, beta=0.001, gamma = 10):
 	V = V.T
 	Z = Z.T
 	e = 0
@@ -162,12 +162,15 @@ def create_dic(r):
 	return u, itm
 
 #data
-n_u = 1
-r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=int, delimiter=' ')
-t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=int, delimiter=' ')
-r_train, r_test = train_test_split(r_data, test_size=0.3, random_state=42)
+n_u = 3
+r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
+t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
+r_train, r_test = train_test_split(r_data, test_size=0.2, random_state=42)
 
 ud, itm = create_dic(r_data)
+# print len(ud), len(itm)
+# print ud
+# sys.exit()
 
 R, ud, itm = data(r_train, (n_u * 1000,n_u * 3000), ud, itm, 0)
 C, ud, itm = data(t_data, (n_u * 1000,n_u * 1000), ud, itm, 1)
@@ -175,6 +178,10 @@ print "for",n_u*1000, "users and", n_u*3000, "items"
 
 # print len(itm)
 # quit()
+
+# print len(ud), len(itm)
+# print ud
+# sys.exit()
 
 
 R = np.array(R)
