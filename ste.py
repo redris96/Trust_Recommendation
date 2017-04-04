@@ -185,7 +185,7 @@ def create_dic(r):
 	return u, itm
 
 #data
-n_u = 3
+n_u = 7
 r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
 t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
 r_train, r_test = train_test_split(r_data, test_size=0.3, random_state=42)

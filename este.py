@@ -1,12 +1,14 @@
 import numpy as np
 import sys
 from sklearn.model_selection import train_test_split
+from scipy.sparse import coo_matrix, lil_matrix
 
 def norm(R):
 	for i in xrange(len(R)):
-		for j in xrange(len(R[i])):
-			if R[i][j] > 0:
-				R[i][j] = (R[i][j])/5.0
+		R[i] = (R[i] - 0.0)/5.0
+		# for j in xrange(len(R[i])):
+		# 	if R[i][j] > 0:
+		# 		R[i][j] = (R[i][j] - 0)/5.0
 	return R
 
 def bound(x):
@@ -44,9 +46,10 @@ def mae(U, V, test, u, itm):
 		print "KeyErrors", ke
 	return e, e/len(test)
 
-def matrix_factorize(R, U, V, C, K, steps=200, alpha=0.1, beta=0.001,w=0.4):
+def matrix_factorize(R, U, V, C, K, steps=400, alpha=0.1, beta=0.001,w=0.4):
 	V = V.T
-	ra = np.zeros(R.shape)
+	ra = lil_matrix(R.shape)
+	Rl = R.tolil()
 	ne = 0
 	pre_e = 10
 	for step in xrange(steps):
@@ -56,13 +59,13 @@ def matrix_factorize(R, U, V, C, K, steps=200, alpha=0.1, beta=0.001,w=0.4):
 			tot = 0
 			# for k in xrange(len(R)):
 			# 	if C[i][k] > 0:
-			nzk = np.nonzero(C[i,:])[0]
+			nzk = np.nonzero(C.getrow(i))[0]
 			for k in nzk:
-				tot += np.dot(U[k,:], V[:,j]) * C[i][k]
+				tot += np.dot(U[k,:], V[:,j]) * C[i,k]
 			v += tot * (1-w)
-			ra[i][j] = v
-		for i,j in nz:
-			v = ra[i][j]
+			ra[i,j] = v
+		for i,j,val in zip(R.row, R.col, R.data):
+			v = ra[i,j]
 			# v = np.dot(U[i,:], V[:,j]) * w
 			# tot = 0
 			# for k in xrange(len(R)):
@@ -71,15 +74,15 @@ def matrix_factorize(R, U, V, C, K, steps=200, alpha=0.1, beta=0.001,w=0.4):
 			# v += tot * (1-w)
 			a = bound(v)
 			b = dbound(v)
-			eij = a - R[i][j]
+			eij = a - val
 			ne += eij * eij
 			tot = np.zeros(K)
 			# for k in xrange(len(R)):
 			# 	if C[k][i] > 0:
-			nzk = np.nonzero(C[:,i])[0]
+			nzk = np.nonzero(C.getcol(i))[0]
 			for k in nzk:
-				if R[k][j] > 0:
-					v = ra[k][j]
+				if Rl[k,j] > 0:
+					v = ra[k,j]
 					# v = np.dot(U[k,:], V[:,j]) * w
 					# tota = 0
 					# for p in xrange(len(R)):
@@ -88,15 +91,15 @@ def matrix_factorize(R, U, V, C, K, steps=200, alpha=0.1, beta=0.001,w=0.4):
 					# v += tota * (1-w)
 					ak = bound(v)
 					bk = dbound(v)
-					keij = ak - R[k][j]
-					tot += keij*bk*C[k][i]*V[:,j]
+					keij = ak - Rl[k,j]
+					tot += keij*bk*C[k,i]*V[:,j]
 			U[i,:] = U[i,:] - alpha*(w*b*eij*V[:,j] + (1-w)*tot + beta*U[i,:])
 			tot = 0
 			# for k in xrange(len(R)):
 			# 	if C[i][k] > 0:
 			nzk = np.nonzero(C[i,:])[0]
 			for k in nzk:
-				tot += C[i][k] * U[k,:]
+				tot += C[i,k] * U[k,:]
 			# tot = np.dot(C[i,:], U)
 			V[:,j] = V[:,j] - alpha*(eij*b*(w*U[i,:] + (1-w)*tot) + beta*V[:,j])
 			ne += beta * (np.dot(U[i,:],U[i,:]) + np.dot(V[:,j], V[:,j]))
@@ -183,7 +186,8 @@ def create_dic(r):
 	return u, itm
 
 #data
-n_u = 3
+n_u = 1
+print "for",n_u*1000, "users and", n_u*3000, "items"
 r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
 t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
 
@@ -244,7 +248,8 @@ for k,v in itm.iteritems():
 # print np.max(p), np.max(q)
 R = coo_matrix((r_train[:,2], (x,y)) , shape = (n_u*1000, n_u*3000))
 C = coo_matrix((t_data[:,2], (p,q)) , shape = (n_u*1000, n_u*3000))
-
+# R = R.tolil()
+C = C.tolil()
 # N = len(R)
 # M = len(R[0])
 s = R.shape

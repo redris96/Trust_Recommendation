@@ -74,8 +74,8 @@ def matrix_factorize(R, C, U, V, Z, K, steps=1200, alpha=0.1, beta=0.001, gamma 
 			y = np.dot(U[i,:], Z[:,j])
 			a = bound(y)
 			b = dbound(y)
-			jminus = np.count_nonzero(ccol == j)
-			iplus = np.count_nonzero(crow == i)
+			# jminus = np.count_nonzero(ccol == j)
+			# iplus = np.count_nonzero(crow == i)
 			# weight = np.sqrt(jminus/ (iplus+jminus + 0.0))	
 			# print "w for ", i, weight		
 			weight = 1
@@ -169,7 +169,7 @@ def create_dic(r):
 	return u, itm
 
 #data
-n_u = 3
+n_u = 7
 print "for",n_u*1000, "users and", n_u*3000, "items"
 r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
 t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
