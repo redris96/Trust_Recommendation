@@ -1,14 +1,12 @@
 import numpy as np
 import sys
 from sklearn.model_selection import train_test_split
-from scipy.sparse import coo_matrix
 
 def norm(R):
 	for i in xrange(len(R)):
-		R[i] = (R[i] - 0.0)/5.0
-		# for j in xrange(len(R[i])):
-		# 	if R[i][j] > 0:
-		# 		R[i][j] = (R[i][j] - 0)/5.0
+		for j in xrange(len(R[i])):
+			if R[i][j] > 0:
+				R[i][j] = (R[i][j])/5.0
 	return R
 
 def bound(x):
@@ -29,7 +27,7 @@ def get(R):
 	for i in xrange(len(R)):
 		for j in xrange(len(R[i])):
 			if R[i][j] > 0:
-				R[i][j] = (R[i][j] * 5.0) + 0
+				R[i][j] = (R[i][j] * 5.0)
 	return R
 
 def mae(U, V, test, u, itm):
@@ -46,45 +44,63 @@ def mae(U, V, test, u, itm):
 		print "KeyErrors", ke
 	return e, e/len(test)
 
-def matrix_factorize(R, C, U, V, Z, K, steps=1200, alpha=0.1, beta=0.001, gamma = 10):
+def matrix_factorize(R, U, V, C, K, steps=200, alpha=0.1, beta=0.001,w=0.4):
 	V = V.T
-	Z = Z.T
-	e = 0
+	ra = np.zeros(R.shape)
 	ne = 0
 	pre_e = 10
-	# nz = np.array(np.nonzero(R)).T
-	# cnz = np.array(np.nonzero(C)).T
 	for step in xrange(steps):
 		ne = 0
-		# for i in xrange(len(R)):
-		# 	for j in xrange(len(R[i])):
 		for i,j,val in zip(R.row, R.col, R.data):
-			# if R[i][j] > 0:
-			y = np.dot(U[i,:], V[:,j])
-			a = bound(y)
-			b = dbound(y)
-			eij = (val - a)
+			v = np.dot(U[i,:], V[:,j]) * w
+			tot = 0
+			# for k in xrange(len(R)):
+			# 	if C[i][k] > 0:
+			nzk = np.nonzero(C[i,:])[0]
+			for k in nzk:
+				tot += np.dot(U[k,:], V[:,j]) * C[i][k]
+			v += tot * (1-w)
+			ra[i][j] = v
+		for i,j in nz:
+			v = ra[i][j]
+			# v = np.dot(U[i,:], V[:,j]) * w
+			# tot = 0
+			# for k in xrange(len(R)):
+			# 	if C[i][k] > 0:
+			# 		tot += np.dot(U[k,:], V[:,j]) * C[i][k]
+			# v += tot * (1-w)
+			a = bound(v)
+			b = dbound(v)
+			eij = a - R[i][j]
 			ne += eij * eij
-			U[i,:] = U[i,:] + alpha * (b * eij * V[:,j] - beta * U[i,:])
-			V[:,j] = V[:,j] + alpha * (b * eij * U[i,:] - beta * V[:,j])
-			ne += beta * (np.dot(U[i,:],U[i,:]) + np.dot(V[:,j],V[:,j]))
-		crow, ccol, cdata = C.row, C.col, C.data
-		for i,j,val in zip(crow, ccol, cdata):
-			# if C[i][j] > 0:
-			y = np.dot(U[i,:], Z[:,j])
-			a = bound(y)
-			b = dbound(y)
-			jminus = np.count_nonzero(ccol == j)
-			iplus = np.count_nonzero(crow == i)
-			# weight = np.sqrt(jminus/ (iplus+jminus + 0.0))	
-			# print "w for ", i, weight		
-			weight = 1
-			eij = (val * weight - a)
-			ne += gamma * eij * eij
-			U[i,:] = U[i,:] + alpha * ((gamma * b * eij) * Z[:,j]) 
-			Z[:,j] = Z[:,j] + alpha * ((gamma * b * eij) * U[i,:] - beta * Z[:,j])
-			ne += beta * np.dot(Z[:,j] , Z[:,j])
-		ne = ne * 0.5
+			tot = np.zeros(K)
+			# for k in xrange(len(R)):
+			# 	if C[k][i] > 0:
+			nzk = np.nonzero(C[:,i])[0]
+			for k in nzk:
+				if R[k][j] > 0:
+					v = ra[k][j]
+					# v = np.dot(U[k,:], V[:,j]) * w
+					# tota = 0
+					# for p in xrange(len(R)):
+					# 	if C[k][p] > 0:
+					# 		tota += np.dot(U[p,:], V[:,j]) * C[k][p]
+					# v += tota * (1-w)
+					ak = bound(v)
+					bk = dbound(v)
+					keij = ak - R[k][j]
+					tot += keij*bk*C[k][i]*V[:,j]
+			U[i,:] = U[i,:] - alpha*(w*b*eij*V[:,j] + (1-w)*tot + beta*U[i,:])
+			tot = 0
+			# for k in xrange(len(R)):
+			# 	if C[i][k] > 0:
+			nzk = np.nonzero(C[i,:])[0]
+			for k in nzk:
+				tot += C[i][k] * U[k,:]
+			# tot = np.dot(C[i,:], U)
+			V[:,j] = V[:,j] - alpha*(eij*b*(w*U[i,:] + (1-w)*tot) + beta*V[:,j])
+			ne += beta * (np.dot(U[i,:],U[i,:]) + np.dot(V[:,j], V[:,j]))
+		ne *= 0.5
 		if ne < 0.001:
 			break
 		else:
@@ -101,13 +117,12 @@ def matrix_factorize(R, C, U, V, Z, K, steps=1200, alpha=0.1, beta=0.001, gamma 
 				print pre_e, e
 				break
 			pre_e = e
-	return U, V.T , Z.T, ne
 
-
+	return U, V.T, ne 
 
 # R = [
-# 	 [5.0,2,1,3,0,4,0,0],
-# 	 [4,3,0,0,5.0,0,0,0],
+# 	 [5.0,2,0,3,0,4,0,0],
+# 	 [4,3,0,0,5,0,0,0],
 # 	 [4,0,2,0,0,0,2,4],
 # 	 [0,0,0,0,0,0,0,0],
 # 	 [5,1,2,0,4,3,0,0],
@@ -122,7 +137,6 @@ def matrix_factorize(R, C, U, V, Z, K, steps=1200, alpha=0.1, beta=0.001, gamma 
 # 	 [0,0,0.4,0,0,0.8],
 # 	 [0,0,0,0,0,0],
 # 	]
-
 
 def data(f,sh, ud, itm,flag):
 	# print len(f[:,2]), len(f[:,[0]])
@@ -170,7 +184,6 @@ def create_dic(r):
 
 #data
 n_u = 3
-print "for",n_u*1000, "users and", n_u*3000, "items"
 r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
 t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
 
@@ -242,29 +255,14 @@ K = 5
 
 U = np.random.rand(N,K)
 V = np.random.rand(M,K)
-Z = np.random.rand(N,K)
-
-# print ud[277]
-# k = 0
-# for i,j,val in zip(R.row, R.col, R.data):
-# 	print i, k, val
-# 	k+=1
-# 	if k == 10:
-# 		break
-# sys.exit()
 
 print "finished data pre-processing"
 
-nU, nV, nZ, em = matrix_factorize(R, C, U, V, Z, K)
+nU, nV, em = matrix_factorize(R, U, V, C, K)
 # nR = np.dot(nU,nV.T)
-# print nR
 # nnR = bou(nR)
 # aR = get(nnR)
 # print aR
-
-# nC = np.dot(nU,nZ.T)
-# nnC = bou(nC)
-
 
 print "process error", em
 

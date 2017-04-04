@@ -51,6 +51,7 @@ def matrix_factorize(R, C, U, V, Z, K, steps=1400, alpha=0.1, beta=0.001, gamma 
 	ne = 0
 	nz = np.array(np.nonzero(R)).T
 	cnz = np.array(np.nonzero(C)).T
+	pre_e = 10
 	for step in xrange(steps):
 		ne = 0
 		# for i in xrange(len(R)):
@@ -94,6 +95,10 @@ def matrix_factorize(R, C, U, V, Z, K, steps=1400, alpha=0.1, beta=0.001, gamma 
 			global r_test
 			t, e = mae(U, V.T, r_test, ud, itm)
 			print "total", t, "MAE", e
+			if pre_e < e:
+				print pre_e, e
+				break
+			pre_e = e
 	return U, V.T , Z.T, ne
 
 
