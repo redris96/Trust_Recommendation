@@ -60,33 +60,37 @@ def mae(U, V, test, u, itm):
 def matrix_factorize(R, U, V, C, K, steps=400, alpha=0.1, beta=0.001,w=0.4):
 	V = V.T
 	ra = lil_matrix(R.shape)
-	Rl = R.tolil()
+	Csr = C.tocsr()
+	Csc = C.tocsc()
+	# Rl = R.tolil()
 	ne = 0
 	pre_e = 10
 	print "here"
 	for step in xrange(steps):
 		ne = 0
+		ra = ra.tolil()
 		for i,j,val in zip(R.row, R.col, R.data):
 			v = np.dot(U[i,:], V[:,j]) * w
 			allj = np.dot(U,V[:,j])
-			p = C.getrow(i)
+			p = Csr.getrow(i)
 			v2 = p.dot(allj)[0] * (1-w)
 			v = v + v2
 			a = bound(v)
 			b = dbound(v)
 			eij = a - val
 			ra[i,j] = eij*b
+		ra = ra.tocsc()
 		print "sm"
 		# sys.exit()
 		for i,j,val in zip(R.row, R.col, R.data):
 			v = ra[i,j]
 			ne += v * v
-			ncol = C.getcol(i).T
+			ncol = Csc.getcol(i).T
 			ncol = ncol.dot(ra[:,j])
-			tot = ncol[0,0] * V[:,j]
+			tot = ncol[0,0] * V[:,j]	
 			tot = np.zeros(V[:,j].shape)
 			U[i,:] = U[i,:] - alpha*(w*v*V[:,j] + (1-w)*tot + beta*U[i,:])
-			row = C.getrow(i)
+			row = Csr.getrow(i)
 			tot = row.dot(U)
 			V[:,j] = V[:,j] - alpha*(v*(w*U[i,:] + (1-w)*tot) + beta*V[:,j])
 			ne += beta * (np.dot(U[i,:],U[i,:]) + np.dot(V[:,j], V[:,j]))
@@ -176,7 +180,7 @@ def create_dic(r):
 #data
 flag = 1
 if flag == 1:
-	n_u = 3
+	n_u = 7
 	print "for",n_u*1000, "users and", n_u*3000, "items"
 	r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
 	t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
@@ -255,7 +259,7 @@ else:
 	C = coo_matrix((t_data[:,2], (p,q)) , shape = (49291, 49291))
 # R = R.tolil()
 print "three"
-C = C.tolil()
+# C = C.tolil()
 # N = len(R)
 # M = len(R[0])
 s = R.shape
