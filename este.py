@@ -2,6 +2,9 @@ import numpy as np
 import sys
 from sklearn.model_selection import train_test_split
 from scipy.sparse import coo_matrix, lil_matrix
+import warnings
+warnings.filterwarnings("error")
+from scipy.special import expit as sigmoid
 
 def norm(R):
 	for i in xrange(len(R)):
@@ -12,12 +15,19 @@ def norm(R):
 	return R
 
 def bound(x):
-	return 1/(1 + np.exp(-x))
+	return sigmoid(x)
+	# return 1/(1 + np.exp(-x))
 
 def dbound(x):
-	y = np.exp(x)
-	# print x,y, " ah"
-	return y/pow((1 + y),2)
+	fx = sigmoid(x)
+	return fx*(1-fx)
+	# try:
+	# 	y = np.exp(x)
+	# except Warning:
+	# 	print x, "haha"
+	# 	# sys.exit()
+	# # print x,y, " ah"
+	# return y/pow((1 + y),2)
 
 def bou(R):
 	for i in xrange(len(R)):
@@ -58,26 +68,9 @@ def matrix_factorize(R, U, V, C, K, steps=400, alpha=0.1, beta=0.001,w=0.4):
 		ne = 0
 		for i,j,val in zip(R.row, R.col, R.data):
 			v = np.dot(U[i,:], V[:,j]) * w
-			# tot = 0
-			# for k in xrange(len(R)):
-			# 	if C[i][k] > 0:
-			# nzk = np.nonzero(C.getrow(i))[0]
 			allj = np.dot(U,V[:,j])
-			# s = allj.shape
-			# allj = allj.reshape((s[0],1))
-			# print allj.shape
-			# sys.exit()
 			p = C.getrow(i)
-			# sys.exit()
-			# p=C[i,:]
-			# print p.shape
-			# sys.exit()
-			# v2 = np.dot(allj,p)
 			v2 = p.dot(allj)[0] * (1-w)
-			# for k in nzk:
-			# 	tot += np.dot(U[k,:], V[:,j]) * C[i,k]
-			# v += tot * (1-w)
-			# print v2
 			v = v + v2
 			a = bound(v)
 			b = dbound(v)
@@ -87,50 +80,14 @@ def matrix_factorize(R, U, V, C, K, steps=400, alpha=0.1, beta=0.001,w=0.4):
 		# sys.exit()
 		for i,j,val in zip(R.row, R.col, R.data):
 			v = ra[i,j]
-			# v = np.dot(U[i,:], V[:,j]) * w
-			# tot = 0
-			# for k in xrange(len(R)):
-			# 	if C[i][k] > 0:
-			# 		tot += np.dot(U[k,:], V[:,j]) * C[i][k]
-			# v += tot * (1-w)
-			# a = bound(v)
-			# b = dbound(v)
-			# eij = a - val
 			ne += v * v
-			tot = np.zeros(K)
-			# for k in xrange(len(R)):
-			# 	if C[k][i] > 0:
 			ncol = C.getcol(i).T
-			# print ncol.shape, ra[:,j].shape
 			ncol = ncol.dot(ra[:,j])
-			# ncol = ncol.dot(V[:,j])
 			tot = ncol[0,0] * V[:,j]
-			# print "one"
-			# sys.exit()
-			# print "new", ncol
-			# nzk = np.nonzero(C.getcol(i))[0]
-			# for k in nzk:
-			# 	if Rl[k,j] > 0:
-			# 		v = ra[k,j]
-			# 		# v = np.dot(U[k,:], V[:,j]) * w
-			# 		# tota = 0
-			# 		# for p in xrange(len(R)):
-			# 		# 	if C[k][p] > 0:
-			# 		# 		tota += np.dot(U[p,:], V[:,j]) * C[k][p]
-			# 		# v += tota * (1-w)
-			# 		tot += v*C[k,i]*V[:,j]
-			# print tot
-			# sys.exit()
+			tot = np.zeros(V[:,j].shape)
 			U[i,:] = U[i,:] - alpha*(w*v*V[:,j] + (1-w)*tot + beta*U[i,:])
-			tot = 0
-			# for k in xrange(len(R)):
-			# 	if C[i][k] > 0:
-			# nzk = np.nonzero(C[i,:])[0]
-			# for k in nzk:
-			# 	tot += C[i,k] * U[k,:]
 			row = C.getrow(i)
 			tot = row.dot(U)
-			# tot = np.dot(C[i,:], U)
 			V[:,j] = V[:,j] - alpha*(v*(w*U[i,:] + (1-w)*tot) + beta*V[:,j])
 			ne += beta * (np.dot(U[i,:],U[i,:]) + np.dot(V[:,j], V[:,j]))
 		print "hola"
@@ -217,14 +174,16 @@ def create_dic(r):
 	return u, itm
 
 #data
-n_u = 3
-print "for",n_u*1000, "users and", n_u*3000, "items"
-# print "For full dataset"
-r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
-t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
-
-# r_data = np.genfromtxt('dataset/ratings_data.txt', dtype=float, delimiter=' ')
-# t_data = np.genfromtxt('dataset/trust_data.txt', dtype=float, delimiter=' ')
+flag = 1
+if flag == 1:
+	n_u = 3
+	print "for",n_u*1000, "users and", n_u*3000, "items"
+	r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
+	t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
+else:
+	print "For full dataset"
+	r_data = np.genfromtxt('dataset/ratings_data.txt', dtype=float, delimiter=' ')
+	t_data = np.genfromtxt('dataset/trust_data.txt', dtype=float, delimiter=' ')
 # print t_data[0][0]
 user = np.unique(np.append(r_data[:,0],[t_data[:,0], t_data[:,1]]))
 items = np.unique(r_data[:,1])
@@ -279,6 +238,8 @@ p = [ud[i] for i in p]
 q = [ud[i] for i in q]
 y = [itm[i] for i in y]
 
+print "two"
+
 # for k,v in ud.iteritems():
 # 	x[x == k] = v
 # 	p[p == k] = v
@@ -286,15 +247,15 @@ y = [itm[i] for i in y]
 # for k,v in itm.iteritems():
 # 	y[y == k] = v
 # print np.max(p), np.max(q)
-R = coo_matrix((r_train[:,2], (x,y)) , shape = (n_u*1000, n_u*3000))
-C = coo_matrix((t_data[:,2], (p,q)) , shape = (n_u*1000, n_u*1000))
-print "two"
-# R = coo_matrix((r_train[:,2], (x,y)) , shape = (49291, 139738))
-# C = coo_matrix((t_data[:,2], (p,q)) , shape = (49291, 49291))
+if flag == 1:
+	R = coo_matrix((r_train[:,2], (x,y)) , shape = (n_u*1000, n_u*3000))
+	C = coo_matrix((t_data[:,2], (p,q)) , shape = (n_u*1000, n_u*1000))
+else:
+	R = coo_matrix((r_train[:,2], (x,y)) , shape = (49291, 139738))
+	C = coo_matrix((t_data[:,2], (p,q)) , shape = (49291, 49291))
 # R = R.tolil()
 print "three"
 C = C.tolil()
-print "four"
 # N = len(R)
 # M = len(R[0])
 s = R.shape
