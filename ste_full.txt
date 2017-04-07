@@ -1,0 +1,7 @@
+For full dataset
+finished data pre-processing
+here
+0 iterations done.
+process error nan
+calculating MAE
+total nan MAE nan

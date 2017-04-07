@@ -1,0 +1,39 @@
+for 3000 users and 9000 items
+finished data pre-processing
+0 iterations done.
+process error 109.063922168
+calculating MAE
+total 262.893921019 MAE 1.01896868612
+10 iterations done.
+process error 96.5382357631
+calculating MAE
+total 246.35386487 MAE 0.954859941358
+20 iterations done.
+process error 87.8409892657
+calculating MAE
+total 240.726870432 MAE 0.933049885396
+30 iterations done.
+process error 80.6453089042
+calculating MAE
+total 236.963293459 MAE 0.918462377747
+40 iterations done.
+process error 74.8613529943
+calculating MAE
+total 234.509730856 MAE 0.908952445179
+50 iterations done.
+process error 69.9392759862
+calculating MAE
+total 233.100917667 MAE 0.903491928941
+60 iterations done.
+process error 65.6927445056
+calculating MAE
+total 232.837372635 MAE 0.90247043657
+70 iterations done.
+process error 62.0083165909
+calculating MAE
+total 233.246410933 MAE 0.90405585633
+0.90247043657 0.90405585633
+process error 62.0083165909
+calculating MAE
+test len (258, 3)
+total 233.246410933 MAE 0.90405585633

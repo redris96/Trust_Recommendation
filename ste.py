@@ -44,7 +44,7 @@ def mae(U, V, test, u, itm):
 		print "KeyErrors", ke
 	return e, e/len(test)
 
-def matrix_factorize(R, U, V, C, K, steps=200, alpha=0.1, beta=0.001,w=0.4):
+def matrix_factorize(R, U, V, C, K, steps=400, alpha=0.1, beta=0.001,w=0.4):
 	V = V.T
 	ra = np.zeros(R.shape)
 	ne = 0
@@ -185,10 +185,10 @@ def create_dic(r):
 	return u, itm
 
 #data
-n_u = 7
+n_u = 3
 r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
 t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
-r_train, r_test = train_test_split(r_data, test_size=0.3, random_state=42)
+r_train, r_test = train_test_split(r_data, test_size=0.1, random_state=42)
 
 ud, itm = create_dic(r_data)
 

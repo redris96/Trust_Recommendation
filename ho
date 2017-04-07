@@ -1,0 +1,227 @@
+for 1000 users and 3000 items
+finished data pre-processing
+0 iterations done.
+process error 54.0364786554
+calculating MAE
+total 77.6858207102 MAE 1.17705788955
+10 iterations done.
+process error 12.5893312669
+calculating MAE
+total 74.5104443815 MAE 1.12894612699
+20 iterations done.
+process error 8.60545285876
+calculating MAE
+total 73.1306895543 MAE 1.10804075082
+30 iterations done.
+process error 6.82514387979
+calculating MAE
+total 72.1470346991 MAE 1.09313688938
+40 iterations done.
+process error 5.6907029594
+calculating MAE
+total 71.4491805704 MAE 1.08256334198
+50 iterations done.
+process error 4.86531728333
+calculating MAE
+total 70.9526311787 MAE 1.07503986634
+60 iterations done.
+process error 4.22942709215
+calculating MAE
+total 70.5528139766 MAE 1.06898202995
+70 iterations done.
+process error 3.72683893293
+calculating MAE
+total 70.2151431557 MAE 1.06386580539
+80 iterations done.
+process error 3.32558979049
+calculating MAE
+total 69.9179547251 MAE 1.05936295038
+90 iterations done.
+process error 3.0044357317
+calculating MAE
+total 69.6485448212 MAE 1.05528098214
+100 iterations done.
+process error 2.74738083127
+calculating MAE
+total 69.400115491 MAE 1.05151690138
+110 iterations done.
+process error 2.54146190553
+calculating MAE
+total 69.169136149 MAE 1.04801721438
+120 iterations done.
+process error 2.37596729696
+calculating MAE
+total 68.9535965731 MAE 1.04475146323
+130 iterations done.
+process error 2.24217788451
+calculating MAE
+total 68.7521602293 MAE 1.04169939741
+140 iterations done.
+process error 2.13317262741
+calculating MAE
+total 68.5638475894 MAE 1.0388461756
+150 iterations done.
+process error 2.04356350453
+calculating MAE
+total 68.387922957 MAE 1.03618065086
+160 iterations done.
+process error 1.96919392154
+calculating MAE
+total 68.2238263223 MAE 1.03369433822
+170 iterations done.
+process error 1.90686134978
+calculating MAE
+total 68.0711051268 MAE 1.03138038071
+180 iterations done.
+process error 1.85409277001
+calculating MAE
+total 67.929347686 MAE 1.0292325407
+190 iterations done.
+process error 1.80897270792
+calculating MAE
+total 67.7981300374 MAE 1.02724439451
+200 iterations done.
+process error 1.77001299502
+calculating MAE
+total 67.6769833985 MAE 1.02540883937
+210 iterations done.
+process error 1.73605351565
+calculating MAE
+total 67.5998755943 MAE 1.02424053931
+220 iterations done.
+process error 1.70618610066
+calculating MAE
+total 67.5482878857 MAE 1.02345890736
+230 iterations done.
+process error 1.67969611913
+calculating MAE
+total 67.5003944002 MAE 1.02273324849
+240 iterations done.
+process error 1.65601779566
+calculating MAE
+total 67.4558469691 MAE 1.02205828741
+250 iterations done.
+process error 1.63470019313
+calculating MAE
+total 67.4143597603 MAE 1.02142969334
+260 iterations done.
+process error 1.61538143906
+calculating MAE
+total 67.3756988365 MAE 1.02084392177
+270 iterations done.
+process error 1.59776926942
+calculating MAE
+total 67.3396725809 MAE 1.02029806941
+280 iterations done.
+process error 1.58162636357
+calculating MAE
+total 67.3061230944 MAE 1.01978974385
+290 iterations done.
+process error 1.56675926767
+calculating MAE
+total 67.2749187281 MAE 1.01931695043
+300 iterations done.
+process error 1.55300996102
+calculating MAE
+total 67.2459478351 MAE 1.0188779975
+310 iterations done.
+process error 1.54024932161
+calculating MAE
+total 67.219113699 MAE 1.01847141968
+320 iterations done.
+process error 1.52837190633
+calculating MAE
+total 67.1943304837 MAE 1.01809591642
+330 iterations done.
+process error 1.51729159256
+calculating MAE
+total 67.1715199721 MAE 1.01775030261
+340 iterations done.
+process error 1.50693775177
+calculating MAE
+total 67.1506088485 MAE 1.0174334674
+350 iterations done.
+process error 1.49725175557
+calculating MAE
+total 67.1315263145 MAE 1.0171443381
+360 iterations done.
+process error 1.48818375467
+calculating MAE
+total 67.1142019263 MAE 1.01688184737
+370 iterations done.
+process error 1.47968980459
+calculating MAE
+total 67.0985636565 MAE 1.01664490389
+380 iterations done.
+process error 1.47172950188
+calculating MAE
+total 67.0845362956 MAE 1.01643236812
+390 iterations done.
+process error 1.46426430476
+calculating MAE
+total 67.0720403737 MAE 1.01624303597
+400 iterations done.
+process error 1.45725662872
+calculating MAE
+total 67.0609917615 MAE 1.01607563275
+410 iterations done.
+process error 1.45066966299
+calculating MAE
+total 67.0513020228 MAE 1.01592881853
+420 iterations done.
+process error 1.44446771292
+calculating MAE
+total 67.0428794521 MAE 1.01580120382
+430 iterations done.
+process error 1.43861679819
+calculating MAE
+total 67.035630608 MAE 1.01569137285
+440 iterations done.
+process error 1.43308525224
+calculating MAE
+total 67.029462084 MAE 1.01559791036
+450 iterations done.
+process error 1.42784415101
+calculating MAE
+total 67.0242822558 MAE 1.01551942812
+460 iterations done.
+process error 1.4228675031
+calculating MAE
+total 67.0200028036 MAE 1.01545458793
+470 iterations done.
+process error 1.41813221704
+calculating MAE
+total 67.0165398914 MAE 1.01540211957
+480 iterations done.
+process error 1.41361790716
+calculating MAE
+total 67.0138149631 MAE 1.01536083277
+490 iterations done.
+process error 1.40930660943
+calculating MAE
+total 67.0117551832 MAE 1.01532962399
+500 iterations done.
+process error 1.40518246753
+calculating MAE
+total 67.0102935791 MAE 1.01530747847
+510 iterations done.
+process error 1.40123142922
+calculating MAE
+total 67.009368958 MAE 1.01529346906
+520 iterations done.
+process error 1.39744097488
+calculating MAE
+total 67.0089256694 MAE 1.01528675257
+530 iterations done.
+process error 1.3937998863
+calculating MAE
+total 67.0089132716 MAE 1.01528656472
+540 iterations done.
+process error 1.390298055
+calculating MAE
+total 67.0092861483 MAE 1.01529221437
+1.01528656472 1.01529221437
+process error 1.390298055
+calculating MAE
+test len (66, 3)
+total 67.0092861483 MAE 1.01529221437

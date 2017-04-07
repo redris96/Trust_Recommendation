@@ -16,6 +16,7 @@ def bound(x):
 
 def dbound(x):
 	y = np.exp(x)
+	# print x,y, " ah"
 	return y/pow((1 + y),2)
 
 def bou(R):
@@ -52,18 +53,38 @@ def matrix_factorize(R, U, V, C, K, steps=400, alpha=0.1, beta=0.001,w=0.4):
 	Rl = R.tolil()
 	ne = 0
 	pre_e = 10
+	print "here"
 	for step in xrange(steps):
 		ne = 0
 		for i,j,val in zip(R.row, R.col, R.data):
 			v = np.dot(U[i,:], V[:,j]) * w
-			tot = 0
+			# tot = 0
 			# for k in xrange(len(R)):
 			# 	if C[i][k] > 0:
-			nzk = np.nonzero(C.getrow(i))[0]
-			for k in nzk:
-				tot += np.dot(U[k,:], V[:,j]) * C[i,k]
-			v += tot * (1-w)
-			ra[i,j] = v
+			# nzk = np.nonzero(C.getrow(i))[0]
+			allj = np.dot(U,V[:,j])
+			# s = allj.shape
+			# allj = allj.reshape((s[0],1))
+			# print allj.shape
+			# sys.exit()
+			p = C.getrow(i)
+			# sys.exit()
+			# p=C[i,:]
+			# print p.shape
+			# sys.exit()
+			# v2 = np.dot(allj,p)
+			v2 = p.dot(allj)[0] * (1-w)
+			# for k in nzk:
+			# 	tot += np.dot(U[k,:], V[:,j]) * C[i,k]
+			# v += tot * (1-w)
+			# print v2
+			v = v + v2
+			a = bound(v)
+			b = dbound(v)
+			eij = a - val
+			ra[i,j] = eij*b
+		print "sm"
+		# sys.exit()
 		for i,j,val in zip(R.row, R.col, R.data):
 			v = ra[i,j]
 			# v = np.dot(U[i,:], V[:,j]) * w
@@ -72,10 +93,10 @@ def matrix_factorize(R, U, V, C, K, steps=400, alpha=0.1, beta=0.001,w=0.4):
 			# 	if C[i][k] > 0:
 			# 		tot += np.dot(U[k,:], V[:,j]) * C[i][k]
 			# v += tot * (1-w)
-			a = bound(v)
-			b = dbound(v)
-			eij = a - val
-			ne += eij * eij
+			# a = bound(v)
+			# b = dbound(v)
+			# eij = a - val
+			ne += v * v
 			tot = np.zeros(K)
 			# for k in xrange(len(R)):
 			# 	if C[k][i] > 0:
@@ -89,19 +110,18 @@ def matrix_factorize(R, U, V, C, K, steps=400, alpha=0.1, beta=0.001,w=0.4):
 					# 	if C[k][p] > 0:
 					# 		tota += np.dot(U[p,:], V[:,j]) * C[k][p]
 					# v += tota * (1-w)
-					ak = bound(v)
-					bk = dbound(v)
-					keij = ak - Rl[k,j]
-					tot += keij*bk*C[k,i]*V[:,j]
-			U[i,:] = U[i,:] - alpha*(w*b*eij*V[:,j] + (1-w)*tot + beta*U[i,:])
+					tot += v*C[k,i]*V[:,j]
+			U[i,:] = U[i,:] - alpha*(w*v*V[:,j] + (1-w)*tot + beta*U[i,:])
 			tot = 0
 			# for k in xrange(len(R)):
 			# 	if C[i][k] > 0:
-			nzk = np.nonzero(C[i,:])[0]
-			for k in nzk:
-				tot += C[i,k] * U[k,:]
+			# nzk = np.nonzero(C[i,:])[0]
+			# for k in nzk:
+			# 	tot += C[i,k] * U[k,:]
+			row = C.getrow(i)
+			tot = row.dot(U)
 			# tot = np.dot(C[i,:], U)
-			V[:,j] = V[:,j] - alpha*(eij*b*(w*U[i,:] + (1-w)*tot) + beta*V[:,j])
+			V[:,j] = V[:,j] - alpha*(v*(w*U[i,:] + (1-w)*tot) + beta*V[:,j])
 			ne += beta * (np.dot(U[i,:],U[i,:]) + np.dot(V[:,j], V[:,j]))
 		ne *= 0.5
 		if ne < 0.001:
@@ -109,7 +129,7 @@ def matrix_factorize(R, U, V, C, K, steps=400, alpha=0.1, beta=0.001,w=0.4):
 		else:
 			# print ne
 			pass
-		if step % 10 == 0:
+		if step % 1 == 0:
 			print step, "iterations done."
 			print "process error", ne
 			print "calculating MAE"
@@ -186,11 +206,15 @@ def create_dic(r):
 	return u, itm
 
 #data
-n_u = 1
+n_u = 3
 print "for",n_u*1000, "users and", n_u*3000, "items"
+# print "For full dataset"
 r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
 t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
 
+# r_data = np.genfromtxt('dataset/ratings_data.txt', dtype=float, delimiter=' ')
+# t_data = np.genfromtxt('dataset/trust_data.txt', dtype=float, delimiter=' ')
+# print t_data[0][0]
 user = np.unique(np.append(r_data[:,0],[t_data[:,0], t_data[:,1]]))
 items = np.unique(r_data[:,1])
 # print items
@@ -209,7 +233,7 @@ itm = dict(zip(items, np.arange(M)))
 # i = i.flatten
 # j = j.flatten
 # rdata = rdata.flatten
-
+print "one"
 r_train, r_test = train_test_split(r_data, test_size=0.2, random_state=42)
 
 # ud, itm = create_dic(r_data)
@@ -239,17 +263,27 @@ q = t_data[:,1]
 
 # print "ah", itm[19793]
 # print x.shape
-for k,v in ud.iteritems():
-	x[x == k] = v
-	p[p == k] = v
-	q[q == k] = v
-for k,v in itm.iteritems():
-	y[y == k] = v
+x = [ud[i] for i in x]
+p = [ud[i] for i in p]
+q = [ud[i] for i in q]
+y = [itm[i] for i in y]
+
+# for k,v in ud.iteritems():
+# 	x[x == k] = v
+# 	p[p == k] = v
+# 	q[q == k] = v
+# for k,v in itm.iteritems():
+# 	y[y == k] = v
 # print np.max(p), np.max(q)
 R = coo_matrix((r_train[:,2], (x,y)) , shape = (n_u*1000, n_u*3000))
-C = coo_matrix((t_data[:,2], (p,q)) , shape = (n_u*1000, n_u*3000))
+C = coo_matrix((t_data[:,2], (p,q)) , shape = (n_u*1000, n_u*1000))
+print "two"
+# R = coo_matrix((r_train[:,2], (x,y)) , shape = (49291, 139738))
+# C = coo_matrix((t_data[:,2], (p,q)) , shape = (49291, 49291))
 # R = R.tolil()
+print "three"
 C = C.tolil()
+print "four"
 # N = len(R)
 # M = len(R[0])
 s = R.shape

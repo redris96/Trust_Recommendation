@@ -1,0 +1,27 @@
+For full dataset
+finished data pre-processing
+0 iterations done.
+process error 54742.4509776
+calculating MAE
+total 6174.84907722 MAE 0.928688385806
+10 iterations done.
+process error 19154.9094998
+calculating MAE
+total 5576.87177395 MAE 0.838753462768
+20 iterations done.
+process error 16913.0167169
+calculating MAE
+total 5490.50861895 MAE 0.82576456895
+30 iterations done.
+process error 15568.0249484
+calculating MAE
+total 5469.18068569 MAE 0.822556878581
+40 iterations done.
+process error 14503.4010959
+calculating MAE
+total 5477.86745142 MAE 0.823863355605
+0.822556878581 0.823863355605
+process error 14503.4010959
+calculating MAE
+test len (6649, 3)
+total 5477.86745142 MAE 0.823863355605

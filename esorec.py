@@ -97,6 +97,7 @@ def matrix_factorize(R, C, U, V, Z, K, steps=1200, alpha=0.1, beta=0.001, gamma 
 			global r_test
 			t, e = mae(U, V.T, r_test, ud, itm)
 			print "total", t, "MAE", e
+			# sys.exit()
 			if pre_e < e:
 				print pre_e, e
 				break
@@ -169,10 +170,17 @@ def create_dic(r):
 	return u, itm
 
 #data
-n_u = 7
-print "for",n_u*1000, "users and", n_u*3000, "items"
-r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
-t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
+# n_u = 7
+# print "for",n_u*1000, "users and", n_u*3000, "items"
+print "For full dataset"
+# r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
+# t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
+
+r_data = np.genfromtxt('dataset/ratings_data.txt', dtype=float, delimiter=' ')
+t_data = np.genfromtxt('dataset/trust_data.txt', dtype=float, delimiter=' ')
+
+# print t_data[:5]
+# sys.exit()
 
 user = np.unique(np.append(r_data[:,0],[t_data[:,0], t_data[:,1]]))
 items = np.unique(r_data[:,1])
@@ -222,15 +230,22 @@ q = t_data[:,1]
 
 # print "ah", itm[19793]
 # print x.shape
-for k,v in ud.iteritems():
-	x[x == k] = v
-	p[p == k] = v
-	q[q == k] = v
-for k,v in itm.iteritems():
-	y[y == k] = v
+x = [ud[i] for i in x]
+p = [ud[i] for i in p]
+q = [ud[i] for i in q]
+y = [itm[i] for i in y]
+# for k,v in ud.iteritems():
+# 	x[x == k] = v
+# 	p[p == k] = v
+# 	q[q == k] = v
+# for k,v in itm.iteritems():
+# 	y[y == k] = v
 # print np.max(p), np.max(q)
-R = coo_matrix((r_train[:,2], (x,y)) , shape = (n_u*1000, n_u*3000))
-C = coo_matrix((t_data[:,2], (p,q)) , shape = (n_u*1000, n_u*3000))
+# R = coo_matrix((r_train[:,2], (x,y)) , shape = (n_u*1000, n_u*3000))
+# C = coo_matrix((t_data[:,2], (p,q)) , shape = (n_u*1000, n_u*3000))
+
+R = coo_matrix((r_train[:,2], (x,y)) , shape = (49291, 139738))
+C = coo_matrix((t_data[:,2], (p,q)) , shape = (49291, 49291))
 
 # N = len(R)
 # M = len(R[0])
@@ -254,6 +269,7 @@ Z = np.random.rand(N,K)
 # sys.exit()
 
 print "finished data pre-processing"
+# sys.exit()
 
 nU, nV, nZ, em = matrix_factorize(R, C, U, V, Z, K)
 # nR = np.dot(nU,nV.T)
