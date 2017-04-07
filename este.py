@@ -100,17 +100,27 @@ def matrix_factorize(R, U, V, C, K, steps=400, alpha=0.1, beta=0.001,w=0.4):
 			tot = np.zeros(K)
 			# for k in xrange(len(R)):
 			# 	if C[k][i] > 0:
-			nzk = np.nonzero(C.getcol(i))[0]
-			for k in nzk:
-				if Rl[k,j] > 0:
-					v = ra[k,j]
-					# v = np.dot(U[k,:], V[:,j]) * w
-					# tota = 0
-					# for p in xrange(len(R)):
-					# 	if C[k][p] > 0:
-					# 		tota += np.dot(U[p,:], V[:,j]) * C[k][p]
-					# v += tota * (1-w)
-					tot += v*C[k,i]*V[:,j]
+			ncol = C.getcol(i).T
+			# print ncol.shape, ra[:,j].shape
+			ncol = ncol.dot(ra[:,j])
+			# ncol = ncol.dot(V[:,j])
+			tot = ncol[0,0] * V[:,j]
+			# print "one"
+			# sys.exit()
+			# print "new", ncol
+			# nzk = np.nonzero(C.getcol(i))[0]
+			# for k in nzk:
+			# 	if Rl[k,j] > 0:
+			# 		v = ra[k,j]
+			# 		# v = np.dot(U[k,:], V[:,j]) * w
+			# 		# tota = 0
+			# 		# for p in xrange(len(R)):
+			# 		# 	if C[k][p] > 0:
+			# 		# 		tota += np.dot(U[p,:], V[:,j]) * C[k][p]
+			# 		# v += tota * (1-w)
+			# 		tot += v*C[k,i]*V[:,j]
+			# print tot
+			# sys.exit()
 			U[i,:] = U[i,:] - alpha*(w*v*V[:,j] + (1-w)*tot + beta*U[i,:])
 			tot = 0
 			# for k in xrange(len(R)):
@@ -123,6 +133,7 @@ def matrix_factorize(R, U, V, C, K, steps=400, alpha=0.1, beta=0.001,w=0.4):
 			# tot = np.dot(C[i,:], U)
 			V[:,j] = V[:,j] - alpha*(v*(w*U[i,:] + (1-w)*tot) + beta*V[:,j])
 			ne += beta * (np.dot(U[i,:],U[i,:]) + np.dot(V[:,j], V[:,j]))
+		print "hola"
 		ne *= 0.5
 		if ne < 0.001:
 			break
