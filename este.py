@@ -101,7 +101,7 @@ def matrix_factorize(R, U, V, C, K, steps=400, alpha=0.1, beta=0.001,w=0.4):
 		else:
 			# print ne
 			pass
-		if step % 1 == 0:
+		if step % 10 == 0:
 			print step, "iterations done."
 			print "process error", ne
 			print "calculating MAE"
@@ -180,7 +180,7 @@ def create_dic(r):
 #data
 flag = 1
 if flag == 1:
-	n_u = 7
+	n_u = 3
 	print "for",n_u*1000, "users and", n_u*3000, "items"
 	r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
 	t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
@@ -207,7 +207,7 @@ itm = dict(zip(items, np.arange(M)))
 # i = i.flatten
 # j = j.flatten
 # rdata = rdata.flatten
-print "one"
+# print "one"
 r_train, r_test = train_test_split(r_data, test_size=0.2, random_state=42)
 
 # ud, itm = create_dic(r_data)
@@ -242,7 +242,7 @@ p = [ud[i] for i in p]
 q = [ud[i] for i in q]
 y = [itm[i] for i in y]
 
-print "two"
+# print "two"
 
 # for k,v in ud.iteritems():
 # 	x[x == k] = v
@@ -258,7 +258,7 @@ else:
 	R = coo_matrix((r_train[:,2], (x,y)) , shape = (49291, 139738))
 	C = coo_matrix((t_data[:,2], (p,q)) , shape = (49291, 49291))
 # R = R.tolil()
-print "three"
+# print "three"
 # C = C.tolil()
 # N = len(R)
 # M = len(R[0])

@@ -1,0 +1,110 @@
+for 7000 users and 21000 items
+finished data pre-processing
+here
+sm
+hola
+0 iterations done.
+process error 30.4668885087
+calculating MAE
+total 3002.86657479 MAE 1.06522404214
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+10 iterations done.
+process error 29.4839720488
+calculating MAE
+total 2908.64266589 MAE 1.0317994558
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+20 iterations done.
+process error 28.9833837545
+calculating MAE
+total 2869.59236081 MAE 1.01794691764
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+30 iterations done.
+process error 28.8859269356
+calculating MAE
+total 2862.91046583 MAE 1.0155766108
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+sm
+hola
+40 iterations done.
+process error 28.8854725132
+calculating MAE
+total 2870.01067227 MAE 1.01809530765
+1.0155766108 1.01809530765
+process error 28.8854725132
+calculating MAE
+test len (2819, 3)
+total 2870.01067227 MAE 1.01809530765
