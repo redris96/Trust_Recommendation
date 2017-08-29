@@ -71,7 +71,7 @@ def matrix_factorize(R, U, V, C, K, steps=400, alpha=0.1, beta=0.001,w=0.4):
 			pre_u = Csr.getcol(i)
 			u_tr = pre_u.T.dot(TRU)
 
-			U[i,:] = U[i,:] + alpha * (b * eij * V[:,j] - beta * U[i,:] - beta * TRU[i,:] + u_tr)
+			U[i,:] = U[i,:] + alpha * (b * eij * V[:,j] - beta * U[i,:] - beta * TRU[i,:] + beta * u_tr)
 			V[:,j] = V[:,j] + alpha * (b * eij * U[i,:] - beta * V[:,j])
 			ne += beta * (np.dot(U[i,:],U[i,:]) + np.dot(V[:,j],V[:,j]))
 			ne += np.dot(TRU[i,:].T, TRU[i,:])
@@ -88,9 +88,9 @@ def matrix_factorize(R, U, V, C, K, steps=400, alpha=0.1, beta=0.001,w=0.4):
 			global r_test
 			t, e = mae(U, V.T, r_test, ud, itm)
 			print "total", t, "MAE", e
-			# if pre_e < e:
-			# 	print pre_e, e
-			# 	break
+			if pre_e < e:
+				print pre_e, e
+				break
 			pre_e = e
 
 	return U, V.T, ne 
