@@ -44,24 +44,27 @@ def mae(U, V, test, u, itm):
 		try:
 			val = np.dot(U[u[i[0]],:],V[itm[i[1]],:].T)
 			val = bound(val) * 5
+			# err = np.absolute(val - i[2])
+			# e += err*err
 			e += np.absolute(val - i[2])
+
 		except KeyError:
 			ke += 1
 	if ke > 0:
 		print "KeyErrors", ke
+	# return e, np.sqrt(e/len(test))
 	return e, e/len(test)
 
-def matrix_factorize(R, U, V, C, K, steps=400, alpha=0.1, beta=0.001,w=0.4):
+def matrix_factorize(R, U, V, C, K, steps=400, alpha=0.2, beta=0.0001):
 	V = V.T
 	Csr = C.tocsr()
 	Csc = C.tocsc()
 	ne = 0
 	pre_e = 10
 
-	TRU = U - C.dot(U)
-
 	for step in xrange(steps):
 		ne = 0
+		TRU = U - C.dot(U)
 		for i,j,val in zip(R.row, R.col, R.data):
 			y = np.dot(U[i,:], V[:,j])
 			a = bound(y)
