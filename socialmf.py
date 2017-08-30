@@ -55,7 +55,7 @@ def mae(U, V, test, u, itm):
 	# return e, np.sqrt(e/len(test))
 	return e, e/len(test)
 
-def matrix_factorize(R, U, V, C, K, steps=400, alpha=0.2, beta=0.0001):
+def matrix_factorize(R, U, V, C, K, steps=400, alpha=0.2, beta=0.001):
 	V = V.T
 	Csr = C.tocsr()
 	Csc = C.tocsc()
@@ -65,14 +65,17 @@ def matrix_factorize(R, U, V, C, K, steps=400, alpha=0.2, beta=0.0001):
 	for step in xrange(steps):
 		ne = 0
 		TRU = U - C.dot(U)
+		pre_i = -1
 		for i,j,val in zip(R.row, R.col, R.data):
 			y = np.dot(U[i,:], V[:,j])
 			a = bound(y)
 			b = dbound(y)
 			eij = (val - a)
 			ne += eij * eij
-			pre_u = Csr.getcol(i)
-			u_tr = pre_u.T.dot(TRU)
+			if pre_i != i:
+				pre_u = Csr.getcol(i)
+				u_tr = pre_u.T.dot(TRU)
+				pre_i = i
 
 			U[i,:] = U[i,:] + alpha * (b * eij * V[:,j] - beta * U[i,:] - beta * TRU[i,:] + beta * u_tr)
 			V[:,j] = V[:,j] + alpha * (b * eij * U[i,:] - beta * V[:,j])
@@ -146,7 +149,7 @@ def create_dic(r):
 #data
 flag = 1
 if flag == 1:
-	n_u = 3
+	n_u = 7
 	print "for",n_u*1000, "users and", n_u*3000, "items"
 	r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
 	t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
@@ -218,7 +221,7 @@ y = [itm[i] for i in y]
 # 	y[y == k] = v
 # print np.max(p), np.max(q)
 if flag == 1:
-	R = coo_matrix((r_train[:,2], (x,y)) , shape = (n_u*1000, n_u*3000))
+	R = coo_matrix((r_train[:,2], (x,y)) , shape = (n_u*1000, n_u*3000)).tocsr().tocoo()
 	C = coo_matrix((t_data[:,2], (p,q)) , shape = (n_u*1000, n_u*1000))
 else:
 	R = coo_matrix((r_train[:,2], (x,y)) , shape = (49291, 139738))
