@@ -55,13 +55,30 @@ def mae(U, V, test, u, itm):
 	# return e, np.sqrt(e/len(test))
 	return e, e/len(test)
 
-def matrix_factorize(R, U, V, C, K, steps=400, alpha=0.2, beta=0.001):
+def rmse(U, V, test, u, itm):
+	e = 0.0
+	ke = 0.0
+	for i in test:
+		try:
+			val = np.dot(U[u[i[0]],:],V[itm[i[1]],:].T)
+			val = bound(val) * 5
+			err = np.absolute(val - i[2])
+			e += err*err
+			# e += np.absolute(val - i[2])
+
+		except KeyError:
+			ke += 1
+	if ke > 0:
+		print "KeyErrors", ke
+	return e, np.sqrt(e/len(test))
+	# return e, e/len(test)
+
+def matrix_factorize(R, U, V, C, K, steps=800, alpha=0.01, beta=0.0001, gamma=0.0001):
 	V = V.T
 	Csr = C.tocsr()
 	Csc = C.tocsc()
 	ne = 0
 	pre_e = 10
-
 	for step in xrange(steps):
 		ne = 0
 		TRU = U - C.dot(U)
@@ -92,8 +109,8 @@ def matrix_factorize(R, U, V, C, K, steps=400, alpha=0.2, beta=0.001):
 			print "process error", ne
 			print "calculating MAE"
 			global r_test
-			t, e = mae(U, V.T, r_test, ud, itm)
-			print "total", t, "MAE", e
+			t, e = rmse(U, V.T, r_test, ud, itm)
+			print "total", t, "RMSE", e
 			if pre_e < e:
 				print pre_e, e
 				break
@@ -177,7 +194,7 @@ itm = dict(zip(items, np.arange(M)))
 # j = j.flatten
 # rdata = rdata.flatten
 # print "one"
-r_train, r_test = train_test_split(r_data, test_size=0.2, random_state=42)
+r_train, r_test = train_test_split(r_data, test_size=0.1, random_state=42)
 
 # ud, itm = create_dic(r_data)
 
@@ -253,8 +270,8 @@ nU, nV, em = matrix_factorize(R, U, V, C_norm, K)
 
 print "process error", em
 
-print "calculating MAE"
+print "calculating RMSE"
 
-t, e = mae(nU, nV, r_test, ud, itm)
+t, e = rmse(nU, nV, r_test, ud, itm)
 print "test len", r_test.shape
-print "total", t, "MAE", e
+print "total", t, "RMSE", e
