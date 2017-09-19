@@ -73,7 +73,7 @@ def rmse(U, V, test, u, itm):
 	return e, np.sqrt(e/len(test))
 	# return e, e/len(test)
 
-def matrix_factorize(R, U, V, C, K, steps=800, alpha=0.01, beta=0.0001, gamma=0.0001):
+def matrix_factorize(R, U, V, C, K, steps=800, alpha=0.1, lam_t=5, lam_uv=0.1):
 	V = V.T
 	Csr = C.tocsr()
 	Csc = C.tocsc()
@@ -83,22 +83,43 @@ def matrix_factorize(R, U, V, C, K, steps=800, alpha=0.01, beta=0.0001, gamma=0.
 		ne = 0
 		TRU = U - C.dot(U)
 		pre_i = -1
+		sig = 0
 		for i,j,val in zip(R.row, R.col, R.data):
+			if pre_i == -1:
+				pre_i = i
+			if pre_i != i:
+				pre_u = Csc.getcol(i)
+				u_tr = pre_u.T.dot(TRU)
+				U[i,:] = U[i,:] + alpha * (sig - lam_uv * U[i,:] - lam_t * TRU[i,:] + lam_t * u_tr)
+				for x in range(i+1,pre_i):
+					pre_u = Csc.getcol(x)
+					u_tr = pre_u.T.dot(TRU)
+					U[i,:] = U[i,:] + alpha * (- lam_uv * U[i,:] - lam_t * TRU[i,:] + lam_t * u_tr)
+				sig = 0
+				pre_i = i
 			# print "hello", i,j,val
 			y = np.dot(U[i,:], V[:,j])
 			a = bound(y)
 			b = dbound(y)
 			eij = (val - a)
 			ne += eij * eij
-			if pre_i != i:
-				pre_u = Csr.getcol(i)
-				u_tr = pre_u.T.dot(TRU)
+			sig += b * eij * V[:,j]
+		sig = 0
+		pre_j = -1
+		R_T = R.T
+		for i,j,val in zip(R_T.row, R_T.col, R_T.data):
+			if pre_i == -1:
 				pre_i = i
-
-			U[i,:] = U[i,:] + alpha * (b * eij * V[:,j] - beta * U[i,:] - beta * TRU[i,:] + beta * u_tr)
-			V[:,j] = V[:,j] + alpha * (b * eij * U[i,:] - beta * V[:,j])
-			ne += beta * (np.dot(U[i,:],U[i,:]) + np.dot(V[:,j],V[:,j]))
-			ne += np.dot(TRU[i,:].T, TRU[i,:])
+			if pre_i != i:
+				V[:,i] = V[:,i] + alpha * (sig - lam_uv * V[:,i])
+				sig = 0
+				pre_i = i
+			# print "hello", i,j,val
+			y = np.dot(U[j,:], V[:,i])
+			a = bound(y)
+			b = dbound(y)
+			eij = (val - a)
+			sig += b * eij * U[j,:]
 		ne *= 0.5
 		if ne < 0.001:
 			break
