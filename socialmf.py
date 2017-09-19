@@ -84,6 +84,7 @@ def matrix_factorize(R, U, V, C, K, steps=800, alpha=0.01, beta=0.0001, gamma=0.
 		TRU = U - C.dot(U)
 		pre_i = -1
 		for i,j,val in zip(R.row, R.col, R.data):
+			# print "hello", i,j,val
 			y = np.dot(U[i,:], V[:,j])
 			a = bound(y)
 			b = dbound(y)
@@ -166,7 +167,7 @@ def create_dic(r):
 #data
 flag = 1
 if flag == 1:
-	n_u = 7
+	n_u = 3
 	print "for",n_u*1000, "users and", n_u*3000, "items"
 	r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
 	t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
