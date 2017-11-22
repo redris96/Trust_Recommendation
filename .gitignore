@@ -1,2 +1,8 @@
 epinions/
-epinions.tgz
+epinions.tgz./epinions/epinions-nouserpages.tar.gz
+./epinions/epinions.tar.gz
+./zomato/post_req/trust_data.txt
+./zomato/post_req/count
+./zomato/post_req/unmapped_trust_data.txt
+./epinions.tgz
+./dataset3/trust_data_repeated.txt

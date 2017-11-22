@@ -172,14 +172,14 @@ def create_dic(r):
 #data
 flag = 1
 if flag == 1:
-	n_u = 7
+	n_u = 3
 	print "for",n_u*1000, "users and", n_u*3000, "items"
 	r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
 	t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
 else:
 	print "For full dataset"
-	r_data = np.genfromtxt('dataset/ratings_data.txt', dtype=float, delimiter=' ')
-	t_data = np.genfromtxt('dataset/trust_data.txt', dtype=float, delimiter=' ')
+	r_data = np.genfromtxt('dataset3/ratings_data.txt', dtype=float, delimiter=' ')
+	t_data = np.genfromtxt('dataset3/trust_data.txt', dtype=float, delimiter=' ')
 # print t_data[0][0]
 user = np.unique(np.append(r_data[:,0],[t_data[:,0], t_data[:,1]]))
 items = np.unique(r_data[:,1])
@@ -192,7 +192,7 @@ M = items.shape[0]
 # sys.exit()
 ud = dict(zip(user, np.arange(N)))
 itm = dict(zip(items, np.arange(M)))
-# print len(ud), len(itm)
+print len(ud), len(itm), " users&items"
 # print ud
 # sys.exit()
 # i,j,rdata = np.hsplit(r_train, 3)
@@ -200,7 +200,7 @@ itm = dict(zip(items, np.arange(M)))
 # j = j.flatten
 # rdata = rdata.flatten
 # print "one"
-r_train, r_test = train_test_split(r_data, test_size=0.2, random_state=42)
+r_train, r_test = train_test_split(r_data, test_size=0.1, random_state=42)
 
 # ud, itm = create_dic(r_data)
 
@@ -247,8 +247,10 @@ if flag == 1:
 	R = coo_matrix((r_train[:,2], (x,y)) , shape = (n_u*1000, n_u*3000))
 	C = coo_matrix((t_data[:,2], (p,q)) , shape = (n_u*1000, n_u*1000))
 else:
-	R = coo_matrix((r_train[:,2], (x,y)) , shape = (49291, 139738))
-	C = coo_matrix((t_data[:,2], (p,q)) , shape = (49291, 49291))
+	R = coo_matrix((r_train[:,2], (x,y)))
+	C = coo_matrix((t_data[:,2], (p,q)))
+	# R = coo_matrix((r_train[:,2], (x,y)) , shape = (49291, 139738))
+	# C = coo_matrix((t_data[:,2], (p,q)) , shape = (49291, 49291))
 # N = len(R)
 # M = len(R[0])
 s = R.shape

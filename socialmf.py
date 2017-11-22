@@ -73,7 +73,8 @@ def rmse(U, V, test, u, itm):
 	return e, np.sqrt(e/len(test))
 	# return e, e/len(test)
 
-def matrix_factorize(R, U, V, C, K, steps=800, alpha=0.01, lam_t=5, lam_uv=0.1):
+def matrix_factorize(R, U, V, C, K, steps=800, alpha=0.1, lam_t=0.001, lam_uv=0.01):
+	print alpha, lam_t, lam_uv
 	V = V.T
 	Csr = C.tocsr()
 	Csc = C.tocsc()
@@ -82,7 +83,7 @@ def matrix_factorize(R, U, V, C, K, steps=800, alpha=0.01, lam_t=5, lam_uv=0.1):
 	for step in xrange(steps):
 		ne = 0
 		TRU = U - C.dot(U)
-		pre_i = -1
+		pre_i = -1	
 		sig = 0
 		for i,j,val in zip(R.row, R.col, R.data):
 			if pre_i == -1:
@@ -98,7 +99,7 @@ def matrix_factorize(R, U, V, C, K, steps=800, alpha=0.01, lam_t=5, lam_uv=0.1):
 					U[x,:] = U[x,:] - alpha * (lam_uv * U[x,:] + lam_t * TRU[x,:] - lam_t * u_tr)
 				sig = 0
 				pre_i = i
-			# print "hello", i,j,val
+			# print "helloo", i,j,val
 			# print i,j, sig
 			y = np.dot(U[i,:], V[:,j])
 			a = bound(y)
@@ -116,7 +117,7 @@ def matrix_factorize(R, U, V, C, K, steps=800, alpha=0.01, lam_t=5, lam_uv=0.1):
 				V[:,pre_i] = V[:,pre_i] - alpha * (sig + lam_uv * V[:,pre_i])
 				sig = 0
 				pre_i = i
-			# print "hello", i,j,val
+			# print "helloo", i,j,val
 			y = np.dot(U[j,:], V[:,i])
 			a = bound(y)
 			b = dbound(y)
@@ -196,8 +197,8 @@ if flag == 1:
 	t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
 else:
 	print "For full dataset"
-	r_data = np.genfromtxt('dataset/ratings_data.txt', dtype=float, delimiter=' ')
-	t_data = np.genfromtxt('dataset/trust_data.txt', dtype=float, delimiter=' ')
+	r_data = np.genfromtxt('dataset2/ratings_data.txt', dtype=float, delimiter=' ')
+	t_data = np.genfromtxt('dataset2/trust_data.txt', dtype=float, delimiter=' ')
 # print t_data[0][0]
 user = np.unique(np.append(r_data[:,0],[t_data[:,0], t_data[:,1]]))
 items = np.unique(r_data[:,1])
@@ -261,12 +262,16 @@ y = [itm[i] for i in y]
 # for k,v in itm.iteritems():
 # 	y[y == k] = v
 # print np.max(p), np.max(q)
+users = 75887
+items = 112476
+# users = 49291
+# items = 139738
 if flag == 1:
 	R = coo_matrix((r_train[:,2], (x,y)) , shape = (n_u*1000, n_u*3000)).tocsr().tocoo()
 	C = coo_matrix((t_data[:,2], (p,q)) , shape = (n_u*1000, n_u*1000))
 else:
-	R = coo_matrix((r_train[:,2], (x,y)) , shape = (49291, 139738))
-	C = coo_matrix((t_data[:,2], (p,q)) , shape = (49291, 49291))
+	R = coo_matrix((r_train[:,2], (x,y)) , shape = (users, items))
+	C = coo_matrix((t_data[:,2], (p,q)) , shape = (users, users))
 # R = R.tolil()
 # print "three"
 # C = C.tolil()

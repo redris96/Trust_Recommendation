@@ -75,6 +75,10 @@ def rmse(U, V, test, u, itm):
 
 def matrix_factorize(R, U, V, C, C_a, Z, K, steps=800, alpha=0.1, lam_t=0.001, lam_uv=0.01):
 	print alpha, lam_t, lam_uv
+	gamma = 10
+	alpha_z=0.1
+	beta=0.01
+	print alpha_z, gamma, beta
 	V = V.T
 	Z = Z.T
 	Csr = C.tocsr()
@@ -125,9 +129,6 @@ def matrix_factorize(R, U, V, C, C_a, Z, K, steps=800, alpha=0.1, lam_t=0.001, l
 			eij = (a - val)
 			sig += b * eij * U[j,:]
 		crow, ccol, cdata = C_a.row, C_a.col, C_a.data
-		gamma = 10
-		# alpha=0.1
-		beta=0.001
 		for i,j,val in zip(crow, ccol, cdata):
 			# if C[i][j] > 0:
 			y = np.dot(U[i,:], Z[:,j])
@@ -140,8 +141,8 @@ def matrix_factorize(R, U, V, C, C_a, Z, K, steps=800, alpha=0.1, lam_t=0.001, l
 			weight = 1
 			eij = (val * weight - a)
 			ne += gamma * eij * eij
-			U[i,:] = U[i,:] + alpha * ((gamma * b * eij) * Z[:,j]) 
-			Z[:,j] = Z[:,j] + alpha * ((gamma * b * eij) * U[i,:] - beta * Z[:,j])
+			U[i,:] = U[i,:] + alpha_z * ((gamma * b * eij) * Z[:,j]) 
+			Z[:,j] = Z[:,j] + alpha_z * ((gamma * b * eij) * U[i,:] - beta * Z[:,j])
 		ne *= 0.5
 		if ne < 0.001:
 			break
@@ -210,7 +211,7 @@ def create_dic(r):
 #data
 flag = 1
 if flag == 1:
-	n_u = 7
+	n_u = 3
 	print "for",n_u*1000, "users and", n_u*3000, "items"
 	r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
 	t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
@@ -281,12 +282,16 @@ y = [itm[i] for i in y]
 # for k,v in itm.iteritems():
 # 	y[y == k] = v
 # print np.max(p), np.max(q)
+users = 75887
+items = 112476
+# users = 49291
+# items = 139738
 if flag == 1:
 	R = coo_matrix((r_train[:,2], (x,y)) , shape = (n_u*1000, n_u*3000)).tocsr().tocoo()
 	C = coo_matrix((t_data[:,2], (p,q)) , shape = (n_u*1000, n_u*1000))
 else:
-	R = coo_matrix((r_train[:,2], (x,y)) , shape = (49291, 139738))
-	C = coo_matrix((t_data[:,2], (p,q)) , shape = (49291, 49291))
+	R = coo_matrix((r_train[:,2], (x,y)) , shape = (users, items))
+	C = coo_matrix((t_data[:,2], (p,q)) , shape = (users, users))
 # R = R.tolil()
 # print "three"
 # C = C.tolil()

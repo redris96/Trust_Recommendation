@@ -1,0 +1,3190 @@
+<!DOCTYPE html>
+<html  lang="en"  prefix="og: http://ogp.me/ns#" >
+<head>
+    <meta charset="utf-8" />
+    <meta content="origin" name="referrer" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" /><script type="text/javascript">window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var o=n[t]={exports:{}};e[t][0].call(o.exports,function(n){var o=e[t][1][n];return r(o||n)},o,o.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<t.length;o++)r(t[o]);return r}({1:[function(e,n,t){function r(){}function o(e,n,t){return function(){return i(e,[c.now()].concat(u(arguments)),n?null:this,t),n?void 0:this}}var i=e("handle"),a=e(2),u=e(3),f=e("ee").get("tracer"),c=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(e,n){s[n]=o(d+n,!0,"api")}),s.addPageAction=o(d+"addPageAction",!0),s.setCurrentRouteName=o(d+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,o="function"==typeof n;return i(l+"tracer",[c.now(),e,t],r),function(){if(f.emit((o?"":"no-")+"fn-start",[c.now(),r,o],t),o)try{return n.apply(this,arguments)}finally{f.emit("fn-end",[c.now()],t)}}}};a("setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=o(l+n)}),newrelic.noticeError=function(e){"string"==typeof e&&(e=new Error(e)),i("err",[e,c.now()])}},{}],2:[function(e,n,t){function r(e,n){var t=[],r="",i=0;for(r in e)o.call(e,r)&&(t[i]=n(r,e[r]),i+=1);return t}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],3:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,o=t-n||0,i=Array(o<0?0:o);++r<o;)i[r]=e[n+r];return i}n.exports=r},{}],4:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function o(e){function n(e){return e&&e instanceof r?e:e?f(e,u,i):i()}function t(t,r,o,i){if(!d.aborted||i){e&&e(t,r,o);for(var a=n(o),u=m(t),f=u.length,c=0;c<f;c++)u[c].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function l(e,n){v[e]=m(e).concat(n)}function m(e){return v[e]||[]}function w(e){return p[e]=p[e]||o(t)}function g(e,n){c(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var v={},y={},b={on:l,emit:t,get:w,listeners:m,context:n,buffer:g,abort:a,aborted:!1};return b}function i(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var u="nr@context",f=e("gos"),c=e(2),s={},p={},d=n.exports=o();d.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(o.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){o.buffer([e],r),o.emit(e,n,t)}var o=e("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=h.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();c(y,function(n,t){e[n]||(e[n]=t)}),f("mark",["onload",a()+h.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function o(){"complete"===d.readyState&&i()}function i(){f("mark",["domContent",a()+h.offset],null,"api")}function a(){return E.exists&&performance.now?Math.round(performance.now()):(u=Math.max((new Date).getTime(),u))-h.offset}var u=(new Date).getTime(),f=e("handle"),c=e(2),s=e("ee"),p=window,d=p.document,l="addEventListener",m="attachEvent",w=p.XMLHttpRequest,g=w&&w.prototype;NREUM.o={ST:setTimeout,SI:p.setImmediate,CT:clearTimeout,XHR:w,REQ:p.Request,EV:p.Event,PR:p.Promise,MO:p.MutationObserver};var v=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1044.min.js"},b=w&&g&&g[l]&&!/CriOS/.test(navigator.userAgent),h=n.exports={offset:u,now:a,origin:v,features:{},xhrWrappable:b};e(1),d[l]?(d[l]("DOMContentLoaded",i,!1),p[l]("load",r,!1)):(d[m]("onreadystatechange",o),p[m]("onload",r)),f("mark",["firstbyte",u],null,"api");var x=0,E=e(4)},{}]},{},["loader"]);</script>
+
+    <link rel="preconnect" href="//b.zmtcdn.com" />
+    
+    <link rel="alternate" hreflang="en" href="https://www.zomato.com/Foodpsyco" />
+    <link rel="alternate" hreflang="tr" href="https://www.zomato.com/tr/Foodpsyco" />
+    <link rel="alternate" hreflang="es" href="https://www.zomato.com/es/Foodpsyco" />
+    <link rel="alternate" hreflang="pt" href="https://www.zomato.com/pt/Foodpsyco" />
+    <link rel="alternate" hreflang="id" href="https://www.zomato.com/id/Foodpsyco" />
+    <link rel="alternate" hreflang="cs" href="https://www.zomato.com/cs/Foodpsyco" />
+    <link rel="alternate" hreflang="sk" href="https://www.zomato.com/sk/Foodpsyco" />
+    <link rel="alternate" hreflang="pl" href="https://www.zomato.com/pl/Foodpsyco" />
+    <link rel="alternate" hreflang="it" href="https://www.zomato.com/it/Foodpsyco" />
+    <link rel="alternate" hreflang="vi" href="https://www.zomato.com/vi/Foodpsyco" />
+
+    <title>Matthew Navraj, Hyderabad | Zomato</title>
+    <meta name="description" content="Matthew Navraj's foodie profile on Zomato. Check out Matthew Navraj's restaurant reviews, favorite restaurants, wishlist and other activity in Hyderabad and more on Zomato. Follow Matthew Navraj on Zomato." />
+            <meta name="keywords" content="reviews, recommendations, local, restaurants, zomato, foodiebay">
+            <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, initial-scale=1">
+    
+        
+        <meta name="robots" content="NOODP,NOYDIR" />
+    
+    
+        <link rel="icon" type="image/png" href="https://b.zmtcdn.com/images/logo/zomato_favicon5.png" />
+    <link rel="apple-touch-icon-precomposed" href="https://b.zmtcdn.com/images/logo/zomato_favicon5.png" />
+
+        
+
+        <meta name='yandex-verification' content='4e4b1f7d1bc34e52' />
+    <meta name="p:domain_verify" content="ff64c9ade03e7fb418904bb99079a071"/>
+
+            <meta name="twitter:card" content="product">
+        <meta name="twitter:site" content="@zomato">
+        <meta name="twitter:creator" content="@Zomato">
+        <meta name="twitter:title" content="Matthew Navraj's food journey ">
+        <meta name="twitter:description" content="Follow me on Zomato!">
+        <meta name="twitter:image" content="https://b.zmtcdn.com/data/user_profile_pictures/396/3473ec3d0e539c86078dad3f8c521396.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A">
+        <meta name="twitter:data1" content="18">
+        <meta name="twitter:label1" content="Reviews">
+        <meta name="twitter:data2" content="148">
+        <meta name="twitter:label2" content="Followers">
+        <meta name="twitter:app:url:iphone" content="zomato://u/27807550?tab=foodjourney"/>
+        <meta name="twitter:app:url:ipad" content="zomato://u/27807550?tab=foodjourney"/>
+        <meta name="twitter:app:url:googleplay" content="http://zoma.to/u/27807550?tab=foodjourney"/>
+
+
+    <meta name="twitter:app:name:iphone" content="Zomato"/>
+    <meta name="twitter:app:id:iphone" content="434613896" />
+    <meta name="twitter:app:name:ipad" content="Zomato" />
+    <meta name="twitter:app:id:ipad" content="434613896" />
+    <meta name="twitter:app:id:googleplay" content="com.application.zomato" />
+    <meta name="twitter:app:name:googleplay" content="Zomato" />
+    <meta name="twitter:app:country" content="in">
+        <meta property="fb:app_id" content="288523881080"/>
+            <meta property="og:title" content="Matthew Navraj (Level 6 | Big Foodie)"/>
+        <meta property="og:url" content="https://www.zomato.com/Foodpsyco?ztype=user&zid=27807550&zsource=facebook"/>
+        <meta property="og:image" content="https://b.zmtcdn.com/data/user_profile_pictures/396/3473ec3d0e539c86078dad3f8c521396.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A">
+        <meta property="fb:app_id" content="288523881080"/>
+        <meta property="og:description" content="18 reviews | 148 followers | 310 photos"/>
+
+                    <meta property="og:type" content="zomatocom:user"/>
+        
+        <meta property="og:site_name" content="Zomato"/>
+        <meta property="zomatocom:caption_one" content="18 reviews | 148 followers | 310| photos">
+        <meta property="al:web:should_fallback" content="false" />
+        <meta property="al:ios:url" content="zomato://u/27807550" />
+        <meta property="al:ios:app_store_id" content="434613896" />
+        <meta property="al:ios:app_name" content="Zomato" />
+        <meta property="al:android:url" content="zomato://u/27807550" />
+        <meta property="al:android:app_name" content="Zomato" />
+        <meta property="al:android:package" content="com.application.zomato" />
+        <meta property="al:windows_phone:url" content="zomato://u/27807550" />
+        <meta property="al:windows_phone:app_id" content="a00f4816-19b0-4bd8-a554-8f0172151cb3" />
+        <meta property="al:windows_phone:app_name" content="Zomato" />
+
+    
+    
+    <script type="text/javascript">
+            </script>
+
+        <link rel="stylesheet" type="text/css" href="https://static.zmtcdn.com/gencss/t-fce05e705b469d889fdc20033ca4cdb8/l-H4sIAAAAAAAAA0tKLE7Vz0nVTS_KTNFLLi7WqcrPTUosKYawi0sSSzKTwezi1NzEPCBHH8YAiQIAP2LJTT4AAAA/h-4ed22facd1ac4c75e6fbc00cc2aa8f38" />
+<link rel="stylesheet" type="text/css" href="https://static.zmtcdn.com/gencss/t-abd42542517040346516907de7611bf4/l-H4sIAAAAAAAAA3WMQQ7CMAwEP0QdKvEKfhEcI1yROGQdCr9vG84cZ2e0y6tL-05dp5nmM12IO9wyMXBahqMrN6tjwKpVbvb5geRYXDkkuWtRVysIb5UVAR5dsbv_YbbUn4IQma2lfRppfZjb8SHt4A0kQshbnQAAAA/h-4ed22facd1ac4c75e6fbc00cc2aa8f38" />
+    
+        <script type="text/javascript">
+            window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+            ga('global.set', 'contentGroup4', 'OtherProfile Activity Direct');
+
+            window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+            ga('city.set', 'contentGroup4', 'OtherProfile Activity Direct');
+
+            window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+            ga('country.set', 'contentGroup4', 'OtherProfile Activity Direct');
+
+            window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+            ga('set', 'contentGroup4', 'OtherProfile Activity Direct');</script>        <script type="text/javascript">
+            window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+
+            // t3 => web/restaurants
+            // t7 => aggregate
+            // t4 => country
+            // t5 => international
+            // t6 => iframe
+            // t2 => business + nye
+
+
+                            ga('create', {
+                    trackingId: 'UA-19617341-13',
+                    cookieDomain: 'auto',
+                    name: 'city'
+                });
+                ga('city.send', 'pageview');
+            
+                            ga('create', {
+                    trackingId: 'UA-19617341-30',
+                    cookieDomain: 'auto',
+                    name: 'country'
+                });
+                ga('country.send', 'pageview');
+            
+            ga('create', {
+                trackingId: 'UA-19617341-21',
+                cookieDomain: 'auto',
+                name: 'global'
+            });
+
+            
+            ga('global.set', 'dimension1', false);
+            ga('global.set', 'dimension2', "India");
+            ga('global.set', 'dimension3', "Hyderabad");
+            ga('global.set', 'dimension4', "User");
+            ga('global.send', 'pageview');
+
+
+            
+        </script>
+        <script async src='https://www.google-analytics.com/analytics.js'></script>
+    
+            <script src="//www.google-analytics.com/cx/api.js"></script>
+        <script>
+            function utmx_section(){}function utmx(){}(function(){var
+            k='64651952-4',d=document,l=d.location,c=d.cookie;
+            if(l.search.indexOf('utm_expid='+k)>0)return;
+            function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
+            indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
+            length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;d.write(
+            '<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://ssl':
+            '://www')+'.google-analytics.com/ga_exp.js?'+'utmxkey='+k+
+            '&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='+new Date().
+            valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
+            '" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
+        </script>
+        <script>
+            window.google_experiments = {};
+            window.google_experiments.ID = 'FQnzc5UZQdSMS6ggKyLrqQ';
+            cv = cxApi.getChosenVariation(window.google_experiments.ID);
+            cxApi.setChosenVariation(cv, window.google_experiments.ID);
+        </script>
+        <!-- Facebook Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1466145233705476');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1466145233705476&ev=PageView&noscript=1"/></noscript>
+    <!-- End Facebook Pixel Code -->
+
+       <script type="text/javascript">
+        window.___gcfg = {
+            isSignedOut: true,
+            parsetags: 'explicit',
+            lang: 'en'
+        };
+
+        CITY_REDIRECT = 0;COLLECTION_CITY_REDIRECT = 0;
+        var zomato = zomato || {};
+        HOST = "https://www.zomato.com/";
+        CDN = "https://b.zmtcdn.com/";
+        JS_CDN_PATH = "https://static.zmtcdn.com/genjs/v2/cl-en/";
+        CITY_ID = "6";
+        USER_ID = "";
+        COOKIE_DOMAIN = "zomato.com";
+	//  ADREF = "";
+        CITY_URL = "hyderabad/";
+        LANG = "en";
+        IS_ZOMATO_USER = "";
+
+        window.howdy = {
+            'm': ""
+        }
+
+        window.fbst = {
+            APP_ID: '288523881080',
+            SOURCE_FB: false,
+            SOURCE_FB_CODE: false,
+            IS_FB_CONNECTED: false,
+            CONNECTED_FB_ID: false        }
+
+        window.gplus = {
+            CLIENT_ID: '442739719837.apps.googleusercontent.com',
+            PROMPT_TYPE: 'force',
+            IS_GPLUS_CONNECTED: false,
+        }
+
+        zomato.documentReady = zomato.documentReady || function() {};
+        zomato.UnitSystem = "METRIC";
+        zomato.distanceUnit = "km";
+        zomato.csrft = "47b44fa50b11d27e8e6108bb7c5ceba6";
+        zomato.csrft_creation_time = Date.now();
+        var FLOADING_IMG_SRC = 'https://b.zmtcdn.com/images/floading.gif';
+
+        var IS_BOT = '0';
+        var ab_version_map = [];
+
+    </script>
+    <script src="https://static.zmtcdn.com/genjs/t-f0c0193d57a01b25bb3b34b3d01782c2/l-H4sIAAAAAAAAAytOLS7OzM_Ty83M08sqBgCsMcoLDgAAAA/cl-en/h-3290dd9fa2e350ef3b9e4652c6191630"></script>
+    <script> var PROFILE_USER_ID = "27807550"</script>
+    <script>
+        var user_profile_url = "https://www.zomato.com/Foodpsyco";
+    </script>
+
+    <!--[if IE 8]>
+    <script type="text/javascript" src="https://b.zmtcdn.com/application/javascript/respond.min.js"></script>
+    <script type="text/javascript" src="https://b.zmtcdn.com/application/javascript/pie.js"></script>
+    <![endif]-->
+</head>
+<body class="is-responsive en"  >
+
+    
+    <div class="ghboxcontainer"  style="visibility: hidden; display: none;"><div id="ghbox"></div></div>
+
+    
+        
+<div id="sticky_header" class="ui sticky v2" >
+    <header class="header   navbar" id="header">
+                            <div class="header__links__container">
+                <div class="header__links__wrapper">
+                    <a href="https://www.zomato.com/business?ref=new_header_top_nav" class="link">Products for Businesses</a>
+                    <a href="https://www.zomato.com/careers?ref=new_header_top_nav" class="link">We&#039;re hiring</a>
+                                    </div>
+            </div>
+                            <div class="header__container">
+                <div class="header__wrapper clearfix">
+                                                                <a class="logo__container left" href="https://www.zomato.com/" title="Restaurants in India, United Kingdom, UAE, South Africa, Philippines, New Zealand, Qatar &amp; Sri Lanka. Delhi Restaurants, Mumbai Restaurants, Gurgaon Restaurants, London Restaurants, Dubai Restaurants, Bangalore Restaurants, Pune, Abu Dhabi, Colombo, Hyderabad, Kolkata, Chennai, Sharjah, Manila, Auckland, Wellington, Cape Town, Johannesburg Restaurants">
+                            <img src="https://b.zmtcdn.com/images/logo/zomato_white.svg" alt="Restaurants in India, United Kingdom, UAE, South Africa, Philippines, New Zealand, Qatar &amp; Sri Lanka. Delhi Restaurants, Mumbai Restaurants, Gurgaon Restaurants, London Restaurants, Dubai Restaurants, Bangalore Restaurants, Pune, Abu Dhabi, Colombo, Hyderabad, Kolkata, Chennai, Sharjah, Manila, Auckland, Wellington, Cape Town, Johannesburg Restaurants"/>
+                        </a>
+                                                                <div class="search__container left">
+                            <div class="header__search-bar">
+                                
+<div id="search_main_container" class="full_search  ">
+    <div id="search_bar_wrapper" class="search_bar search-zindex" role="form">
+        <div class="search_type flex-shrink-0">
+            <div id="location_contianer">
+                <div id="location_pretext">
+                    <div class="l-pre-1" role="link" aria-label="Please type a location..." aria-describedby="location_input_sp" tabindex="0" aria-flowto="explore-location-suggest">
+                        <span class="location_placeholder ml5">
+                                                            <i class="location_select_icon" data-icon="&#129;"></i>
+                                                    </span>
+                        <span id="location_input_sp" class="location_input_sp mr5">Hyderabad</span>
+                        <span class="right location-dropdown"><i class="ui icon tiny caret down left"></i></span>
+                    </div>
+                    <div class="l-pre-2 hidden">
+                        <span class="location_placeholder ml5">
+                                                            <i class="location_select_icon" data-icon="&#129;"></i>
+                                                        <label class="hdn" id="label_search_location">Please type a location...</label>
+                            <input id="location_input" role="combobox" aria-labelledby="label_search_location" aria-expanded="true" aria-autocomplete="list" aria-owns="explore-location-suggest" placeholder="Please type a location..."
+                            autocomplete="off" />
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Location drop down starts   -->
+                <div role="listbox" id="explore-location-suggest" class=" suggest-box start-steps clearfix">
+                    <div id="location-all" class="item" data-entity_type="city" data-entity_id="6">All of Hyderabad</div>
+                    <ul id="location-recent" role="presentation">
+                        <li class="label ttupper">Recent Locations</li>
+                    </ul>
+                    <ul id="location-popular" role="presentation">
+                        <li class="label ttupper">Popular Locations</li>
+                        <li class="item grey-text" role="option" data-entity_type="subzone" data-entity_id="7005" >Banjara Hills, Hyderabad</li><li class="item grey-text" role="option" data-entity_type="subzone" data-entity_id="7022" >Jubilee Hills, Hyderabad</li><li class="item grey-text" role="option" data-entity_type="subzone" data-entity_id="7034" >Madhapur, Hyderabad</li>                    </ul>
+                    <ul id="location-suggestion-container" role="presentation"></ul>
+                </div>
+
+                <!-- Location dro down ends   -->
+            </div>
+        </div>
+        <div class="flex-shrink-1 search-box plr0i ml5 mr5">
+            <div id="keywords_container" class="col-s-16 pr0">
+                <div id="keywords_pretext">
+                    <div class="k-pre-1 hidden" style="overflow:hidden;">
+                        <span class="search-bar-icon mr5">
+                            <i class="search icon tiny"></i>
+                        </span>
+
+                        <div class="keyword_placeholder nowrap">
+                            <div class="keyword_div">Search for restaurants or cuisines...</div>
+                        </div>
+                    </div>
+                    <div class="k-pre-2  w100">
+                        <span class="search-bar-icon mr5"><i class="search icon tiny"></i></span>
+                        <label id="label_search_res" class="hdn">Search for restaurants or cuisines...</label>
+                        <input role="combobox" aria-expanded="true" aria-autocomplete="list" aria-owns="keywords-by"
+                                aria-labelledby="label_search_res" id="keywords_input" class="discover-search"
+                                placeholder="Search for restaurants or cuisines..."
+                                autocomplete="off"/>
+                    </div>
+                </div>
+                <!-- keywords dro down starts   -->
+                <div id="explore-keywords-dropdown" class=" ">
+                    <div id="keywords-dd">
+                        <ul id="keywords-by" role="listbox">
+                        </ul>
+                    </div>
+                    <div class="keyword-search-start start-steps clearfix">
+                        <div class="search-screen-block hidden">
+                            <div class="ui inverted dimmer screen-block-loader">
+                                <div class="ui text loader">Coming right up...</div>
+                            </div>
+                        </div>
+
+                        <ul id="no-results" class="hidden">
+                            <li class="item no-result-found">
+                                <a class="item">
+                                    <div class="keywords-dd-l">No results found</div>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="popular-searches">
+                        <ul id="popular-results"
+                            data-entity-id='6'
+                            data-entity-type='city'>
+                                <li class="label">Trending Searches</li>
+                            </ul>
+                        </div>
+                                                                            <ul id="explore-by">
+                                <li class="label">Suggested Searches</li>
+                                
+                                <li class="item" data-item_type="cat"  data-item_id="1">
+                                    <div class="start-step-label">
+                                        <img class="ui middle aligned pr5 micro image search-drop-down-lazy" data-original="https://b.zmtcdn.com/images/search_tokens/app_icons/category_1.png?fit=around%7C88%3A88&crop=88%3A88%3B%2A%2C%2A" src="https://b.zmtcdn.com/images/pixel.gif"
+                                        alt="Delivery" />
+                                        <span>Delivery</span>
+                                    </div>
+                                </li>
+                                
+                                <li class="item" data-item_type="cat"  data-item_id="8">
+                                    <div class="start-step-label">
+                                        <img class="ui middle aligned pr5 micro image search-drop-down-lazy" data-original="https://b.zmtcdn.com/images/search_tokens/app_icons/category_8.png?fit=around%7C88%3A88&crop=88%3A88%3B%2A%2C%2A" src="https://b.zmtcdn.com/images/pixel.gif"
+                                        alt="Breakfast" />
+                                        <span>Breakfast</span>
+                                    </div>
+                                </li>
+                                
+                                <li class="item" data-item_type="cat"  data-item_id="9">
+                                    <div class="start-step-label">
+                                        <img class="ui middle aligned pr5 micro image search-drop-down-lazy" data-original="https://b.zmtcdn.com/images/search_tokens/app_icons/category_9.png?fit=around%7C88%3A88&crop=88%3A88%3B%2A%2C%2A" src="https://b.zmtcdn.com/images/pixel.gif"
+                                        alt="Lunch" />
+                                        <span>Lunch</span>
+                                    </div>
+                                </li>
+                                
+                                <li class="item" data-item_type="cat"  data-item_id="10">
+                                    <div class="start-step-label">
+                                        <img class="ui middle aligned pr5 micro image search-drop-down-lazy" data-original="https://b.zmtcdn.com/images/search_tokens/app_icons/category_10.png?fit=around%7C88%3A88&crop=88%3A88%3B%2A%2C%2A" src="https://b.zmtcdn.com/images/pixel.gif"
+                                        alt="Dinner" />
+                                        <span>Dinner</span>
+                                    </div>
+                                </li>
+                                
+                                <li class="item" data-item_type="cat"  data-item_id="3">
+                                    <div class="start-step-label">
+                                        <img class="ui middle aligned pr5 micro image search-drop-down-lazy" data-original="https://b.zmtcdn.com/images/search_tokens/app_icons/category_3.png?fit=around%7C88%3A88&crop=88%3A88%3B%2A%2C%2A" src="https://b.zmtcdn.com/images/pixel.gif"
+                                        alt="Drinks & Nightlife" />
+                                        <span>Drinks & Nightlife</span>
+                                    </div>
+                                </li>
+                                
+                                <li class="item" data-item_type="cat"  data-item_id="6">
+                                    <div class="start-step-label">
+                                        <img class="ui middle aligned pr5 micro image search-drop-down-lazy" data-original="https://b.zmtcdn.com/images/search_tokens/app_icons/category_6.png?fit=around%7C88%3A88&crop=88%3A88%3B%2A%2C%2A" src="https://b.zmtcdn.com/images/pixel.gif"
+                                        alt="Cafés" />
+                                        <span>Cafés</span>
+                                    </div>
+                                </li>
+                                
+                                <li class="item" data-item_type="cat"  data-item_id="13">
+                                    <div class="start-step-label">
+                                        <img class="ui middle aligned pr5 micro image search-drop-down-lazy" data-original="https://b.zmtcdn.com/images/search_tokens/app_icons/category_13.png?fit=around%7C88%3A88&crop=88%3A88%3B%2A%2C%2A" src="https://b.zmtcdn.com/images/pixel.gif"
+                                        alt="Pocket-Friendly Delivery" />
+                                        <span>Pocket-Friendly Delivery</span>
+                                    </div>
+                                </li>
+                                
+                                <li class="item" data-item_type="specials"  data-item_id="23">
+                                    <div class="start-step-label">
+                                        <img class="ui middle aligned pr5 micro image search-drop-down-lazy" data-original="https://b.zmtcdn.com/images/search_tokens/app_icons/special_23.png?fit=around%7C88%3A88&crop=88%3A88%3B%2A%2C%2A" src="https://b.zmtcdn.com/images/pixel.gif"
+                                        alt="Luxury Dining" />
+                                        <span>Luxury Dining</span>
+                                    </div>
+                                </li>
+                                
+                                <li class="item" data-item_type="specials"  data-item_id="14">
+                                    <div class="start-step-label">
+                                        <img class="ui middle aligned pr5 micro image search-drop-down-lazy" data-original="https://b.zmtcdn.com/images/search_tokens/app_icons/special_14.png?fit=around%7C88%3A88&crop=88%3A88%3B%2A%2C%2A" src="https://b.zmtcdn.com/images/pixel.gif"
+                                        alt="Buffet Places" />
+                                        <span>Buffet Places</span>
+                                    </div>
+                                </li>
+                                
+                                <li class="item" data-item_type="specials"  data-item_id="31">
+                                    <div class="start-step-label">
+                                        <img class="ui middle aligned pr5 micro image search-drop-down-lazy" data-original="https://b.zmtcdn.com/images/search_tokens/app_icons/special_31.png?fit=around%7C88%3A88&crop=88%3A88%3B%2A%2C%2A" src="https://b.zmtcdn.com/images/pixel.gif"
+                                        alt="Chinese" />
+                                        <span>Chinese</span>
+                                    </div>
+                                </li>
+                                
+                                <li class="item" data-item_type="specials"  data-item_id="10">
+                                    <div class="start-step-label">
+                                        <img class="ui middle aligned pr5 micro image search-drop-down-lazy" data-original="https://b.zmtcdn.com/images/search_tokens/app_icons/special_10.png?fit=around%7C88%3A88&crop=88%3A88%3B%2A%2C%2A" src="https://b.zmtcdn.com/images/pixel.gif"
+                                        alt="Desserts & Bakes" />
+                                        <span>Desserts & Bakes</span>
+                                    </div>
+                                </li>
+                                
+                                <li class="item" data-item_type="specials"  data-item_id="13">
+                                    <div class="start-step-label">
+                                        <img class="ui middle aligned pr5 micro image search-drop-down-lazy" data-original="https://b.zmtcdn.com/images/search_tokens/app_icons/special_13.png?fit=around%7C88%3A88&crop=88%3A88%3B%2A%2C%2A" src="https://b.zmtcdn.com/images/pixel.gif"
+                                        alt="North Indian" />
+                                        <span>North Indian</span>
+                                    </div>
+                                </li>
+                                                            </ul>
+                                            </div>
+                </div>
+
+                <!-- keywords dro down ends   -->
+            </div>
+        </div>
+        <div class="flex-shrink-0 plr0i">
+            <div role="button" tabindex="0" id="search_button" class="left ui red button">
+                Search            </div>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+    <form id="search-keyword" method="GET" action="https://www.zomato.com/index.php" class="hidden">
+        <input type="hidden" name="category"        id="category" value="0"/>
+        <input type="hidden" name="tokens"          id="selected-tokens" value=""/>
+        <input type="hidden" name="special"         id="special" value="0"/>
+        <input type="hidden" name="cuisine"         id="cuisine" value="0"/>
+        <input type="hidden" name="city"            id="city" value="6"/>
+        <input type="hidden" name="subzone"         id="subzone" value=""/>
+        <input type="hidden" name="zone"            id="zone" value=""/>
+        <input type="hidden" name="landmark"        id="landmark" value=""/>
+        <input type="hidden" name="near-me"         id="near_me" value=""/>
+        <input type="hidden" name="zipcode"         id="zipcode" value=""/>
+        <input type="hidden" name="zipcode_area"    id="zipcode_area" value=""/>
+        <input type="hidden" name="group"           id="group" value=""/>
+        <input type="hidden" name="metro"           id="metro" value=""/>
+        <input type="hidden" name="street"          id="street" value="" />
+        <input type="hidden" name="entity_type"     id="form_entity_type" value="city"/>
+        <input type="hidden" name="entity_id"       id="form_entity_id" value="6"/>
+        <input type="hidden" name="order-online"    id="online-ordering" value=""/>
+        <input type="hidden" name="q"               id="keywords_query" value=""/>
+        <input type="hidden" name="place_id"        id="place_id" value="" />
+        <input type="hidden" name="table_booking"   id="tr-header-input" value="" />
+    </form>
+</div>
+
+                            </div>
+                        </div>
+                                                                <div id="login-navigation" class="login__container right">
+                                    <div class="header-link">
+        <a href="#" class="signin-link header-login-button ui button mr0" id="signin-link">Log in</a>
+                    <a href="#" class="signup-link header-login-button ui button mr0" id="signup-link">Create an account</a>
+            </div>
+
+
+
+                        </div>
+                                    </div>
+            </div>
+                            <div class="header__navigation__container">
+                <div class="header__navigation__wrapper clearfix">
+                    <div class="left h100">
+                        <a href="https://www.zomato.com/mobile?ref=new_header_top_nav" class="header__navigation__link get-the-app">
+                            <img src="https://b.zmtcdn.com/images/icons/get-the-app-plain.svg"/>
+                            <span class="label">Get the App</span>
+                        </a>
+                    </div>
+                    <div class="right h100">
+                                                                            <a href="https://www.zomato.com/hyderabad/order" id="header-order-food-btn" class="header__navigation__link left">
+                                <img src="https://b.zmtcdn.com/images/icons/order-online.svg"/>
+                                <span class="label">Order Food</span>
+                            </a>
+                                                                            <a href="https://www.zomato.com/hyderabad/restaurants?table_booking=1" id="tr-header-bttn" class="header__navigation__link left">
+                                <img src="https://b.zmtcdn.com/images/icons/book-a-table.svg"/>
+                                <span class="label">Book a Table</span>
+                            </a>
+                                                                                            </div>
+                </div>
+            </div>
+                    </header>
+    </div>
+<div id="resp-search-container" class="search-box-area"></div>
+<div class="wrapper">
+        <div class="col-l-16 container">
+        <div class="row">
+            <div class="mtop">
+    <div class="ui segment">
+
+        <div class="row tac user-cover" >
+            <div class="ui items">
+               <div class="item">
+                <div style="position:relative;width:150px;" class="mr20">
+                                        <div class="ui small circular image " style="display: inline-table;">
+                        <img data-original="https://b.zmtcdn.com/data/user_profile_pictures/396/3473ec3d0e539c86078dad3f8c521396.jpg?fit=around%7C400%3A400&crop=400%3A400%3B%2A%2C%2A" src="https://b.zmtcdn.com/images/placeholder_200.png" alt="Matthew Navraj" class="lazy" style='width:100%'>
+                    </div>
+                </div>
+                <div class="user-header-info middle aligned content fontsize2">
+                    <div class="user-header-info-middle">
+                    <div class="">
+                        <span class="ui huge header "><a href="https://www.zomato.com/Foodpsyco"> Matthew Navraj </a> </span>
+                    </div>
+                                        <div class="meta" style="color:#89959B;">
+                            <span> @Foodpsyco</span>
+                                                        </div>
+                                                                            <div class="meta " data-icon="L" style="color:#89959B;">
+                                    Hyderabad                                </div>
+                                                            <div class="meta clearfix" style="line-height: 18px;" >
+
+                                    Trying out new food is like exploring yourself more and more so never Stop experiencing life!
+                                    </div>
+                                                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bt" ></div>
+
+                <section class="user-cover ptop ta-center">
+                    <div class="ui mini statistics">
+                        
+
+
+                                            <div class="statistic" style="margin-bottom: 0;">
+                            <div class="value">
+                                <div class="mb5 clearfix user-stats-ranking-cont"   style="display: inline-block;">
+                                    <div class="user-stats_ranking">
+                                        <span class="user-stats_rank uflc-6" data-icon="ú">6</span>
+                                        <span class="ttupper uflc-6 user-stats_rank_text">&nbsp;Big Foodie</span>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                            </div>
+                                                            <div class="label">
+                                    338 Points to level up                                </div>
+                                                    </div>
+                    
+
+                    
+
+                    </div>
+    </div>
+</section>
+</div>
+</div>
+            <div class="row">
+            <div class="pbot2 mtop col-m-16 col-l-4 pr0 pl0">
+                <div class="pr10 pbot">
+                                                            
+                    <section class="user-p-tabs p-relative ">
+                        
+
+<div class="tabs-container tabs-container-user ">
+    <div data-limit="5" class="ui vertical fluid menu user-tab-sorting tabs selectors" data-user_id="27807550" id="selectors">
+
+    <a class="item user-tab user-tab-journey cursor-pointer active" data-count="0" data-tab="foodjourney">
+                Dineline            </a>
+
+        <a class="item user-tab user-tab-reviews cursor-pointer  " data-count="0" data-tab="reviews">
+            Reviews            <div class="ui label">18</div>
+        </a>
+
+        
+        <a class="item user-tab-photos user-tab cursor-pointer "  data-count="310" data-tab="photos">
+            Photos            <div class="ui label">310</div>
+        </a>
+
+        <a class="item user-tab-follows user-tab cursor-pointer " data-count="0" data-tab="network">
+            Followers            <div class="ui label">148</div>
+        </a>
+
+        <a class="item user-tab user-tab-bookmarks cursor-pointer " data-count="0" data-tab="bookmarks">
+            Bookmarks            <div class="ui label">1</div>
+        </a>
+
+        <a class="item user-tab user-tab-beenthere cursor-pointer " data-count="0"  data-tab="beenthere">
+            Been There            <div class="ui label">54</div>
+        </a>
+
+
+
+     
+    
+    
+        <a class="item user-tab user-tab-community cursor-pointer" data-count="0" data-tab="community" target="_blank" href="http://community.zomato.com?utm_source=zblog&utm_campaign=community-blog&utm_medium=user_profile">
+            Community Blog        </a>
+
+
+    </div>
+
+    <!-- Setting and invite: TODO (Load it through ajax) -->
+<!--
+     -->
+
+
+</div>
+
+<!-- Menu for user tab: Order -->
+
+
+
+
+
+<!-- User widgets -->
+
+
+
+ <a class="hidden" href="#" id="get_user_widget_code">Get this widget</a>
+
+                    </section>
+                </div>
+            </div>
+
+            <div class="col-m-16 col-l-12 pl10 mtop ">
+    <div class="row">
+        <div class="user-profile-main-cont col-l-2by3 ">
+
+            <div id="tabtop" class="user-tab-content res-reviews-container zs-following-list brstd  pbot">
+                
+<div id="foodjourney" class="clearfix">
+    <div id="nFeed" data-active="1" data-data_type="food_journey" data-user_id="27807550" style="border: none;" class="pbot0 ">
+        <div class="user-food-journey-container" >
+            <h3>Dineline</h3>
+                        <div class="ui segments res-review-body res-review clearfix act--food-journey feedroot js-activity-root res-review stupendousact" data-groupid="A:13:27807550:2017-10-29:32217507" data-review_id="32217507" style="padding:0px;">
+
+        
+      <div class="ui segment brtop">
+
+	<div class="act__heading">
+		<div class="mb5">
+<div class="ui list snippet-restaurant " data-res-id="96507">
+  
+    <div class="item">
+                    <a href="https://www.zomato.com/hyderabad/starbucks-jubilee-hills" class="left mr10 res_image">
+          <img alt="Starbucks" class="lazy-inv-image-rest-snippet brstd ui mini image" src="https://b.zmtcdn.com/images/res_avatar_120_1x_new.png" data-original="https://b.zmtcdn.com/data/pictures/chains/7/96507/d53301727bcd09e732cab4ce7af33b37_featured_v2.jpg?fit=around%7C50%3A50&amp;crop=50%3A50%3B%2A%2C%2A"  />
+        </a>
+            
+    <div class="   content  ">
+    <div class="">
+    		      
+    
+    
+    <div class="header nowrap">
+          <a class="res_name" href="https://www.zomato.com/hyderabad/starbucks-jubilee-hills" data-entity_id="96507" data-entity_type="RESTAURANT">Starbucks</a>
+    </div>
+    <a href="https://www.zomato.com/hyderabad/jubilee-hills-restaurants" title="Jubilee Hills">
+          <span class="grey-text fontsize5">Jubilee Hills, Hyderabad</span>
+    </a>
+       
+
+        </div>
+        </div>
+
+    </div>
+</div>
+</div>
+	</div>
+  
+  
+	        <div class="fs12px pb5 clearfix">
+        <a href="https://www.zomato.com/review/ZNkvqr" class="res-review-date">
+            <time itemprop="datePublished" datetime="2017-10-29 11:11:05">3 days ago</time>
+        </a>
+            </div>
+    	<div class="act-body mbot0">
+
+		<div class="actn-cont">
+
+            				<div class="rev-text" tabindex="0" style="line-height:20px;word-wrap:break-word">
+					<div class="left"><div aria-label="Rated 4.0" title="Very Good" class="left bold zdhl2 tooltip icon-font-level-7" data-iconr="ù">Rated</div>&nbsp;&nbsp;</div>Basically need no introduction for this outlet as everyone knows about it.I've been here on their 100th store celebration and it was absolute delight.The ambience is really good and interior was a wow.Good place to hangout with various options of Hot&amp;Cold coffee ,latte.The prices are decent and food is great.<br />
+Food-4/5<br />
+Ambience 4/5<br />
+Rating 4/5.
+					                    <div class="clear"></div>
+				</div>
+            
+            
+            	                        
+							<div class="thumbs photosContainer mtop0" data-no_redirect="1" data-group_id="A:13:27807550:2017-10-29:32217507">
+
+					<div class="ui tiny images">
+																									    <div class="ui fluid image js-heart-container" data-photo_id="u_MTU3OTM1NTczMj" aria-label="Matthew Navraj&#039;s review  photo">
+			                      <a href="#" class="lazy-user-photos res-photo-thumbnail" data-type="rev" data-photo_id="u_MTU3OTM1NTczMj"
+			                      data-index="0">
+			                        <img class="margin0 ui card image lazy" alt="Matthew Navraj&#039;s review  photo" data-type="rev" data-index="1" data-photo_id="u_MTU3OTM1NTczMj"  data-original="https://b.zmtcdn.com/data/reviews_photos/44f/4734680a78c0577e438b4b52f62e044f_1509255667.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A"   src="https://b.zmtcdn.com/images/photoback.png">
+			                      </a>
+			                    </div>
+							
+																															    <div class="ui fluid image js-heart-container" data-photo_id="u_g2NzIMjA0ODcxN" aria-label="Matthew Navraj&#039;s review  photo">
+			                      <a href="#" class="lazy-user-photos res-photo-thumbnail" data-type="rev" data-photo_id="u_g2NzIMjA0ODcxN"
+			                      data-index="1">
+			                        <img class="margin0 ui card image lazy" alt="Matthew Navraj&#039;s review  photo" data-type="rev" data-index="2" data-photo_id="u_g2NzIMjA0ODcxN"  data-original="https://b.zmtcdn.com/data/reviews_photos/491/b8d2b16f46b1722fecdb903716aa6491_1509255668.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A"   src="https://b.zmtcdn.com/images/photoback.png">
+			                      </a>
+			                    </div>
+							
+																															    <div class="ui fluid image js-heart-container" data-photo_id="u_MjE0OTU0MjE5MD" aria-label="Matthew Navraj&#039;s review  photo">
+			                      <a href="#" class="lazy-user-photos res-photo-thumbnail" data-type="rev" data-photo_id="u_MjE0OTU0MjE5MD"
+			                      data-index="2">
+			                        <img class="margin0 ui card image lazy" alt="Matthew Navraj&#039;s review  photo" data-type="rev" data-index="3" data-photo_id="u_MjE0OTU0MjE5MD"  data-original="https://b.zmtcdn.com/data/reviews_photos/ba5/0944813d02d6ff5fbc66a1290db09ba5_1509255668.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A"   src="https://b.zmtcdn.com/images/photoback.png">
+			                      </a>
+			                    </div>
+							
+																															    <div class="ui fluid image js-heart-container" data-photo_id="u_3MDk1MjU2NTQ4M" aria-label="Matthew Navraj&#039;s review  photo">
+			                      <a href="#" class="lazy-user-photos res-photo-thumbnail" data-type="rev" data-photo_id="u_3MDk1MjU2NTQ4M"
+			                      data-index="3">
+			                        <img class="margin0 ui card image lazy" alt="Matthew Navraj&#039;s review  photo" data-type="rev" data-index="4" data-photo_id="u_3MDk1MjU2NTQ4M"  data-original="https://b.zmtcdn.com/data/reviews_photos/aa5/b701718f16fffd9e19a051699069caa5_1509255669.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A"   src="https://b.zmtcdn.com/images/photoback.png">
+			                      </a>
+			                    </div>
+							
+																																	
+										<div class="ui fluid image">
+                        <a class="grey-text left margin0" data-type="rev" data-index="5" data-photo_id="u_MDYzNjQ1MjM0OT" href="#">
+                            <div class="left-photo-count photo-load-more-small">
+                                <img class="margin0 ui card image lazy" src="https://b.zmtcdn.com/images/photoback.png" data-original="https://b.zmtcdn.com/data/reviews_photos/a02/80f90078e8f8e8f9d6b93ffa8ba9fa02_1509255670.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A">
+                                <div class="overlay res-photo-thumbnail" data-photo_id="u_MDYzNjQ1MjM0OT" data-type="rev">
+                                	<span class="col-s-16 tac">
+                                		+2
+                                	</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+										<div class="clear"></div>
+				</div>
+				</div>
+			</div>
+
+
+
+	</div>
+
+							
+                
+		<div class="left mr5 ui tiny labeled button js-btn-thank" data-action="like" data-active="1" data-reviewid="32217507" data-likes="" aria-label="Like">
+			<div class="compact ui tiny button " data-icon="f">
+								<span>Like</span>
+							</div>
+			<div class="ui basic label  stats-thanks js-thank-count js-activity-like-count zero-likes" data-action_id="32217507" data-action_type="REVIEW" aria-label="0 Likes">
+				0
+			</div>
+		</div>
+
+        <div class="left ui tiny labeled button comment-btn-to">
+            <div class="compact ui tiny button" data-icon="÷">
+                Comment
+            </div>
+            <div class="ui basic label stats-comment" aria-label="0 Comments">
+                0
+            </div>
+        </div>
+
+        
+                    
+            <div class="right">
+            <div class=" left res-review-top-right-text">
+                                                    
+                                    <button class="ui button compact js-btn-share small" aria-label="Share" data-entity-id="32217507" data-entity-type="REVIEW" data-icon="ß">
+                        Share
+                    </button>
+                            </div>
+
+        </div>
+    
+	<div class="clear"></div>
+	</div>
+																	<div class="plr0i ui secondary segment pt0 pb0 brbot js_review_comments_root" data-review_id="32217507" data-fetched_comments_count="0" data-remaining_comments_count="0">
+					<div id="rcr-32217507" class="js_review_comments_root plr15 ui secondary segment remove-segment-border pt0 pb0" data-fetched_comments_count="0" data-remaining_comments_count="0" data-review_id="32217507">
+
+    
+    <div class="  review_comments_container mb0 mt0" data-review_id="32217507" style="max-width: 100% !important;">
+            </div>
+
+                    <div class="bt ui comments mt0 pbot0 ptop0" style="max-width: 100% !important;">
+            <div class="comment">
+                <a class="avatar">
+                    <img data-original="https://b.zmtcdn.com/images/user_avatars/mug_2x.png?fit=around%7C200%3A200&amp;crop=200%3A200%3B%2A%2C%2A" class="lazy round_avatar" src="https://b.zmtcdn.com/images/placeholder_200.png"  alt="">
+                </a>
+                        
+                <div class="content">
+                    <div class="js_review_comment_right review-comment-right dimmer-comment-box pl0i">
+                        <div aria-label="Write a comment... Use @ to tag friends" contenteditable="true" id="review-comment-32217507"  class=" js_review_comment review-comment-textbox" data-placeholder="Write a comment... Use @ to tag friends"></div>
+                        <div class="ui inverted dimmer">
+                            <div class="ui loader"></div>
+                        </div>
+                        <a href="#" class="btn btn-inline review-comment-submit hidden-i hidden" data-active="1">
+                            <span class="default-text">
+                                Submit
+                            </span>
+                            <span class="loading-text"></span>
+                        </a>
+                        <div class="tag-suggestions-container"></div>
+                    </div>
+               </div>
+            </div>
+
+        </div>
+            </div>
+				</div>
+
+			
+  <div class="diagonal-stripes"></div>
+</div>
+<div class='ui segment' role='article'><div class="js-activity-root act act--food-journey feedroot" data-groupid="A:26:27807550:2017-10-29:96507">
+
+        
+      <div class="act__heading">
+    <div class="mb5">
+<div class="ui list snippet-restaurant nb" data-res-id="96507">
+  
+    <div class="item">
+                    <a href="https://www.zomato.com/hyderabad/starbucks-jubilee-hills" class="left mr10 res_image">
+          <img alt="Starbucks" class="lazy-inv-image-rest-snippet brstd ui mini image" src="https://b.zmtcdn.com/images/res_avatar_120_1x_new.png" data-original="https://b.zmtcdn.com/data/pictures/chains/7/96507/d53301727bcd09e732cab4ce7af33b37_featured_v2.jpg?fit=around%7C50%3A50&amp;crop=50%3A50%3B%2A%2C%2A"  />
+        </a>
+            
+    <div class="   content  ">
+    <div class="">
+    		          <div class="row right floated   hidden ">
+
+		            		    <div tabindex="0" aria-label="Rated " class="res-rating-nf  " data-content="" data-variation="mini" >
+			   
+		    </div>
+        		            </div>
+		      
+    
+    
+    <div class="header nowrap">
+          <a class="res_name" href="https://www.zomato.com/hyderabad/starbucks-jubilee-hills" data-entity_id="96507" data-entity_type="RESTAURANT">Starbucks</a>
+    </div>
+    <a href="https://www.zomato.com/hyderabad/jubilee-hills-restaurants" title="Jubilee Hills">
+          <span class="grey-text fontsize5">Jubilee Hills, Hyderabad</span>
+    </a>
+       
+
+        </div>
+        </div>
+
+    </div>
+</div>
+</div>
+  </div>
+    
+  
+    <div class="act-time" data-act-time="1509255115">3 days ago</div>
+  
+  <div class="clear"></div>
+</div>
+</div><div class="mtr act act--food-journey js-activity-root feedroot stupendousact" data-groupid="A:38:27807550:2017-10-14:18505228" style="padding:0;">
+
+        
+		<div class="ui segment brtop" style="margin-bottom: 0px;">
+	<div class="act__heading">
+		<div class="mb5">
+<div class="ui list snippet-restaurant " data-res-id="18505228">
+  
+    <div class="item">
+                    <a href="https://www.zomato.com/hyderabad/smoky-pitara-1-jubilee-hills" class="left mr10 res_image">
+          <img alt="Smoky Pitara" class="lazy-inv-image-rest-snippet brstd ui mini image" src="https://b.zmtcdn.com/images/res_avatar_120_1x_new.png" data-original="https://b.zmtcdn.com/data/pictures/8/18505228/987b2aff89589dd5becae171ac724f7b_featured_v2.jpg?fit=around%7C50%3A50&amp;crop=50%3A50%3B%2A%2C%2A"  />
+        </a>
+            
+    <div class="   content  ">
+    <div class="">
+    		          <div class="row right floated   hidden ">
+
+		            		    <div tabindex="0" aria-label="Rated 4.0" class="res-rating-nf  level-7" data-content="Very Good" data-variation="mini" >
+			   4.0
+		    </div>
+        		            </div>
+		      
+    
+    
+    <div class="header nowrap">
+          <a class="res_name" href="https://www.zomato.com/hyderabad/smoky-pitara-1-jubilee-hills" data-entity_id="18505228" data-entity_type="RESTAURANT">Smoky Pitara</a>
+    </div>
+    <a href="https://www.zomato.com/hyderabad/jubilee-hills-restaurants" title="Jubilee Hills">
+          <span class="grey-text fontsize5">Jubilee Hills, Hyderabad</span>
+    </a>
+       
+
+        </div>
+        </div>
+
+    </div>
+</div>
+</div>
+	</div>
+	
+	
+	
+	<div class="clearfix"></div>
+	<div class="act-body mt5">
+		<div class="actn-cont">
+
+			<div class="p-relative js-feedPhotoGroup photosContainer photosContainer--food-journey" data-group_id="A:38:27807550:2017-10-14:18505228">
+				
+				
+				
+				
+          			    <div role="img" class="ui image photo2 mr1p res-photo-thumbnail js-heart-container lazy-feed-load" data-type="journey" data-photo_id="u_0MTUwODgxMDk5N" data-index="0" alt="" data-original="https://b.zmtcdn.com/data/reviews_photos/17e/52c086aac3404f107c7b384f0237617e_1507948863.jpg?fit=around%7C640%3A640&amp;crop=640%3A640%3B%2A%2C%2A" style="background-image:url('https://b.zmtcdn.com/images/photoback.png');">
+			    	<a class="ui right corner label js-btn-like" data-photo_id="u_0MTUwODgxMDk5N">
+		               <i class="heart icon js-fp-like no-events "></i>
+		            </a>
+				</div>
+				<div role="img" class="ui image photo4 mr1p mb1p res-photo-thumbnail js-heart-container lazy-feed-load" data-type="journey" data-photo_id="u_3MjQzOTM5MDUwN" data-index="1" alt="" data-original="https://b.zmtcdn.com/data/reviews_photos/c67/5d50118908b4eaaad111cd18e4439c67_1507948837.jpg?fit=around%7C200%3A200&amp;crop=200%3A200%3B%2A%2C%2A" style="background-image:url('https://b.zmtcdn.com/images/photoback.png');">
+					<a class="ui right corner label js-btn-like" data-photo_id="u_3MjQzOTM5MDUwN">
+		               <i class="heart icon js-fp-like no-events "></i>
+		            </a>
+				</div>
+				<div role="img" class="ui image photo4 mb1p res-photo-thumbnail js-heart-container lazy-feed-load" data-type="journey" data-photo_id="u_5MTIxNzQwMjE0M" data-index="2" alt="" data-original="https://b.zmtcdn.com/data/reviews_photos/e83/762a0a7850d33a1a71d0f23abb1bfe83_1507948871.jpg?fit=around%7C200%3A200&amp;crop=200%3A200%3B%2A%2C%2A" style="background-image:url('https://b.zmtcdn.com/images/photoback.png');">
+					<a class="ui right corner label js-btn-like" data-photo_id="u_5MTIxNzQwMjE0M">
+		               <i class="heart icon js-fp-like no-events "></i>
+		            </a>
+				</div>
+				<div role="img" class="ui image photo4 mr1p res-photo-thumbnail js-heart-container lazy-feed-load" data-type="journey" data-photo_id="u_A4MDQ5NTE1MDAx" data-index="3" alt="" data-original="https://b.zmtcdn.com/data/reviews_photos/ed7/336420171c9e28ef692ca5e4a3b84ed7_1507948849.jpg?fit=around%7C200%3A200&amp;crop=200%3A200%3B%2A%2C%2A" style="background-image:url('https://b.zmtcdn.com/images/photoback.png');">
+					<a class="ui right corner label js-btn-like" data-photo_id="u_A4MDQ5NTE1MDAx">
+		               <i class="heart icon js-fp-like no-events "></i>
+		            </a>
+				</div>
+          <div class="photomore res-photo-thumbnail photo4" data-type="journey" data-photo_id="u_A4OTA4MDkNTA4M" data-index="4">
+          	<span class="photomore__count pos-absolute ptop2 ml2n mtop0">+40</span>
+          </div>
+				
+				<div class="clear"></div>
+
+                    			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+	</div>
+
+		<div class="diagonal-stripes"></div>
+	<div class="clear"></div>
+</div>
+</div>
+<div class="ui segments res-review-body res-review clearfix act--food-journey feedroot js-activity-root res-review stupendousact" data-groupid="A:13:27807550:2017-10-14:32054617" data-review_id="32054617" style="padding:0px;">
+
+        
+      <div class="ui segment brtop">
+
+	<div class="act__heading">
+		<div class="mb5">
+<div class="ui list snippet-restaurant " data-res-id="18505228">
+  
+    <div class="item">
+                    <a href="https://www.zomato.com/hyderabad/smoky-pitara-1-jubilee-hills" class="left mr10 res_image">
+          <img alt="Smoky Pitara" class="lazy-inv-image-rest-snippet brstd ui mini image" src="https://b.zmtcdn.com/images/res_avatar_120_1x_new.png" data-original="https://b.zmtcdn.com/data/pictures/8/18505228/987b2aff89589dd5becae171ac724f7b_featured_v2.jpg?fit=around%7C50%3A50&amp;crop=50%3A50%3B%2A%2C%2A"  />
+        </a>
+            
+    <div class="   content  ">
+    <div class="">
+    		      
+    
+    
+    <div class="header nowrap">
+          <a class="res_name" href="https://www.zomato.com/hyderabad/smoky-pitara-1-jubilee-hills" data-entity_id="18505228" data-entity_type="RESTAURANT">Smoky Pitara</a>
+    </div>
+    <a href="https://www.zomato.com/hyderabad/jubilee-hills-restaurants" title="Jubilee Hills">
+          <span class="grey-text fontsize5">Jubilee Hills, Hyderabad</span>
+    </a>
+       
+
+        </div>
+        </div>
+
+    </div>
+</div>
+</div>
+	</div>
+  
+  
+	        <div class="fs12px pb5 clearfix">
+        <a href="https://www.zomato.com/review/AZPXrq" class="res-review-date">
+            <time itemprop="datePublished" datetime="2017-10-14 08:06:16">18 days ago</time>
+        </a>
+            </div>
+    	<div class="act-body mbot0">
+
+		<div class="actn-cont">
+
+            				<div class="rev-text hidden" style="line-height:20px;word-wrap:break-word">
+					<div class="left"><div aria-label="Rated 4.0" title="Very Good" class="left bold zdhl2 tooltip icon-font-level-7" data-iconr="ù">Rated</div>&nbsp;&nbsp;</div>Smoky pitara,one of the few veg buffet places is a good place to hang out and enjoy some delicious vegetarian delicacies.<br />
+The ambience is really good i loved it very neat decoration.<br />
+I've been here regarding a invite ,the staff were great and quick.The pitaras were little costly i feel according to quantity you get in it,food was quite tasty and delicious.A good restaurant for vegetarians.A-la kat had a wide range of items to pick from. <br />
+It even has a banquet hall which can accommodate 20-200 people easily.<br />
+Overall<br />
+Quality:4.5/5<br />
+Ambience:4/5<br />
+Food:4/5
+					                    <div class="clear"></div>
+				</div>
+				<div class="rev-text-sm" style="line-height:20px;word-wrap:break-word">
+					<div class="rev-text-expand" tabindex="0" style="line-height:20px;">
+						<div class="left"><div aria-label="Rated 4.0" title="Very Good" class="left bold zdhl2 tooltip icon-font-level-7" data-iconr="ù">Rated</div>&nbsp;&nbsp;</div>Smoky pitara,one of the few veg buffet places is a good place to hang out and enjoy some delicious vegetarian delicacies.<br />
+The ambience is really good i loved it very neat decoration.<br />
+I've been here regarding a invite ,the staff were great and quick.The pitaras were little costly i feel according to quantity you get in it,food was quite tasty and delicious.A good restaurant for vegetarians.A-la kat had a wide range of items to pick from. <br />
+It even has a banquet...
+						                            <span role="link" aria-label="read more" class="read-more zred cursor-pointer">read more</span>
+                        					</div>
+					<div class="clear"></div>
+				</div>
+			
+            
+            	                        
+							<div class="thumbs photosContainer mtop0" data-no_redirect="1" data-group_id="A:13:27807550:2017-10-14:32054617">
+
+					<div class="ui tiny images">
+																									    <div class="ui fluid image js-heart-container" data-photo_id="u_DkwMTM1ODM1NDc" aria-label="Matthew Navraj&#039;s review  photo">
+			                      <a href="#" class="lazy-user-photos res-photo-thumbnail" data-type="rev" data-photo_id="u_DkwMTM1ODM1NDc"
+			                      data-index="0">
+			                        <img class="margin0 ui card image lazy" alt="Matthew Navraj&#039;s review  photo" data-type="rev" data-index="1" data-photo_id="u_DkwMTM1ODM1NDc"  data-original="https://b.zmtcdn.com/data/reviews_photos/7ca/482497ccef07200fa0eb5ae234f167ca_1507948577.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A"   src="https://b.zmtcdn.com/images/photoback.png">
+			                      </a>
+			                    </div>
+							
+																															    <div class="ui fluid image js-heart-container" data-photo_id="u_2MjYyMDE4OTE5M" aria-label="Matthew Navraj&#039;s review  photo">
+			                      <a href="#" class="lazy-user-photos res-photo-thumbnail" data-type="rev" data-photo_id="u_2MjYyMDE4OTE5M"
+			                      data-index="1">
+			                        <img class="margin0 ui card image lazy" alt="Matthew Navraj&#039;s review  photo" data-type="rev" data-index="2" data-photo_id="u_2MjYyMDE4OTE5M"  data-original="https://b.zmtcdn.com/data/reviews_photos/214/8d7fc94b405b5c880fef7d382b38a214_1507948577.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A"   src="https://b.zmtcdn.com/images/photoback.png">
+			                      </a>
+			                    </div>
+							
+																															    <div class="ui fluid image js-heart-container" data-photo_id="u_I1NTkxMzM1ODQ5" aria-label="Matthew Navraj&#039;s review  photo">
+			                      <a href="#" class="lazy-user-photos res-photo-thumbnail" data-type="rev" data-photo_id="u_I1NTkxMzM1ODQ5"
+			                      data-index="2">
+			                        <img class="margin0 ui card image lazy" alt="Matthew Navraj&#039;s review  photo" data-type="rev" data-index="3" data-photo_id="u_I1NTkxMzM1ODQ5"  data-original="https://b.zmtcdn.com/data/reviews_photos/90d/b9a9bc8a8a0be500c11efa589e00d90d_1507948578.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A"   src="https://b.zmtcdn.com/images/photoback.png">
+			                      </a>
+			                    </div>
+							
+																															    <div class="ui fluid image js-heart-container" data-photo_id="u_wMjUNDE1ODE2Mz" aria-label="Matthew Navraj&#039;s review  photo">
+			                      <a href="#" class="lazy-user-photos res-photo-thumbnail" data-type="rev" data-photo_id="u_wMjUNDE1ODE2Mz"
+			                      data-index="3">
+			                        <img class="margin0 ui card image lazy" alt="Matthew Navraj&#039;s review  photo" data-type="rev" data-index="4" data-photo_id="u_wMjUNDE1ODE2Mz"  data-original="https://b.zmtcdn.com/data/reviews_photos/ed4/6bbbc7db3806548d2d8fdd4819ac1ed4_1507948579.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A"   src="https://b.zmtcdn.com/images/photoback.png">
+			                      </a>
+			                    </div>
+							
+																																																																																																																																																																																																																												
+										<div class="ui fluid image">
+                        <a class="grey-text left margin0" data-type="rev" data-index="5" data-photo_id="u_zA5MTEyNjgwMTQ" href="#">
+                            <div class="left-photo-count photo-load-more-small">
+                                <img class="margin0 ui card image lazy" src="https://b.zmtcdn.com/images/photoback.png" data-original="https://b.zmtcdn.com/data/reviews_photos/5c2/4d6f3443755908d73ae079b4b0c0e5c2_1507948580.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A">
+                                <div class="overlay res-photo-thumbnail" data-photo_id="u_zA5MTEyNjgwMTQ" data-type="rev">
+                                	<span class="col-s-16 tac">
+                                		+19
+                                	</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+										<div class="clear"></div>
+				</div>
+				</div>
+			</div>
+
+
+
+	</div>
+
+							
+                
+		<div class="left mr5 ui tiny labeled button js-btn-thank" data-action="like" data-active="1" data-reviewid="32054617" data-likes="" aria-label="Like">
+			<div class="compact ui tiny button " data-icon="f">
+								<span>Like</span>
+							</div>
+			<div class="ui basic label  stats-thanks js-thank-count js-activity-like-count zero-likes" data-action_id="32054617" data-action_type="REVIEW" aria-label="0 Likes">
+				0
+			</div>
+		</div>
+
+        <div class="left ui tiny labeled button comment-btn-to">
+            <div class="compact ui tiny button" data-icon="÷">
+                Comment
+            </div>
+            <div class="ui basic label stats-comment" aria-label="0 Comments">
+                0
+            </div>
+        </div>
+
+        
+                    
+            <div class="right">
+            <div class=" left res-review-top-right-text">
+                                                    
+                                    <button class="ui button compact js-btn-share small" aria-label="Share" data-entity-id="32054617" data-entity-type="REVIEW" data-icon="ß">
+                        Share
+                    </button>
+                            </div>
+
+        </div>
+    
+	<div class="clear"></div>
+	</div>
+																	<div class="plr0i ui secondary segment pt0 pb0 brbot js_review_comments_root" data-review_id="32054617" data-fetched_comments_count="0" data-remaining_comments_count="0">
+					<div id="rcr-32054617" class="js_review_comments_root plr15 ui secondary segment remove-segment-border pt0 pb0" data-fetched_comments_count="0" data-remaining_comments_count="0" data-review_id="32054617">
+
+    
+    <div class="  review_comments_container mb0 mt0" data-review_id="32054617" style="max-width: 100% !important;">
+            </div>
+
+                    <div class="bt ui comments mt0 pbot0 ptop0" style="max-width: 100% !important;">
+            <div class="comment">
+                <a class="avatar">
+                    <img data-original="https://b.zmtcdn.com/images/user_avatars/mug_2x.png?fit=around%7C200%3A200&amp;crop=200%3A200%3B%2A%2C%2A" class="lazy round_avatar" src="https://b.zmtcdn.com/images/placeholder_200.png"  alt="">
+                </a>
+                        
+                <div class="content">
+                    <div class="js_review_comment_right review-comment-right dimmer-comment-box pl0i">
+                        <div aria-label="Write a comment... Use @ to tag friends" contenteditable="true" id="review-comment-32054617"  class=" js_review_comment review-comment-textbox" data-placeholder="Write a comment... Use @ to tag friends"></div>
+                        <div class="ui inverted dimmer">
+                            <div class="ui loader"></div>
+                        </div>
+                        <a href="#" class="btn btn-inline review-comment-submit hidden-i hidden" data-active="1">
+                            <span class="default-text">
+                                Submit
+                            </span>
+                            <span class="loading-text"></span>
+                        </a>
+                        <div class="tag-suggestions-container"></div>
+                    </div>
+               </div>
+            </div>
+
+        </div>
+            </div>
+				</div>
+
+			
+  <div class="diagonal-stripes"></div>
+</div>
+<div class='ui segment' role='article'><div class="js-activity-root act act--food-journey feedroot" data-groupid="A:26:27807550:2017-10-13:18505228">
+
+        
+      <div class="act__heading">
+    <div class="mb5">
+<div class="ui list snippet-restaurant nb" data-res-id="18505228">
+  
+    <div class="item">
+                    <a href="https://www.zomato.com/hyderabad/smoky-pitara-1-jubilee-hills" class="left mr10 res_image">
+          <img alt="Smoky Pitara" class="lazy-inv-image-rest-snippet brstd ui mini image" src="https://b.zmtcdn.com/images/res_avatar_120_1x_new.png" data-original="https://b.zmtcdn.com/data/pictures/8/18505228/987b2aff89589dd5becae171ac724f7b_featured_v2.jpg?fit=around%7C50%3A50&amp;crop=50%3A50%3B%2A%2C%2A"  />
+        </a>
+            
+    <div class="   content  ">
+    <div class="">
+    		          <div class="row right floated   hidden ">
+
+		            		    <div tabindex="0" aria-label="Rated " class="res-rating-nf  " data-content="" data-variation="mini" >
+			   
+		    </div>
+        		            </div>
+		      
+    
+    
+    <div class="header nowrap">
+          <a class="res_name" href="https://www.zomato.com/hyderabad/smoky-pitara-1-jubilee-hills" data-entity_id="18505228" data-entity_type="RESTAURANT">Smoky Pitara</a>
+    </div>
+    <a href="https://www.zomato.com/hyderabad/jubilee-hills-restaurants" title="Jubilee Hills">
+          <span class="grey-text fontsize5">Jubilee Hills, Hyderabad</span>
+    </a>
+       
+
+        </div>
+        </div>
+
+    </div>
+</div>
+</div>
+  </div>
+    
+  
+    <div class="act-time" data-act-time="1507909286">19 days ago</div>
+  
+  <div class="clear"></div>
+</div>
+</div><div class="mtr act act--food-journey js-activity-root feedroot stupendousact" data-groupid="A:38:27807550:2017-10-12:18550292" style="padding:0;">
+
+        
+		<div class="ui segment brtop" style="margin-bottom: 0px;">
+	<div class="act__heading">
+		<div class="mb5">
+<div class="ui list snippet-restaurant " data-res-id="18550292">
+  
+    <div class="item">
+                    <a href="https://www.zomato.com/hyderabad/flechazo-madhapur" class="left mr10 res_image">
+          <img alt="Flechazo" class="lazy-inv-image-rest-snippet brstd ui mini image" src="https://b.zmtcdn.com/images/res_avatar_120_1x_new.png" data-original="https://b.zmtcdn.com/data/pictures/2/18550292/acc1c0de9e71e8e8156913fc863bdf1e_featured_v2.jpg?fit=around%7C50%3A50&amp;crop=50%3A50%3B%2A%2C%2A"  />
+        </a>
+            
+    <div class="   content  ">
+    <div class="">
+    		          <div class="row right floated   hidden ">
+
+		            		    <div tabindex="0" aria-label="Rated 4.4" class="res-rating-nf  level-7" data-content="Very Good" data-variation="mini" >
+			   4.4
+		    </div>
+        		            </div>
+		      
+    
+    
+    <div class="header nowrap">
+          <a class="res_name" href="https://www.zomato.com/hyderabad/flechazo-madhapur" data-entity_id="18550292" data-entity_type="RESTAURANT">Flechazo</a>
+    </div>
+    <a href="https://www.zomato.com/hyderabad/madhapur-restaurants" title="Madhapur">
+          <span class="grey-text fontsize5">Madhapur, Hyderabad</span>
+    </a>
+       
+
+        </div>
+        </div>
+
+    </div>
+</div>
+</div>
+	</div>
+	
+	
+	
+	<div class="clearfix"></div>
+	<div class="act-body mt5">
+		<div class="actn-cont">
+
+			<div class="p-relative js-feedPhotoGroup photosContainer photosContainer--food-journey" data-group_id="A:38:27807550:2017-10-12:18550292">
+				
+				
+				
+				
+          			    <div role="img" class="ui image photo2 mr1p res-photo-thumbnail js-heart-container lazy-feed-load" data-type="journey" data-photo_id="u_1ODk0MjAyOTkwM" data-index="0" alt="" data-original="https://b.zmtcdn.com/data/reviews_photos/787/0022c3e2c29966f4f5809910897d7787_1507821018.jpg?fit=around%7C640%3A640&amp;crop=640%3A640%3B%2A%2C%2A" style="background-image:url('https://b.zmtcdn.com/images/photoback.png');">
+			    	<a class="ui right corner label js-btn-like" data-photo_id="u_1ODk0MjAyOTkwM">
+		               <i class="heart icon js-fp-like no-events "></i>
+		            </a>
+				</div>
+				<div role="img" class="ui image photo4 mr1p mb1p res-photo-thumbnail js-heart-container lazy-feed-load" data-type="journey" data-photo_id="u_2MTMyMTg5MTkzN" data-index="1" alt="" data-original="https://b.zmtcdn.com/data/reviews_photos/cc2/5fd0de187149ec1b6a0dae5679c1ccc2_1507821001.jpg?fit=around%7C200%3A200&amp;crop=200%3A200%3B%2A%2C%2A" style="background-image:url('https://b.zmtcdn.com/images/photoback.png');">
+					<a class="ui right corner label js-btn-like" data-photo_id="u_2MTMyMTg5MTkzN">
+		               <i class="heart icon js-fp-like no-events "></i>
+		            </a>
+				</div>
+				<div role="img" class="ui image photo4 mb1p res-photo-thumbnail js-heart-container lazy-feed-load" data-type="journey" data-photo_id="u_3ODYyNjA2NjQ2N" data-index="2" alt="" data-original="https://b.zmtcdn.com/data/reviews_photos/8db/d1d6e51c663576e6b172d120008998db_1507821011.jpg?fit=around%7C200%3A200&amp;crop=200%3A200%3B%2A%2C%2A" style="background-image:url('https://b.zmtcdn.com/images/photoback.png');">
+					<a class="ui right corner label js-btn-like" data-photo_id="u_3ODYyNjA2NjQ2N">
+		               <i class="heart icon js-fp-like no-events "></i>
+		            </a>
+				</div>
+				<div role="img" class="ui image photo4 mr1p res-photo-thumbnail js-heart-container lazy-feed-load" data-type="journey" data-photo_id="u_A5NDk0NjYxMDQ2" data-index="3" alt="" data-original="https://b.zmtcdn.com/data/reviews_photos/274/d0543b55e49df8c363852c6cc1cd2274_1507821014.jpg?fit=around%7C200%3A200&amp;crop=200%3A200%3B%2A%2C%2A" style="background-image:url('https://b.zmtcdn.com/images/photoback.png');">
+					<a class="ui right corner label js-btn-like" data-photo_id="u_A5NDk0NjYxMDQ2">
+		               <i class="heart icon js-fp-like no-events "></i>
+		            </a>
+				</div>
+          <div class="photomore res-photo-thumbnail photo4" data-type="journey" data-photo_id="u_DE3ODMzNTMyMwO" data-index="4">
+          	<span class="photomore__count pos-absolute ptop2 ml2n mtop0">+29</span>
+          </div>
+				
+				<div class="clear"></div>
+
+                    			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+	</div>
+
+		<div class="diagonal-stripes"></div>
+	<div class="clear"></div>
+</div>
+</div>
+<div class="ui segments res-review-body res-review clearfix act--food-journey feedroot js-activity-root res-review stupendousact" data-groupid="A:13:27807550:2017-10-11:32032651" data-review_id="32032651" style="padding:0px;">
+
+        
+      <div class="ui segment brtop">
+
+	<div class="act__heading">
+		<div class="mb5">
+<div class="ui list snippet-restaurant " data-res-id="18550292">
+  
+    <div class="item">
+                    <a href="https://www.zomato.com/hyderabad/flechazo-madhapur" class="left mr10 res_image">
+          <img alt="Flechazo" class="lazy-inv-image-rest-snippet brstd ui mini image" src="https://b.zmtcdn.com/images/res_avatar_120_1x_new.png" data-original="https://b.zmtcdn.com/data/pictures/2/18550292/acc1c0de9e71e8e8156913fc863bdf1e_featured_v2.jpg?fit=around%7C50%3A50&amp;crop=50%3A50%3B%2A%2C%2A"  />
+        </a>
+            
+    <div class="   content  ">
+    <div class="">
+    		      
+    
+    
+    <div class="header nowrap">
+          <a class="res_name" href="https://www.zomato.com/hyderabad/flechazo-madhapur" data-entity_id="18550292" data-entity_type="RESTAURANT">Flechazo</a>
+    </div>
+    <a href="https://www.zomato.com/hyderabad/madhapur-restaurants" title="Madhapur">
+          <span class="grey-text fontsize5">Madhapur, Hyderabad</span>
+    </a>
+       
+
+        </div>
+        </div>
+
+    </div>
+</div>
+</div>
+	</div>
+  
+  
+	        <div class="fs12px pb5 clearfix">
+        <a href="https://www.zomato.com/review/AZEPrz" class="res-review-date">
+            <time itemprop="datePublished" datetime="2017-10-11 23:23:07">21 days ago</time>
+        </a>
+            </div>
+    	<div class="act-body mbot0">
+
+		<div class="actn-cont">
+
+            				<div class="rev-text hidden" style="line-height:20px;word-wrap:break-word">
+					<div class="left"><div aria-label="Rated 4.5" title="Excellent" class="left bold zdhl2 tooltip icon-font-level-8" data-iconr="è">Rated</div>&nbsp;&nbsp;</div>Flechazo ,One of coolest new place in town,with a seating capacity of 270 people is one of the largest restaurant in Hyderabere.The place only offers buffe menu with wide variety of cusines,the ambience, atmosphere, is perfect for a family lunch/dinner.The staff was really great and friendly and would help you with whatever you need.flechazo offers 5 live counters in the buffet which is really awesome.<br />
+Live counters.<br />
+1: conveyer Belt<br />
+2:The big O (pizza)<br />
+3:Pasta <br />
+4:kheema stall and<br />
+5: nitrogen ice cream <br />
+Flechazo buffet really offers great food with very reasonable pricing.The menu keeps changing every week so you won't have to get bored of this wonderful place i would totally recommend this place for a family dinner. <br />
+
+					                    <div class="clear"></div>
+				</div>
+				<div class="rev-text-sm" style="line-height:20px;word-wrap:break-word">
+					<div class="rev-text-expand" tabindex="0" style="line-height:20px;">
+						<div class="left"><div aria-label="Rated 4.5" title="Excellent" class="left bold zdhl2 tooltip icon-font-level-8" data-iconr="è">Rated</div>&nbsp;&nbsp;</div>Flechazo ,One of coolest new place in town,with a seating capacity of 270 people is one of the largest restaurant in Hyderabere.The place only offers buffe menu with wide variety of cusines,the ambience, atmosphere, is perfect for a family lunch/dinner.The staff was really great and friendly and would help you with whatever you need.flechazo offers 5 live counters in the buffet which is really awesome.<br />
+Live counters.<br />
+1: conveyer Belt<br />
+2:The big O (pizza)<br />
+3:Pasta...
+						                            <span role="link" aria-label="read more" class="read-more zred cursor-pointer">read more</span>
+                        					</div>
+					<div class="clear"></div>
+				</div>
+			
+            
+            	                        
+							<div class="thumbs photosContainer mtop0" data-no_redirect="1" data-group_id="A:13:27807550:2017-10-11:32032651">
+
+					<div class="ui tiny images">
+																									    <div class="ui fluid image js-heart-container" data-photo_id="u_EMTA5MzM5MjAxN" aria-label="Matthew Navraj&#039;s review  photo">
+			                      <a href="#" class="lazy-user-photos res-photo-thumbnail" data-type="rev" data-photo_id="u_EMTA5MzM5MjAxN"
+			                      data-index="0">
+			                        <img class="margin0 ui card image lazy" alt="Matthew Navraj&#039;s review  photo" data-type="rev" data-index="1" data-photo_id="u_EMTA5MzM5MjAxN"  data-original="https://b.zmtcdn.com/data/reviews_photos/ff0/688b5b841922e910371b34fc3af0eff0_1507744388.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A"   src="https://b.zmtcdn.com/images/photoback.png">
+			                      </a>
+			                    </div>
+							
+																															    <div class="ui fluid image js-heart-container" data-photo_id="u_xOTI2ODg1NDMwO" aria-label="Matthew Navraj&#039;s review  photo">
+			                      <a href="#" class="lazy-user-photos res-photo-thumbnail" data-type="rev" data-photo_id="u_xOTI2ODg1NDMwO"
+			                      data-index="1">
+			                        <img class="margin0 ui card image lazy" alt="Matthew Navraj&#039;s review  photo" data-type="rev" data-index="2" data-photo_id="u_xOTI2ODg1NDMwO"  data-original="https://b.zmtcdn.com/data/reviews_photos/21b/daa8f070df12de90fc89a2781c9d021b_1507744388.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A"   src="https://b.zmtcdn.com/images/photoback.png">
+			                      </a>
+			                    </div>
+							
+																															    <div class="ui fluid image js-heart-container" data-photo_id="u_TE0OTgxMTQwMjk" aria-label="Matthew Navraj&#039;s review  photo">
+			                      <a href="#" class="lazy-user-photos res-photo-thumbnail" data-type="rev" data-photo_id="u_TE0OTgxMTQwMjk"
+			                      data-index="2">
+			                        <img class="margin0 ui card image lazy" alt="Matthew Navraj&#039;s review  photo" data-type="rev" data-index="3" data-photo_id="u_TE0OTgxMTQwMjk"  data-original="https://b.zmtcdn.com/data/reviews_photos/3cc/2bc1b48548d43078a7ea8663a6e043cc_1507744389.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A"   src="https://b.zmtcdn.com/images/photoback.png">
+			                      </a>
+			                    </div>
+							
+																															    <div class="ui fluid image js-heart-container" data-photo_id="u_jE3MDY1NTkODIz" aria-label="Matthew Navraj&#039;s review  photo">
+			                      <a href="#" class="lazy-user-photos res-photo-thumbnail" data-type="rev" data-photo_id="u_jE3MDY1NTkODIz"
+			                      data-index="3">
+			                        <img class="margin0 ui card image lazy" alt="Matthew Navraj&#039;s review  photo" data-type="rev" data-index="4" data-photo_id="u_jE3MDY1NTkODIz"  data-original="https://b.zmtcdn.com/data/reviews_photos/0dd/392c869bab687a34e713c3810e9ae0dd_1507744389.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A"   src="https://b.zmtcdn.com/images/photoback.png">
+			                      </a>
+			                    </div>
+							
+																																																																																																																																				
+										<div class="ui fluid image">
+                        <a class="grey-text left margin0" data-type="rev" data-index="5" data-photo_id="u_MjM0NjUzMjQ5MD" href="#">
+                            <div class="left-photo-count photo-load-more-small">
+                                <img class="margin0 ui card image lazy" src="https://b.zmtcdn.com/images/photoback.png" data-original="https://b.zmtcdn.com/data/reviews_photos/52c/1eaa1bd2827392daac03c535fc15b52c_1507744392.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A">
+                                <div class="overlay res-photo-thumbnail" data-photo_id="u_MjM0NjUzMjQ5MD" data-type="rev">
+                                	<span class="col-s-16 tac">
+                                		+11
+                                	</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+										<div class="clear"></div>
+				</div>
+				</div>
+			</div>
+
+
+
+	</div>
+
+							
+                
+		<div class="left mr5 ui tiny labeled button js-btn-thank" data-action="like" data-active="1" data-reviewid="32032651" data-likes="1" aria-label="Like">
+			<div class="compact ui tiny button " data-icon="f">
+								<span>Like</span>
+							</div>
+			<div class="ui basic label  stats-thanks js-thank-count js-activity-like-count " data-action_id="32032651" data-action_type="REVIEW" aria-label="1 Likes">
+				1
+			</div>
+		</div>
+
+        <div class="left ui tiny labeled button comment-btn-to">
+            <div class="compact ui tiny button" data-icon="÷">
+                Comment
+            </div>
+            <div class="ui basic label stats-comment" aria-label="0 Comments">
+                0
+            </div>
+        </div>
+
+        
+                    
+            <div class="right">
+            <div class=" left res-review-top-right-text">
+                                                    
+                                    <button class="ui button compact js-btn-share small" aria-label="Share" data-entity-id="32032651" data-entity-type="REVIEW" data-icon="ß">
+                        Share
+                    </button>
+                            </div>
+
+        </div>
+    
+	<div class="clear"></div>
+	</div>
+									
+<div id="rrtr-32032651" class="plr15 pt0 pb5 brbot review-replies-thread-root clearfix ui secondary segment remove-segment-border" data-remaining_replies_count="0" data-fetched_replies_count="1" data-review_id="32032651">
+
+    <div class="ui comments mb0" style="max-width: 100% !important;">
+
+                
+        <div class="review-replies-container mtop">
+                            <div id="rr-3130168" data-comment_id="3130168" class="review-replies-item comment">
+
+    
+        <a href="" class="avatar mt0">
+      <img  src="https://b.zmtcdn.com/images/placeholder_200.png" class="lazy-inv-image ui rounded mini image" style="min-height: 35px;" data-original="https://b.zmtcdn.com/data/pictures/2/18550292/acc1c0de9e71e8e8156913fc863bdf1e_featured_v2.jpg?fit=around%7C200%3A200&amp;crop=200%3A200%3B%2A%2C%2A" alt="Flechazo">
+    </a>
+    
+    <div tabindex="0" class = "review-reply-text zblack content ">
+                <div class="author">Flechazo</div>
+                <div class="text">
+            Dear Mr. Matthew,<br />
+<br />
+Thank you for visiting Flechazo and the wonderful review. We are happy to know that we could delight you with our offerings. Do recommend us to your family and friends. We look forward to seeing you more often.<br />
+<br />
+Regards<br />
+<br />
+<br />
+Team Flechazo
+        </div>
+    </div>
+        
+    <div class="review-replies-links fontsize5">
+            </div>
+</div>
+                    </div>
+
+    </div>
+
+    
+    <div class="hidden mtop0 review-replies-error error-message-highlight"></div>
+</div>
+								<div class="plr0i ui secondary segment pt0 pb0 brbot js_review_comments_root" data-review_id="32032651" data-fetched_comments_count="0" data-remaining_comments_count="0">
+					<div id="rcr-32032651" class="js_review_comments_root plr15 ui secondary segment remove-segment-border pt0 pb0" data-fetched_comments_count="0" data-remaining_comments_count="0" data-review_id="32032651">
+
+    
+    <div class="  review_comments_container mb0 mt0" data-review_id="32032651" style="max-width: 100% !important;">
+            </div>
+
+                    <div class="bt ui comments mt0 pbot0 ptop0" style="max-width: 100% !important;">
+            <div class="comment">
+                <a class="avatar">
+                    <img data-original="https://b.zmtcdn.com/images/user_avatars/mug_2x.png?fit=around%7C200%3A200&amp;crop=200%3A200%3B%2A%2C%2A" class="lazy round_avatar" src="https://b.zmtcdn.com/images/placeholder_200.png"  alt="">
+                </a>
+                        
+                <div class="content">
+                    <div class="js_review_comment_right review-comment-right dimmer-comment-box pl0i">
+                        <div aria-label="Write a comment... Use @ to tag friends" contenteditable="true" id="review-comment-32032651"  class=" js_review_comment review-comment-textbox" data-placeholder="Write a comment... Use @ to tag friends"></div>
+                        <div class="ui inverted dimmer">
+                            <div class="ui loader"></div>
+                        </div>
+                        <a href="#" class="btn btn-inline review-comment-submit hidden-i hidden" data-active="1">
+                            <span class="default-text">
+                                Submit
+                            </span>
+                            <span class="loading-text"></span>
+                        </a>
+                        <div class="tag-suggestions-container"></div>
+                    </div>
+               </div>
+            </div>
+
+        </div>
+            </div>
+				</div>
+
+			
+  <div class="diagonal-stripes"></div>
+</div>
+<div class='ui segment' role='article'><div class="js-activity-root act act--food-journey feedroot" data-groupid="A:26:27807550:2017-10-11:18550292">
+
+        
+      <div class="act__heading">
+    <div class="mb5">
+<div class="ui list snippet-restaurant nb" data-res-id="18550292">
+  
+    <div class="item">
+                    <a href="https://www.zomato.com/hyderabad/flechazo-madhapur" class="left mr10 res_image">
+          <img alt="Flechazo" class="lazy-inv-image-rest-snippet brstd ui mini image" src="https://b.zmtcdn.com/images/res_avatar_120_1x_new.png" data-original="https://b.zmtcdn.com/data/pictures/2/18550292/acc1c0de9e71e8e8156913fc863bdf1e_featured_v2.jpg?fit=around%7C50%3A50&amp;crop=50%3A50%3B%2A%2C%2A"  />
+        </a>
+            
+    <div class="   content  ">
+    <div class="">
+    		          <div class="row right floated   hidden ">
+
+		            		    <div tabindex="0" aria-label="Rated " class="res-rating-nf  " data-content="" data-variation="mini" >
+			   
+		    </div>
+        		            </div>
+		      
+    
+    
+    <div class="header nowrap">
+          <a class="res_name" href="https://www.zomato.com/hyderabad/flechazo-madhapur" data-entity_id="18550292" data-entity_type="RESTAURANT">Flechazo</a>
+    </div>
+    <a href="https://www.zomato.com/hyderabad/madhapur-restaurants" title="Madhapur">
+          <span class="grey-text fontsize5">Madhapur, Hyderabad</span>
+    </a>
+       
+
+        </div>
+        </div>
+
+    </div>
+</div>
+</div>
+  </div>
+    
+  
+    <div class="act-time" data-act-time="1507743469">21 days ago</div>
+  
+  <div class="clear"></div>
+</div>
+</div><div class="ui segments res-review-body res-review clearfix act--food-journey feedroot js-activity-root res-review stupendousact" data-groupid="A:13:27807550:2017-09-30:31900331" data-review_id="31900331" style="padding:0px;">
+
+        
+      <div class="ui segment brtop">
+
+	<div class="act__heading">
+		<div class="mb5">
+<div class="ui list snippet-restaurant " data-res-id="92432">
+  
+    <div class="item">
+                    <a href="https://www.zomato.com/hyderabad/prana-manasarovar-the-fern-hotel-begumpet" class="left mr10 res_image">
+          <img alt="Prana - Manasarovar - The Fern Hotel" class="lazy-inv-image-rest-snippet brstd ui mini image" src="https://b.zmtcdn.com/images/res_avatar_120_1x_new.png" data-original="https://b.zmtcdn.com/data/pictures/2/92432/7d8f133a445007d9622b08ea6ce4571a_featured_v2.jpg?fit=around%7C50%3A50&amp;crop=50%3A50%3B%2A%2C%2A"  />
+        </a>
+            
+    <div class="   content  ">
+    <div class="">
+    		      
+    
+    
+    <div class="header nowrap">
+          <a class="res_name" href="https://www.zomato.com/hyderabad/prana-manasarovar-the-fern-hotel-begumpet" data-entity_id="92432" data-entity_type="RESTAURANT">Prana - Manasarovar - The Fern Hotel</a>
+    </div>
+    <a href="https://www.zomato.com/hyderabad/begumpet-restaurants" title="Begumpet">
+          <span class="grey-text fontsize5">Begumpet, Hyderabad</span>
+    </a>
+       
+
+        </div>
+        </div>
+
+    </div>
+</div>
+</div>
+	</div>
+  
+  
+	        <div class="fs12px pb5 clearfix">
+        <a href="https://www.zomato.com/review/PxdnRK" class="res-review-date">
+            <time itemprop="datePublished" datetime="2017-09-30 14:49:31">one month ago</time>
+        </a>
+            </div>
+    	<div class="act-body mbot0">
+
+		<div class="actn-cont">
+
+            				<div class="rev-text hidden" style="line-height:20px;word-wrap:break-word">
+					<div class="left"><div aria-label="Rated 4.0" title="Very Good" class="left bold zdhl2 tooltip icon-font-level-7" data-iconr="ù">Rated</div>&nbsp;&nbsp;</div>Prana ,Mansarovar The Fern an Ecotel hotel with various eco friendly initiatives.The hotel Prana, recently opened their restaurant to the public to try out their delicious menu.<br />
+The Place is really smooth and appealing to the eyes the Ambience is just perfect with mild music.The decoration was really great and tidy but little bit of maintenance is required here and there around the cornor apart from that the Restaurant is great.<br />
+The hospitality was great with warm greetings and friendly staff and quick to serve you with the menu.<br />
+People looking for a corporate meetings for more than 30 people can contact the Chef and tell your personal preferences in food.<br />
+The food was really Great and tasty the prices are reasonable for a lovely place but the buffet need a little of improvement as they give just one starter in non-veg and two in veg.<br />
+The desserts were really great with some good variety for your sweet tooth!<br />
+My personal Favourite was<br />
+Murgh Reshmi Kebab so do try this of you visit.<br />
+Food:4/5<br />
+Ambience:4.5/5<br />
+Hospitality:5/5<br />
+Feel:4.5/5<br />
+
+					                    <div class="clear"></div>
+				</div>
+				<div class="rev-text-sm" style="line-height:20px;word-wrap:break-word">
+					<div class="rev-text-expand" tabindex="0" style="line-height:20px;">
+						<div class="left"><div aria-label="Rated 4.0" title="Very Good" class="left bold zdhl2 tooltip icon-font-level-7" data-iconr="ù">Rated</div>&nbsp;&nbsp;</div>Prana ,Mansarovar The Fern an Ecotel hotel with various eco friendly initiatives.The hotel Prana, recently opened their restaurant to the public to try out their delicious menu.<br />
+The Place is really smooth and appealing to the eyes the Ambience is just perfect with mild music.The decoration was really great and tidy but little bit of maintenance is required here and there around the cornor apart from that the Restaurant is great.<br />
+The hospitality was great with...
+						                            <span role="link" aria-label="read more" class="read-more zred cursor-pointer">read more</span>
+                        					</div>
+					<div class="clear"></div>
+				</div>
+			
+            
+            	                        
+							<div class="thumbs photosContainer mtop0" data-no_redirect="1" data-group_id="A:13:27807550:2017-09-30:31900331">
+
+					<div class="ui tiny images">
+																									    <div class="ui fluid image js-heart-container" data-photo_id="u_A3MjU4Mjc3Njk4" aria-label="Matthew Navraj&#039;s review  photo">
+			                      <a href="#" class="lazy-user-photos res-photo-thumbnail" data-type="rev" data-photo_id="u_A3MjU4Mjc3Njk4"
+			                      data-index="0">
+			                        <img class="margin0 ui card image lazy" alt="Matthew Navraj&#039;s review  photo" data-type="rev" data-index="1" data-photo_id="u_A3MjU4Mjc3Njk4"  data-original="https://b.zmtcdn.com/data/reviews_photos/e57/560ff73ed3c99c6c054816cc8a5b8e57_1506763171.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A"   src="https://b.zmtcdn.com/images/photoback.png">
+			                      </a>
+			                    </div>
+							
+																															    <div class="ui fluid image js-heart-container" data-photo_id="u_k2MTYyNDc2Mzg2" aria-label="Matthew Navraj&#039;s review  photo">
+			                      <a href="#" class="lazy-user-photos res-photo-thumbnail" data-type="rev" data-photo_id="u_k2MTYyNDc2Mzg2"
+			                      data-index="1">
+			                        <img class="margin0 ui card image lazy" alt="Matthew Navraj&#039;s review  photo" data-type="rev" data-index="2" data-photo_id="u_k2MTYyNDc2Mzg2"  data-original="https://b.zmtcdn.com/data/reviews_photos/3e8/41d1dfa0416e6ab15ca8ddc9a840d3e8_1506763172.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A"   src="https://b.zmtcdn.com/images/photoback.png">
+			                      </a>
+			                    </div>
+							
+																															    <div class="ui fluid image js-heart-container" data-photo_id="u_UyMzQ5NzkzMzI4" aria-label="Matthew Navraj&#039;s review  photo">
+			                      <a href="#" class="lazy-user-photos res-photo-thumbnail" data-type="rev" data-photo_id="u_UyMzQ5NzkzMzI4"
+			                      data-index="2">
+			                        <img class="margin0 ui card image lazy" alt="Matthew Navraj&#039;s review  photo" data-type="rev" data-index="3" data-photo_id="u_UyMzQ5NzkzMzI4"  data-original="https://b.zmtcdn.com/data/reviews_photos/bbf/675211d1d7566ef1d7a9d24e07cffbbf_1506763172.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A"   src="https://b.zmtcdn.com/images/photoback.png">
+			                      </a>
+			                    </div>
+							
+																															    <div class="ui fluid image js-heart-container" data-photo_id="u_QzOTg3MjE1NTk1" aria-label="Matthew Navraj&#039;s review  photo">
+			                      <a href="#" class="lazy-user-photos res-photo-thumbnail" data-type="rev" data-photo_id="u_QzOTg3MjE1NTk1"
+			                      data-index="3">
+			                        <img class="margin0 ui card image lazy" alt="Matthew Navraj&#039;s review  photo" data-type="rev" data-index="4" data-photo_id="u_QzOTg3MjE1NTk1"  data-original="https://b.zmtcdn.com/data/reviews_photos/6bb/b6708eadad1abff4f09432c92616f6bb_1506763173.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A"   src="https://b.zmtcdn.com/images/photoback.png">
+			                      </a>
+			                    </div>
+							
+																																																																																																																																																																																																						
+										<div class="ui fluid image">
+                        <a class="grey-text left margin0" data-type="rev" data-index="5" data-photo_id="u_Q1NTIxNTI5MzQx" href="#">
+                            <div class="left-photo-count photo-load-more-small">
+                                <img class="margin0 ui card image lazy" src="https://b.zmtcdn.com/images/photoback.png" data-original="https://b.zmtcdn.com/data/reviews_photos/106/2f0e5b5a3a65ee91973ef1e5e6873106_1506763173.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A">
+                                <div class="overlay res-photo-thumbnail" data-photo_id="u_Q1NTIxNTI5MzQx" data-type="rev">
+                                	<span class="col-s-16 tac">
+                                		+17
+                                	</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+										<div class="clear"></div>
+				</div>
+				</div>
+			</div>
+
+
+
+	</div>
+
+							
+                
+		<div class="left mr5 ui tiny labeled button js-btn-thank" data-action="like" data-active="1" data-reviewid="31900331" data-likes="" aria-label="Like">
+			<div class="compact ui tiny button " data-icon="f">
+								<span>Like</span>
+							</div>
+			<div class="ui basic label  stats-thanks js-thank-count js-activity-like-count zero-likes" data-action_id="31900331" data-action_type="REVIEW" aria-label="0 Likes">
+				0
+			</div>
+		</div>
+
+        <div class="left ui tiny labeled button comment-btn-to">
+            <div class="compact ui tiny button" data-icon="÷">
+                Comment
+            </div>
+            <div class="ui basic label stats-comment" aria-label="0 Comments">
+                0
+            </div>
+        </div>
+
+        
+                    
+            <div class="right">
+            <div class=" left res-review-top-right-text">
+                                                    
+                                    <button class="ui button compact js-btn-share small" aria-label="Share" data-entity-id="31900331" data-entity-type="REVIEW" data-icon="ß">
+                        Share
+                    </button>
+                            </div>
+
+        </div>
+    
+	<div class="clear"></div>
+	</div>
+																	<div class="plr0i ui secondary segment pt0 pb0 brbot js_review_comments_root" data-review_id="31900331" data-fetched_comments_count="0" data-remaining_comments_count="0">
+					<div id="rcr-31900331" class="js_review_comments_root plr15 ui secondary segment remove-segment-border pt0 pb0" data-fetched_comments_count="0" data-remaining_comments_count="0" data-review_id="31900331">
+
+    
+    <div class="  review_comments_container mb0 mt0" data-review_id="31900331" style="max-width: 100% !important;">
+            </div>
+
+                    <div class="bt ui comments mt0 pbot0 ptop0" style="max-width: 100% !important;">
+            <div class="comment">
+                <a class="avatar">
+                    <img data-original="https://b.zmtcdn.com/images/user_avatars/mug_2x.png?fit=around%7C200%3A200&amp;crop=200%3A200%3B%2A%2C%2A" class="lazy round_avatar" src="https://b.zmtcdn.com/images/placeholder_200.png"  alt="">
+                </a>
+                        
+                <div class="content">
+                    <div class="js_review_comment_right review-comment-right dimmer-comment-box pl0i">
+                        <div aria-label="Write a comment... Use @ to tag friends" contenteditable="true" id="review-comment-31900331"  class=" js_review_comment review-comment-textbox" data-placeholder="Write a comment... Use @ to tag friends"></div>
+                        <div class="ui inverted dimmer">
+                            <div class="ui loader"></div>
+                        </div>
+                        <a href="#" class="btn btn-inline review-comment-submit hidden-i hidden" data-active="1">
+                            <span class="default-text">
+                                Submit
+                            </span>
+                            <span class="loading-text"></span>
+                        </a>
+                        <div class="tag-suggestions-container"></div>
+                    </div>
+               </div>
+            </div>
+
+        </div>
+            </div>
+				</div>
+
+			
+  <div class="diagonal-stripes"></div>
+</div>
+<div class='ui segment' role='article'><div class="js-activity-root act act--food-journey feedroot" data-groupid="A:26:27807550:2017-09-30:92432">
+
+        
+      <div class="act__heading">
+    <div class="mb5">
+<div class="ui list snippet-restaurant nb" data-res-id="92432">
+  
+    <div class="item">
+                    <a href="https://www.zomato.com/hyderabad/prana-manasarovar-the-fern-hotel-begumpet" class="left mr10 res_image">
+          <img alt="Prana - Manasarovar - The Fern Hotel" class="lazy-inv-image-rest-snippet brstd ui mini image" src="https://b.zmtcdn.com/images/res_avatar_120_1x_new.png" data-original="https://b.zmtcdn.com/data/pictures/2/92432/7d8f133a445007d9622b08ea6ce4571a_featured_v2.jpg?fit=around%7C50%3A50&amp;crop=50%3A50%3B%2A%2C%2A"  />
+        </a>
+            
+    <div class="   content  ">
+    <div class="">
+    		          <div class="row right floated   hidden ">
+
+		            		    <div tabindex="0" aria-label="Rated " class="res-rating-nf  " data-content="" data-variation="mini" >
+			   
+		    </div>
+        		            </div>
+		      
+    
+    
+    <div class="header nowrap">
+          <a class="res_name" href="https://www.zomato.com/hyderabad/prana-manasarovar-the-fern-hotel-begumpet" data-entity_id="92432" data-entity_type="RESTAURANT">Prana - Manasarovar - The Fern Hotel</a>
+    </div>
+    <a href="https://www.zomato.com/hyderabad/begumpet-restaurants" title="Begumpet">
+          <span class="grey-text fontsize5">Begumpet, Hyderabad</span>
+    </a>
+       
+
+        </div>
+        </div>
+
+    </div>
+</div>
+</div>
+  </div>
+    
+  
+    <div class="act-time" data-act-time="1506762895">one month ago</div>
+  
+  <div class="clear"></div>
+</div>
+</div><div class="ui segments res-review-body res-review clearfix act--food-journey feedroot js-activity-root res-review stupendousact" data-groupid="A:13:27807550:2017-09-25:31849607" data-review_id="31849607" style="padding:0px;">
+
+        
+      <div class="ui segment brtop">
+
+	<div class="act__heading">
+		<div class="mb5">
+<div class="ui list snippet-restaurant " data-res-id="18565417">
+  
+    <div class="item">
+                    <a href="https://www.zomato.com/cream-tap-food-truck" class="left mr10 res_image">
+          <img alt="Cream Tap" class="lazy-inv-image-rest-snippet brstd ui mini image" src="https://b.zmtcdn.com/images/res_avatar_120_1x_new.png" data-original="https://b.zmtcdn.com/images/res_avatar_476_320_1x_new.png?fit=around%7C50%3A50&amp;crop=50%3A50%3B%2A%2C%2A"  />
+        </a>
+            
+    <div class="   content  ">
+    <div class="">
+    		      
+    
+    
+    <div class="header nowrap">
+          <a class="res_name" href="https://www.zomato.com/cream-tap-food-truck" data-entity_id="18565417" data-entity_type="RESTAURANT">Cream Tap</a>
+    </div>
+    <a href="https://www.zomato.com/hyderabad/madhapur-restaurants" title="Madhapur">
+          <span class="grey-text fontsize5">Madhapur, Hyderabad</span>
+    </a>
+       
+
+        </div>
+        </div>
+
+    </div>
+</div>
+</div>
+	</div>
+  
+  
+	        <div class="fs12px pb5 clearfix">
+        <a href="https://www.zomato.com/review/ZvpnXR" class="res-review-date">
+            <time itemprop="datePublished" datetime="2017-09-25 11:06:25">one month ago</time>
+        </a>
+            </div>
+    	<div class="act-body mbot0">
+
+		<div class="actn-cont">
+
+            				<div class="rev-text" tabindex="0" style="line-height:20px;word-wrap:break-word">
+					<div class="left"><div aria-label="Rated 4.0" title="Very Good" class="left bold zdhl2 tooltip icon-font-level-7" data-iconr="ù">Rated</div>&nbsp;&nbsp;</div>Cream tap offers you a vide variety thick milkshakes which everyone loves😍. It had got it's own Cream Tap bottles they serve in which are really cute and guess what ? You can take away the bottle after your done with your delicious milkshakes.Great milkshakes with very affordable price do visit.Dont forgot to sketch your names while leaving on the truck. 😎👽
+					                    <div class="clear"></div>
+				</div>
+            
+            
+            	                        
+							<div class="thumbs photosContainer mtop0" data-no_redirect="1" data-group_id="A:13:27807550:2017-09-25:31849607">
+
+					<div class="ui tiny images">
+																									    <div class="ui fluid image js-heart-container" data-photo_id="u_xNzM4NzIxOTA5N" aria-label="Matthew Navraj&#039;s review  photo">
+			                      <a href="#" class="lazy-user-photos res-photo-thumbnail" data-type="rev" data-photo_id="u_xNzM4NzIxOTA5N"
+			                      data-index="0">
+			                        <img class="margin0 ui card image lazy" alt="Matthew Navraj&#039;s review  photo" data-type="rev" data-index="1" data-photo_id="u_xNzM4NzIxOTA5N"  data-original="https://b.zmtcdn.com/data/reviews_photos/5e5/038c33f5c57bf8a3df5129f1501d75e5_1506317785.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A"   src="https://b.zmtcdn.com/images/photoback.png">
+			                      </a>
+			                    </div>
+							
+																															    <div class="ui fluid image js-heart-container" data-photo_id="u_OTg4NDg2NDExNz" aria-label="Matthew Navraj&#039;s review  photo">
+			                      <a href="#" class="lazy-user-photos res-photo-thumbnail" data-type="rev" data-photo_id="u_OTg4NDg2NDExNz"
+			                      data-index="1">
+			                        <img class="margin0 ui card image lazy" alt="Matthew Navraj&#039;s review  photo" data-type="rev" data-index="2" data-photo_id="u_OTg4NDg2NDExNz"  data-original="https://b.zmtcdn.com/data/reviews_photos/71f/f545eb2e86b06c8162c949b30fe8071f_1506317786.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A"   src="https://b.zmtcdn.com/images/photoback.png">
+			                      </a>
+			                    </div>
+							
+																															    <div class="ui fluid image js-heart-container" data-photo_id="u_zMTYwMDQyNzQzM" aria-label="Matthew Navraj&#039;s review  photo">
+			                      <a href="#" class="lazy-user-photos res-photo-thumbnail" data-type="rev" data-photo_id="u_zMTYwMDQyNzQzM"
+			                      data-index="2">
+			                        <img class="margin0 ui card image lazy" alt="Matthew Navraj&#039;s review  photo" data-type="rev" data-index="3" data-photo_id="u_zMTYwMDQyNzQzM"  data-original="https://b.zmtcdn.com/data/reviews_photos/4e4/5d54e4f8fe617c56fa91ce332b75f4e4_1506317788.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A"   src="https://b.zmtcdn.com/images/photoback.png">
+			                      </a>
+			                    </div>
+							
+																															    <div class="ui fluid image js-heart-container" data-photo_id="u_NTU1MjU1NTg5MT" aria-label="Matthew Navraj&#039;s review  photo">
+			                      <a href="#" class="lazy-user-photos res-photo-thumbnail" data-type="rev" data-photo_id="u_NTU1MjU1NTg5MT"
+			                      data-index="3">
+			                        <img class="margin0 ui card image lazy" alt="Matthew Navraj&#039;s review  photo" data-type="rev" data-index="4" data-photo_id="u_NTU1MjU1NTg5MT"  data-original="https://b.zmtcdn.com/data/reviews_photos/f08/6ef4dc3f7294b5d9d3cb022c87451f08_1506317789.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A"   src="https://b.zmtcdn.com/images/photoback.png">
+			                      </a>
+			                    </div>
+							
+																																	
+										<div class="ui fluid image">
+                        <a class="grey-text left margin0" data-type="rev" data-index="5" data-photo_id="u_NDY5NTM0MDE1ND" href="#">
+                            <div class="left-photo-count photo-load-more-small">
+                                <img class="margin0 ui card image lazy" src="https://b.zmtcdn.com/images/photoback.png" data-original="https://b.zmtcdn.com/data/reviews_photos/582/185010138d32cc1f6b905ceb9ef1f582_1506317790.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A">
+                                <div class="overlay res-photo-thumbnail" data-photo_id="u_NDY5NTM0MDE1ND" data-type="rev">
+                                	<span class="col-s-16 tac">
+                                		+2
+                                	</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+										<div class="clear"></div>
+				</div>
+				</div>
+			</div>
+
+
+
+	</div>
+
+							
+                
+		<div class="left mr5 ui tiny labeled button js-btn-thank" data-action="like" data-active="1" data-reviewid="31849607" data-likes="" aria-label="Like">
+			<div class="compact ui tiny button " data-icon="f">
+								<span>Like</span>
+							</div>
+			<div class="ui basic label  stats-thanks js-thank-count js-activity-like-count zero-likes" data-action_id="31849607" data-action_type="REVIEW" aria-label="0 Likes">
+				0
+			</div>
+		</div>
+
+        <div class="left ui tiny labeled button comment-btn-to">
+            <div class="compact ui tiny button" data-icon="÷">
+                Comment
+            </div>
+            <div class="ui basic label stats-comment" aria-label="0 Comments">
+                0
+            </div>
+        </div>
+
+        
+                    
+            <div class="right">
+            <div class=" left res-review-top-right-text">
+                                                    
+                                    <button class="ui button compact js-btn-share small" aria-label="Share" data-entity-id="31849607" data-entity-type="REVIEW" data-icon="ß">
+                        Share
+                    </button>
+                            </div>
+
+        </div>
+    
+	<div class="clear"></div>
+	</div>
+																	<div class="plr0i ui secondary segment pt0 pb0 brbot js_review_comments_root" data-review_id="31849607" data-fetched_comments_count="0" data-remaining_comments_count="0">
+					<div id="rcr-31849607" class="js_review_comments_root plr15 ui secondary segment remove-segment-border pt0 pb0" data-fetched_comments_count="0" data-remaining_comments_count="0" data-review_id="31849607">
+
+    
+    <div class="  review_comments_container mb0 mt0" data-review_id="31849607" style="max-width: 100% !important;">
+            </div>
+
+                    <div class="bt ui comments mt0 pbot0 ptop0" style="max-width: 100% !important;">
+            <div class="comment">
+                <a class="avatar">
+                    <img data-original="https://b.zmtcdn.com/images/user_avatars/mug_2x.png?fit=around%7C200%3A200&amp;crop=200%3A200%3B%2A%2C%2A" class="lazy round_avatar" src="https://b.zmtcdn.com/images/placeholder_200.png"  alt="">
+                </a>
+                        
+                <div class="content">
+                    <div class="js_review_comment_right review-comment-right dimmer-comment-box pl0i">
+                        <div aria-label="Write a comment... Use @ to tag friends" contenteditable="true" id="review-comment-31849607"  class=" js_review_comment review-comment-textbox" data-placeholder="Write a comment... Use @ to tag friends"></div>
+                        <div class="ui inverted dimmer">
+                            <div class="ui loader"></div>
+                        </div>
+                        <a href="#" class="btn btn-inline review-comment-submit hidden-i hidden" data-active="1">
+                            <span class="default-text">
+                                Submit
+                            </span>
+                            <span class="loading-text"></span>
+                        </a>
+                        <div class="tag-suggestions-container"></div>
+                    </div>
+               </div>
+            </div>
+
+        </div>
+            </div>
+				</div>
+
+			
+  <div class="diagonal-stripes"></div>
+</div>
+<div class='ui segment' role='article'><div class="js-activity-root act act--food-journey feedroot" data-groupid="A:26:27807550:2017-09-25:18565417">
+
+        
+      <div class="act__heading">
+    <div class="mb5">
+<div class="ui list snippet-restaurant nb" data-res-id="18565417">
+  
+    <div class="item">
+                    <a href="https://www.zomato.com/cream-tap-food-truck" class="left mr10 res_image">
+          <img alt="Cream Tap" class="lazy-inv-image-rest-snippet brstd ui mini image" src="https://b.zmtcdn.com/images/res_avatar_120_1x_new.png" data-original="https://b.zmtcdn.com/images/res_avatar_476_320_1x_new.png?fit=around%7C50%3A50&amp;crop=50%3A50%3B%2A%2C%2A"  />
+        </a>
+            
+    <div class="   content  ">
+    <div class="">
+    		          <div class="row right floated   hidden ">
+
+		            		    <div tabindex="0" aria-label="Rated " class="res-rating-nf  " data-content="" data-variation="mini" >
+			   
+		    </div>
+        		            </div>
+		      
+    
+    
+    <div class="header nowrap">
+          <a class="res_name" href="https://www.zomato.com/cream-tap-food-truck" data-entity_id="18565417" data-entity_type="RESTAURANT">Cream Tap</a>
+    </div>
+    <a href="https://www.zomato.com/hyderabad/madhapur-restaurants" title="Madhapur">
+          <span class="grey-text fontsize5">Madhapur, Hyderabad</span>
+    </a>
+       
+
+        </div>
+        </div>
+
+    </div>
+</div>
+</div>
+  </div>
+    
+  
+    <div class="act-time" data-act-time="1506317313">one month ago</div>
+  
+  <div class="clear"></div>
+</div>
+</div><div class="mtr act act--food-journey js-activity-root feedroot stupendousact" data-groupid="A:38:27807550:2017-09-23:18234118" style="padding:0;">
+
+        
+		<div class="ui segment brtop" style="margin-bottom: 0px;">
+	<div class="act__heading">
+		<div class="mb5">
+<div class="ui list snippet-restaurant " data-res-id="18234118">
+  
+    <div class="item">
+                    <a href="https://www.zomato.com/hyderabad/china-bistro-jubilee-hills" class="left mr10 res_image">
+          <img alt="China Bistro" class="lazy-inv-image-rest-snippet brstd ui mini image" src="https://b.zmtcdn.com/images/res_avatar_120_1x_new.png" data-original="https://b.zmtcdn.com/data/pictures/8/18234118/9613279ac8a79ce07a08ece1e0ae7694_featured_v2.jpg?fit=around%7C50%3A50&amp;crop=50%3A50%3B%2A%2C%2A"  />
+        </a>
+            
+    <div class="   content  ">
+    <div class="">
+    		          <div class="row right floated   hidden ">
+
+		            		    <div tabindex="0" aria-label="Rated 4.4" class="res-rating-nf  level-7" data-content="Very Good" data-variation="mini" >
+			   4.4
+		    </div>
+        		            </div>
+		      
+    
+    
+    <div class="header nowrap">
+          <a class="res_name" href="https://www.zomato.com/hyderabad/china-bistro-jubilee-hills" data-entity_id="18234118" data-entity_type="RESTAURANT">China Bistro</a>
+    </div>
+    <a href="https://www.zomato.com/hyderabad/jubilee-hills-restaurants" title="Jubilee Hills">
+          <span class="grey-text fontsize5">Jubilee Hills, Hyderabad</span>
+    </a>
+       
+
+        </div>
+        </div>
+
+    </div>
+</div>
+</div>
+	</div>
+	
+	
+	
+	<div class="clearfix"></div>
+	<div class="act-body mt5">
+		<div class="actn-cont">
+
+			<div class="p-relative js-feedPhotoGroup photosContainer photosContainer--food-journey" data-group_id="A:38:27807550:2017-09-23:18234118">
+				
+				
+				
+				
+          			    <div role="img" class="ui image photo2 mr1p res-photo-thumbnail js-heart-container lazy-feed-load" data-type="journey" data-photo_id="u_0MTQxNzg0MDc0M" data-index="0" alt="" data-original="https://b.zmtcdn.com/data/reviews_photos/d00/9859e9ddebe9521e14a975762f61dd00_1506185548.jpg?fit=around%7C640%3A640&amp;crop=640%3A640%3B%2A%2C%2A" style="background-image:url('https://b.zmtcdn.com/images/photoback.png');">
+			    	<a class="ui right corner label js-btn-like" data-photo_id="u_0MTQxNzg0MDc0M">
+		               <i class="heart icon js-fp-like no-events "></i>
+		            </a>
+				</div>
+				<div role="img" class="ui image photo4 mr1p mb1p res-photo-thumbnail js-heart-container lazy-feed-load" data-type="journey" data-photo_id="u_5MTYyNTgyNjc4N" data-index="1" alt="" data-original="https://b.zmtcdn.com/data/reviews_photos/60e/bd7abcd24cb7542718079f76ba58560e_1506185539.jpg?fit=around%7C200%3A200&amp;crop=200%3A200%3B%2A%2C%2A" style="background-image:url('https://b.zmtcdn.com/images/photoback.png');">
+					<a class="ui right corner label js-btn-like" data-photo_id="u_5MTYyNTgyNjc4N">
+		               <i class="heart icon js-fp-like no-events "></i>
+		            </a>
+				</div>
+				<div role="img" class="ui image photo4 mb1p res-photo-thumbnail js-heart-container lazy-feed-load" data-type="journey" data-photo_id="u_5NzAwNzI2MTcyM" data-index="2" alt="" data-original="https://b.zmtcdn.com/data/reviews_photos/a99/6b1336f9a2b470d0b2189c7387692a99_1506185543.jpg?fit=around%7C200%3A200&amp;crop=200%3A200%3B%2A%2C%2A" style="background-image:url('https://b.zmtcdn.com/images/photoback.png');">
+					<a class="ui right corner label js-btn-like" data-photo_id="u_5NzAwNzI2MTcyM">
+		               <i class="heart icon js-fp-like no-events "></i>
+		            </a>
+				</div>
+				<div role="img" class="ui image photo4 mr1p res-photo-thumbnail js-heart-container lazy-feed-load" data-type="journey" data-photo_id="u_AxMzg4MgNjc0MD" data-index="3" alt="" data-original="https://b.zmtcdn.com/data/reviews_photos/2a3/2fc9d41e7eaa77f78e3ede2779e5c2a3_1506185537.jpg?fit=around%7C200%3A200&amp;crop=200%3A200%3B%2A%2C%2A" style="background-image:url('https://b.zmtcdn.com/images/photoback.png');">
+					<a class="ui right corner label js-btn-like" data-photo_id="u_AxMzg4MgNjc0MD">
+		               <i class="heart icon js-fp-like no-events "></i>
+		            </a>
+				</div>
+          <div class="photomore res-photo-thumbnail photo4" data-type="journey" data-photo_id="u_DI3MjIxOTg0ODg" data-index="4">
+          	<span class="photomore__count pos-absolute ptop2 ml2n mtop0">+19</span>
+          </div>
+				
+				<div class="clear"></div>
+
+                    			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+	</div>
+
+		<div class="diagonal-stripes"></div>
+	<div class="clear"></div>
+</div>
+</div>
+<div class="ui segments res-review-body res-review clearfix act--food-journey feedroot js-activity-root res-review stupendousact" data-groupid="A:13:27807550:2017-09-23:31832050" data-review_id="31832050" style="padding:0px;">
+
+        
+      <div class="ui segment brtop">
+
+	<div class="act__heading">
+		<div class="mb5">
+<div class="ui list snippet-restaurant " data-res-id="18234118">
+  
+    <div class="item">
+                    <a href="https://www.zomato.com/hyderabad/china-bistro-jubilee-hills" class="left mr10 res_image">
+          <img alt="China Bistro" class="lazy-inv-image-rest-snippet brstd ui mini image" src="https://b.zmtcdn.com/images/res_avatar_120_1x_new.png" data-original="https://b.zmtcdn.com/data/pictures/8/18234118/9613279ac8a79ce07a08ece1e0ae7694_featured_v2.jpg?fit=around%7C50%3A50&amp;crop=50%3A50%3B%2A%2C%2A"  />
+        </a>
+            
+    <div class="   content  ">
+    <div class="">
+    		      
+    
+    
+    <div class="header nowrap">
+          <a class="res_name" href="https://www.zomato.com/hyderabad/china-bistro-jubilee-hills" data-entity_id="18234118" data-entity_type="RESTAURANT">China Bistro</a>
+    </div>
+    <a href="https://www.zomato.com/hyderabad/jubilee-hills-restaurants" title="Jubilee Hills">
+          <span class="grey-text fontsize5">Jubilee Hills, Hyderabad</span>
+    </a>
+       
+
+        </div>
+        </div>
+
+    </div>
+</div>
+</div>
+	</div>
+  
+  
+	        <div class="fs12px pb5 clearfix">
+        <a href="https://www.zomato.com/review/mpezXA" class="res-review-date">
+            <time itemprop="datePublished" datetime="2017-09-23 22:13:48">one month ago</time>
+        </a>
+            </div>
+    	<div class="act-body mbot0">
+
+		<div class="actn-cont">
+
+            				<div class="rev-text hidden" style="line-height:20px;word-wrap:break-word">
+					<div class="left"><div aria-label="Rated 4.5" title="Excellent" class="left bold zdhl2 tooltip icon-font-level-8" data-iconr="è">Rated</div>&nbsp;&nbsp;</div>People ,if your looking for some high class authentic Chinese cuisine then i recommend you to head right away to this lovely place.China Bistro😎<br />
+The place was really well maintained and neat the ambiance was excellent.The decoration was fantastic according to the cusine they offer.What i really loved about this restaurant is the staff they are lovely and very polite and neat and will help you with anything you require.<br />
+Coming to the food,the place offered some variety and rare dishes and one of the dishes was KHAO SUEY i just personally loved this dish.<br />
+And coming to others my other favourite was CRIPSY LOTUS STEM it was really really good amd you will love it.<br />
+The Mocktails you get here are amazing and refreshing my favourite was BLUEBERRY PASSION (recommended).<br />
+So my overall experience was very good and i would recommend this place very highly for a good time .<br />
+And they offer some variety of desserts in buffet do try them out 😍.<br />
+<br />
+
+					                    <div class="clear"></div>
+				</div>
+				<div class="rev-text-sm" style="line-height:20px;word-wrap:break-word">
+					<div class="rev-text-expand" tabindex="0" style="line-height:20px;">
+						<div class="left"><div aria-label="Rated 4.5" title="Excellent" class="left bold zdhl2 tooltip icon-font-level-8" data-iconr="è">Rated</div>&nbsp;&nbsp;</div>People ,if your looking for some high class authentic Chinese cuisine then i recommend you to head right away to this lovely place.China Bistro😎<br />
+The place was really well maintained and neat the ambiance was excellent.The decoration was fantastic according to the cusine they offer.What i really loved about this restaurant is the staff they are lovely and very polite and neat and will help you with anything you require.<br />
+Coming to the food,the place offered some...
+						                            <span role="link" aria-label="read more" class="read-more zred cursor-pointer">read more</span>
+                        					</div>
+					<div class="clear"></div>
+				</div>
+			
+            
+            	                        
+							<div class="thumbs photosContainer mtop0" data-no_redirect="1" data-group_id="A:13:27807550:2017-09-23:31832050">
+
+					<div class="ui tiny images">
+																									    <div class="ui fluid image js-heart-container" data-photo_id="u_xMjIxMTkzNjA4M" aria-label="Matthew Navraj&#039;s review  photo">
+			                      <a href="#" class="lazy-user-photos res-photo-thumbnail" data-type="rev" data-photo_id="u_xMjIxMTkzNjA4M"
+			                      data-index="0">
+			                        <img class="margin0 ui card image lazy" alt="Matthew Navraj&#039;s review  photo" data-type="rev" data-index="1" data-photo_id="u_xMjIxMTkzNjA4M"  data-original="https://b.zmtcdn.com/data/reviews_photos/db6/cbe7cd61ff854b25f258bd0fb5211db6_1506185029.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A"   src="https://b.zmtcdn.com/images/photoback.png">
+			                      </a>
+			                    </div>
+							
+																															    <div class="ui fluid image js-heart-container" data-photo_id="u_MDk3MDMzODQ4OD" aria-label="Matthew Navraj&#039;s review  photo">
+			                      <a href="#" class="lazy-user-photos res-photo-thumbnail" data-type="rev" data-photo_id="u_MDk3MDMzODQ4OD"
+			                      data-index="1">
+			                        <img class="margin0 ui card image lazy" alt="Matthew Navraj&#039;s review  photo" data-type="rev" data-index="2" data-photo_id="u_MDk3MDMzODQ4OD"  data-original="https://b.zmtcdn.com/data/reviews_photos/94f/b58b3f02dbb676aaa596604520ca894f_1506185040.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A"   src="https://b.zmtcdn.com/images/photoback.png">
+			                      </a>
+			                    </div>
+							
+																															    <div class="ui fluid image js-heart-container" data-photo_id="u_MTQ3MjgxMTcyMD" aria-label="Matthew Navraj&#039;s review  photo">
+			                      <a href="#" class="lazy-user-photos res-photo-thumbnail" data-type="rev" data-photo_id="u_MTQ3MjgxMTcyMD"
+			                      data-index="2">
+			                        <img class="margin0 ui card image lazy" alt="Matthew Navraj&#039;s review  photo" data-type="rev" data-index="3" data-photo_id="u_MTQ3MjgxMTcyMD"  data-original="https://b.zmtcdn.com/data/reviews_photos/1c8/3333e61cfec3ab8bd7e1846e927d01c8_1506185041.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A"   src="https://b.zmtcdn.com/images/photoback.png">
+			                      </a>
+			                    </div>
+							
+																															    <div class="ui fluid image js-heart-container" data-photo_id="u_E5MDM0MzIxMzY4" aria-label="Matthew Navraj&#039;s review  photo">
+			                      <a href="#" class="lazy-user-photos res-photo-thumbnail" data-type="rev" data-photo_id="u_E5MDM0MzIxMzY4"
+			                      data-index="3">
+			                        <img class="margin0 ui card image lazy" alt="Matthew Navraj&#039;s review  photo" data-type="rev" data-index="4" data-photo_id="u_E5MDM0MzIxMzY4"  data-original="https://b.zmtcdn.com/data/reviews_photos/965/549237fb41a1cb4c19394009c8772965_1506185041.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A"   src="https://b.zmtcdn.com/images/photoback.png">
+			                      </a>
+			                    </div>
+							
+																																																																																																																																																																																																																																																		
+										<div class="ui fluid image">
+                        <a class="grey-text left margin0" data-type="rev" data-index="5" data-photo_id="u_2MjIyNzk0NTI4M" href="#">
+                            <div class="left-photo-count photo-load-more-small">
+                                <img class="margin0 ui card image lazy" src="https://b.zmtcdn.com/images/photoback.png" data-original="https://b.zmtcdn.com/data/reviews_photos/6de/bb1a1e2fa2f1e51c6babd5dc5dd256de_1506185042.jpg?fit=around%7C160%3A160&amp;crop=160%3A160%3B%2A%2C%2A">
+                                <div class="overlay res-photo-thumbnail" data-photo_id="u_2MjIyNzk0NTI4M" data-type="rev">
+                                	<span class="col-s-16 tac">
+                                		+21
+                                	</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+										<div class="clear"></div>
+				</div>
+				</div>
+			</div>
+
+
+
+	</div>
+
+							
+                
+		<div class="left mr5 ui tiny labeled button js-btn-thank" data-action="like" data-active="1" data-reviewid="31832050" data-likes="" aria-label="Like">
+			<div class="compact ui tiny button " data-icon="f">
+								<span>Like</span>
+							</div>
+			<div class="ui basic label  stats-thanks js-thank-count js-activity-like-count zero-likes" data-action_id="31832050" data-action_type="REVIEW" aria-label="0 Likes">
+				0
+			</div>
+		</div>
+
+        <div class="left ui tiny labeled button comment-btn-to">
+            <div class="compact ui tiny button" data-icon="÷">
+                Comment
+            </div>
+            <div class="ui basic label stats-comment" aria-label="0 Comments">
+                0
+            </div>
+        </div>
+
+        
+                    
+            <div class="right">
+            <div class=" left res-review-top-right-text">
+                                                    
+                                    <button class="ui button compact js-btn-share small" aria-label="Share" data-entity-id="31832050" data-entity-type="REVIEW" data-icon="ß">
+                        Share
+                    </button>
+                            </div>
+
+        </div>
+    
+	<div class="clear"></div>
+	</div>
+									
+<div id="rrtr-31832050" class="plr15 pt0 pb5 brbot review-replies-thread-root clearfix ui secondary segment remove-segment-border" data-remaining_replies_count="0" data-fetched_replies_count="1" data-review_id="31832050">
+
+    <div class="ui comments mb0" style="max-width: 100% !important;">
+
+                
+        <div class="review-replies-container mtop">
+                            <div id="rr-3024937" data-comment_id="3024937" class="review-replies-item comment">
+
+    
+        <a href="" class="avatar mt0">
+      <img  src="https://b.zmtcdn.com/images/placeholder_200.png" class="lazy-inv-image ui rounded mini image" style="min-height: 35px;" data-original="https://b.zmtcdn.com/data/pictures/8/18234118/9613279ac8a79ce07a08ece1e0ae7694_featured_v2.jpg?fit=around%7C200%3A200&amp;crop=200%3A200%3B%2A%2C%2A" alt="China Bistro">
+    </a>
+    
+    <div tabindex="0" class = "review-reply-text zblack content ">
+                <div class="author">China Bistro</div>
+                <div class="text">
+            Hi Matthew<br />
+<br />
+Thank you for the amazing review. Our team and chefs will be thrilled to hear your feedback :)<br />
+<br />
+Regards,<br />
+Team China Bistro<br />
+To stay updated on the latest happenings at China Bistro, do follow us on,<br />
+https://www.instagram.com/chinabistrofl/<br />
+https://www.facebook.com/FoodlinkChinaBistro<br />
+https://twitter.com/chinabistrofl
+        </div>
+    </div>
+        
+    <div class="review-replies-links fontsize5">
+            </div>
+</div>
+                    </div>
+
+    </div>
+
+    
+    <div class="hidden mtop0 review-replies-error error-message-highlight"></div>
+</div>
+								<div class="plr0i ui secondary segment pt0 pb0 brbot js_review_comments_root" data-review_id="31832050" data-fetched_comments_count="0" data-remaining_comments_count="0">
+					<div id="rcr-31832050" class="js_review_comments_root plr15 ui secondary segment remove-segment-border pt0 pb0" data-fetched_comments_count="0" data-remaining_comments_count="0" data-review_id="31832050">
+
+    
+    <div class="  review_comments_container mb0 mt0" data-review_id="31832050" style="max-width: 100% !important;">
+            </div>
+
+                    <div class="bt ui comments mt0 pbot0 ptop0" style="max-width: 100% !important;">
+            <div class="comment">
+                <a class="avatar">
+                    <img data-original="https://b.zmtcdn.com/images/user_avatars/mug_2x.png?fit=around%7C200%3A200&amp;crop=200%3A200%3B%2A%2C%2A" class="lazy round_avatar" src="https://b.zmtcdn.com/images/placeholder_200.png"  alt="">
+                </a>
+                        
+                <div class="content">
+                    <div class="js_review_comment_right review-comment-right dimmer-comment-box pl0i">
+                        <div aria-label="Write a comment... Use @ to tag friends" contenteditable="true" id="review-comment-31832050"  class=" js_review_comment review-comment-textbox" data-placeholder="Write a comment... Use @ to tag friends"></div>
+                        <div class="ui inverted dimmer">
+                            <div class="ui loader"></div>
+                        </div>
+                        <a href="#" class="btn btn-inline review-comment-submit hidden-i hidden" data-active="1">
+                            <span class="default-text">
+                                Submit
+                            </span>
+                            <span class="loading-text"></span>
+                        </a>
+                        <div class="tag-suggestions-container"></div>
+                    </div>
+               </div>
+            </div>
+
+        </div>
+            </div>
+				</div>
+
+			
+  <div class="diagonal-stripes"></div>
+</div>
+                    </div>
+    </div>
+            <div class="load-more-feed load-more-fj ui segment tac cursor-pointer mtop mbot zred">Load More</div>
+    </div>
+            </div>
+        </div>
+        
+                    <div class=" col-l-1by3 hom pr0 user-page-right-misc" style="min-height: 600px;">
+                                <div class="clear"></div>
+                                <div class="res-reviews-container ui segment home-page-sidebar zs-following-list mbot0">
+                    
+
+<h4>
+                                Suggested foodies to follow
+                            </h4><div class=" mtop0"><div class="top-foodie-container mt5">
+        <div class="top-user-rev-a mbot0">
+            <div class="ui horizontal list col-s-16" >
+
+  <div class="item col-s-16">
+
+        <img class="ui avatar image left user-pic-lazy" alt="Neha Goud"  src="https://b.zmtcdn.com/images/placeholder_200.png" data-original="https://b.zmtcdn.com/data/user_profile_pictures/edf/48ae03a66002f05728451424f2651edf.jpg?fit=around%7C100%3A100&amp;crop=100%3A100%3B%2A%2C%2A" />
+    
+    <div class="content col-l-11 col-s-13 nowrap">
+
+      <div class="header nowrap">
+
+                  <a href="https://www.zomato.com/Neha_goud" data-entity_id="39803383" >
+            Neha Goud
+          </a>
+                
+                
+      </div>
+
+      <span class="grey-text fontsize5">
+
+                        
+        
+           
+                          43 Reviews
+            
+                    ,
+
+                            397 Followers
+                                          
+              </span>
+    </div>
+
+                <div class="right">
+        <div class="zs-follow-btn-container follow_icon" data-entity-type="USER" data-user-id="39803383" data-is-followed="">
+            <a role="button" aria-label="Follow" class="snippet__follow social-button follow-social zs-follow-user-button" href="#" data-icon="û">
+              Follow
+            </a>
+        </div>
+      </div>
+      
+          
+  </div>
+</div>
+<div class="clear"></div>
+        </div>
+        <div class="top-user-rev-a mbot0">
+            <div class="ui horizontal list col-s-16" >
+
+  <div class="item col-s-16">
+
+        <img class="ui avatar image left user-pic-lazy" alt="Ganny"  src="https://b.zmtcdn.com/images/placeholder_200.png" data-original="https://b.zmtcdn.com/data/user_profile_pictures/db9/cc44335b17a0eb0e151cc1f3359b8db9.jpg?fit=around%7C100%3A100&amp;crop=100%3A100%3B%2A%2C%2A" />
+    
+    <div class="content col-l-11 col-s-13 nowrap">
+
+      <div class="header nowrap">
+
+                  <a href="https://www.zomato.com/Ganny" data-entity_id="2162468" >
+            Ganny
+          </a>
+                
+                
+      </div>
+
+      <span class="grey-text fontsize5">
+
+                        
+        
+           
+                          79 Reviews
+            
+                    ,
+
+                            704 Followers
+                                          
+              </span>
+    </div>
+
+                <div class="right">
+        <div class="zs-follow-btn-container follow_icon" data-entity-type="USER" data-user-id="2162468" data-is-followed="">
+            <a role="button" aria-label="Follow" class="snippet__follow social-button follow-social zs-follow-user-button" href="#" data-icon="û">
+              Follow
+            </a>
+        </div>
+      </div>
+      
+          
+  </div>
+</div>
+<div class="clear"></div>
+        </div>
+        <div class="top-user-rev-a mbot0">
+            <div class="ui horizontal list col-s-16" >
+
+  <div class="item col-s-16">
+
+        <img class="ui avatar image left user-pic-lazy" alt="Jhilik Pal"  src="https://b.zmtcdn.com/images/placeholder_200.png" data-original="https://b.zmtcdn.com/data/user_profile_pictures/170/fba619f03535c27c2a0d0b9417c17170.jpg?fit=around%7C100%3A100&amp;crop=100%3A100%3B%2A%2C%2A" />
+    
+    <div class="content col-l-11 col-s-13 nowrap">
+
+      <div class="header nowrap">
+
+                  <a href="https://www.zomato.com/JhilikDFoodie" data-entity_id="620955" >
+            Jhilik Pal
+          </a>
+                
+                
+      </div>
+
+      <span class="grey-text fontsize5">
+
+                        
+        
+           
+                          52 Reviews
+            
+                    ,
+
+                            521 Followers
+                                          
+              </span>
+    </div>
+
+                <div class="right">
+        <div class="zs-follow-btn-container follow_icon" data-entity-type="USER" data-user-id="620955" data-is-followed="">
+            <a role="button" aria-label="Follow" class="snippet__follow social-button follow-social zs-follow-user-button" href="#" data-icon="û">
+              Follow
+            </a>
+        </div>
+      </div>
+      
+          
+  </div>
+</div>
+<div class="clear"></div>
+        </div>
+        <div class="top-user-rev-a mbot0">
+            <div class="ui horizontal list col-s-16" >
+
+  <div class="item col-s-16">
+
+        <img class="ui avatar image left user-pic-lazy" alt="Ankita Dasila(Experience_With_Bonviveur)"  src="https://b.zmtcdn.com/images/placeholder_200.png" data-original="https://b.zmtcdn.com/data/user_profile_pictures/8cf/5583a8e7e4e6de98a079c5f777d038cf.jpg?fit=around%7C100%3A100&amp;crop=100%3A100%3B%2A%2C%2A" />
+    
+    <div class="content col-l-11 col-s-13 nowrap">
+
+      <div class="header nowrap">
+
+                  <a href="https://www.zomato.com/ankitadasila" data-entity_id="27928484" >
+            Ankita Dasila(Experience_With_Bonviveur)
+          </a>
+                
+                
+      </div>
+
+      <span class="grey-text fontsize5">
+
+                        
+        
+           
+                          89 Reviews
+            
+                    ,
+
+                            515 Followers
+                                          
+              </span>
+    </div>
+
+                <div class="right">
+        <div class="zs-follow-btn-container follow_icon" data-entity-type="USER" data-user-id="27928484" data-is-followed="">
+            <a role="button" aria-label="Follow" class="snippet__follow social-button follow-social zs-follow-user-button" href="#" data-icon="û">
+              Follow
+            </a>
+        </div>
+      </div>
+      
+          
+  </div>
+</div>
+<div class="clear"></div>
+        </div>
+        <div class="top-user-rev-a mbot0">
+            <div class="ui horizontal list col-s-16" >
+
+  <div class="item col-s-16">
+
+        <img class="ui avatar image left user-pic-lazy" alt="Gnana Teja Peddi"  src="https://b.zmtcdn.com/images/placeholder_200.png" data-original="https://b.zmtcdn.com/data/user_profile_pictures/edb/c60d753814c214b6f69568e931d2fedb.jpg?fit=around%7C100%3A100&amp;crop=100%3A100%3B%2A%2C%2A" />
+    
+    <div class="content col-l-11 col-s-13 nowrap">
+
+      <div class="header nowrap">
+
+                  <a href="https://www.zomato.com/gtpeddi" data-entity_id="12089911" >
+            Gnana Teja Peddi
+          </a>
+                
+                
+      </div>
+
+      <span class="grey-text fontsize5">
+
+                        
+        
+           
+                          161 Reviews
+            
+                    ,
+
+                            484 Followers
+                                          
+              </span>
+    </div>
+
+                <div class="right">
+        <div class="zs-follow-btn-container follow_icon" data-entity-type="USER" data-user-id="12089911" data-is-followed="">
+            <a role="button" aria-label="Follow" class="snippet__follow social-button follow-social zs-follow-user-button" href="#" data-icon="û">
+              Follow
+            </a>
+        </div>
+      </div>
+      
+          
+  </div>
+</div>
+<div class="clear"></div>
+        </div></div><div class="clear"></div><div class="clear"></div>
+                                </div>
+                    
+                    
+                </div>
+                                    <div style="max-height: 300px;">
+                        <ins class="adsbygoogle"
+                    style="display:inline-block;width:250px; height:250px"
+                    data-ad-client="ca-pub-7613048120618893"
+                    data-ad-slot="6583270854">
+                    </ins><script type="text/javascript">
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            zomato = window.zomato || {};
+            zomato.shouldLoadGoogleAds = true;
+        </script>                    </div>
+                            </div>
+            </div>
+</div>
+        </div>
+    </div>
+    </div>
+</div>
+<footer id="footer" class=" ">
+    <div class="wrapper">
+        <div class="row">
+            <div class="col-m-10">
+                <h3 class="footer-top logo--footer" tabindex="0">
+                    <a class="logo--header" href="https://www.zomato.com/hyderabad" title="Find the best restaurants, cafés, and bars in Hyderabad">
+    <img src="https://b.zmtcdn.com/images/logo/zomato_logo.svg" alt="Find the best restaurants, cafés, and bars in Hyderabad" width="60px"/>
+</a>
+
+                </h3>
+            </div>
+                            <div class="col-m-6 ptop0">
+                                            <div class="ui dropdown lang-dropdown">
+  <div class="default text" data-icon="g">English</div>
+  <div class="ml10 right"><i data-icon="&#61655;" class="ui white tiny icon"></i></div>  
+  <div class="vertical menu langbox__dropdown" style="min-width: 100%;">
+        	<a class="item" href="https://www.zomato.com/Foodpsyco?lang=cs&amp;user_lang_change=1" style="padding-left: 28px !important;">Čeština</a>
+        	<a class="item" href="https://www.zomato.com/Foodpsyco?lang=en&amp;user_lang_change=1" style="padding-left: 28px !important;">English</a>
+        	<a class="item" href="https://www.zomato.com/Foodpsyco?lang=es&amp;user_lang_change=1" style="padding-left: 28px !important;">Español</a>
+        	<a class="item" href="https://www.zomato.com/Foodpsyco?lang=id&amp;user_lang_change=1" style="padding-left: 28px !important;">Indonesian</a>
+        	<a class="item" href="https://www.zomato.com/Foodpsyco?lang=it&amp;user_lang_change=1" style="padding-left: 28px !important;">Italian</a>
+        	<a class="item" href="https://www.zomato.com/Foodpsyco?lang=pl&amp;user_lang_change=1" style="padding-left: 28px !important;">Polish</a>
+        	<a class="item" href="https://www.zomato.com/Foodpsyco?lang=por&amp;user_lang_change=1" style="padding-left: 28px !important;">Português (BR)</a>
+        	<a class="item" href="https://www.zomato.com/Foodpsyco?lang=pt&amp;user_lang_change=1" style="padding-left: 28px !important;">Português (PT)</a>
+        	<a class="item" href="https://www.zomato.com/Foodpsyco?lang=sk&amp;user_lang_change=1" style="padding-left: 28px !important;">Slovenčina</a>
+        	<a class="item" href="https://www.zomato.com/Foodpsyco?lang=tr&amp;user_lang_change=1" style="padding-left: 28px !important;">Türkçe</a>
+        	<a class="item" href="https://www.zomato.com/Foodpsyco?lang=vi&amp;user_lang_change=1" style="padding-left: 28px !important;">Vietnamese</a>
+      </div>
+</div>                                    </div>
+                    </div>
+
+                <div class="footer_divider"></div>
+        <div class="row">
+            <div class="col-m-4">
+                <h3>About Zomato</h3>
+                <ul class="footer-links--big">
+                    <li>
+                        <a href="https://www.zomato.com/about">
+                            About Us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://culture.zomato.com">
+                            Culture
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://blog.zomato.com">
+                            Blog
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.zomato.com/careers">
+                            Careers
+                        </a>
+                    </li>
+                    <li class="contact-big-footer-link">
+                        <a href="https://www.zomato.com/contact">
+                            Contact
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-m-5">
+                <h3>For Foodies</h3>
+                <ul class="footer-links--big">
+                    <li>
+                        <a href="https://www.zomato.com/policies">
+                            Code of Conduct
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://community.zomato.com">
+                            Community
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.zomato.com/verified">
+                            Verified Users
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.zomato.com/bloggers">
+                            Blogger Help
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://developers.zomato.com">
+                            Developers
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.zomato.com/mobile">
+                            Mobile Apps
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-m-7">
+                <h3>For Restaurants</h3>
+                <div class="row">
+                    <div class="col-m-8">
+                        <ul class="footer-links--big">
+                            <li>
+                                <a href="https://www.zomato.com/addrestaurant">
+                                    Add a Restaurant
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.zomato.com/business">
+                                    Claim your Listing
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.zomato.com/business/apps">
+                                    Business App
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.zomato.com/guidelines/merchant">
+                                    Business Owner Guidelines
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://business-blog.zomato.com/">
+                                    Business Blog
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.zomato.com/business/widgets">
+                                    Restaurant Widgets
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.zomato.com/business">
+                                    Products for Businesses
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-m-8">
+                        <ul class="footer-links--big">
+                            <li>
+                                <a href="https://www.zomato.com/business/advertise">
+                                    Advertise
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.zomato.com/business/order">
+                                    Order
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.zomato.com/book">
+                                    Book
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.zomato.com/trace">
+                                    Trace
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer_divider mt5"></div>
+        <div class="row">
+            <div class="col-m-16"><h3 tabindex="0">Countries</h3></div>
+                                                                    
+                        <div class="col-m-1by5 col-m-4">
+                                    <ul class="footer-links--big">
+                        <li>
+                            <a class="pl5" title="Restaurants in Australia" href="https://www.zomato.com/australia">
+                                Australia
+                            </a>
+                        </li>
+                    </ul>
+                                    <ul class="footer-links--big">
+                        <li>
+                            <a class="pl5" title="Restaurants in Brasil" href="https://www.zomato.com/brasil">
+                                Brasil
+                            </a>
+                        </li>
+                    </ul>
+                                    <ul class="footer-links--big">
+                        <li>
+                            <a class="pl5" title="Restaurants in Canada" href="https://www.zomato.com/canada">
+                                Canada
+                            </a>
+                        </li>
+                    </ul>
+                                    <ul class="footer-links--big">
+                        <li>
+                            <a class="pl5" title="Restaurants in Chile" href="https://www.zomato.com/chile">
+                                Chile
+                            </a>
+                        </li>
+                    </ul>
+                                    <ul class="footer-links--big">
+                        <li>
+                            <a class="pl5" title="Restaurants in Czech Republic" href="https://www.zomato.com/czech-republic">
+                                Czech Republic
+                            </a>
+                        </li>
+                    </ul>
+                            </div>
+                        <div class="col-m-1by5 col-m-4">
+                                    <ul class="footer-links--big">
+                        <li>
+                            <a class="pl5" title="Restaurants in India" href="https://www.zomato.com/india">
+                                India
+                            </a>
+                        </li>
+                    </ul>
+                                    <ul class="footer-links--big">
+                        <li>
+                            <a class="pl5" title="Restaurants in Indonesia" href="https://www.zomato.com/indonesia">
+                                Indonesia
+                            </a>
+                        </li>
+                    </ul>
+                                    <ul class="footer-links--big">
+                        <li>
+                            <a class="pl5" title="Restaurants in Ireland" href="https://www.zomato.com/ireland">
+                                Ireland
+                            </a>
+                        </li>
+                    </ul>
+                                    <ul class="footer-links--big">
+                        <li>
+                            <a class="pl5" title="Restaurants in Italy" href="https://www.zomato.com/italy">
+                                Italy
+                            </a>
+                        </li>
+                    </ul>
+                                    <ul class="footer-links--big">
+                        <li>
+                            <a class="pl5" title="Restaurants in Lebanon" href="https://www.zomato.com/lebanon">
+                                Lebanon
+                            </a>
+                        </li>
+                    </ul>
+                            </div>
+                        <div class="col-m-1by5 col-m-4">
+                                    <ul class="footer-links--big">
+                        <li>
+                            <a class="pl5" title="Restaurants in Malaysia" href="https://www.zomato.com/malaysia">
+                                Malaysia
+                            </a>
+                        </li>
+                    </ul>
+                                    <ul class="footer-links--big">
+                        <li>
+                            <a class="pl5" title="Restaurants in New Zealand" href="https://www.zomato.com/newzealand">
+                                New Zealand
+                            </a>
+                        </li>
+                    </ul>
+                                    <ul class="footer-links--big">
+                        <li>
+                            <a class="pl5" title="Restaurants in Philippines" href="https://www.zomato.com/philippines">
+                                Philippines
+                            </a>
+                        </li>
+                    </ul>
+                                    <ul class="footer-links--big">
+                        <li>
+                            <a class="pl5" title="Restaurants in Poland" href="https://www.zomato.com/poland">
+                                Poland
+                            </a>
+                        </li>
+                    </ul>
+                                    <ul class="footer-links--big">
+                        <li>
+                            <a class="pl5" title="Restaurants in Portugal" href="https://www.zomato.com/portugal">
+                                Portugal
+                            </a>
+                        </li>
+                    </ul>
+                            </div>
+                        <div class="col-m-1by5 col-m-4">
+                                    <ul class="footer-links--big">
+                        <li>
+                            <a class="pl5" title="Restaurants in Qatar" href="https://www.zomato.com/qatar">
+                                Qatar
+                            </a>
+                        </li>
+                    </ul>
+                                    <ul class="footer-links--big">
+                        <li>
+                            <a class="pl5" title="Restaurants in Singapore" href="https://www.zomato.com/singapore-country">
+                                Singapore
+                            </a>
+                        </li>
+                    </ul>
+                                    <ul class="footer-links--big">
+                        <li>
+                            <a class="pl5" title="Restaurants in Slovakia" href="https://www.zomato.com/slovakia">
+                                Slovakia
+                            </a>
+                        </li>
+                    </ul>
+                                    <ul class="footer-links--big">
+                        <li>
+                            <a class="pl5" title="Restaurants in South Africa" href="https://www.zomato.com/southafrica">
+                                South Africa
+                            </a>
+                        </li>
+                    </ul>
+                                    <ul class="footer-links--big">
+                        <li>
+                            <a class="pl5" title="Restaurants in Sri Lanka" href="https://www.zomato.com/srilanka">
+                                Sri Lanka
+                            </a>
+                        </li>
+                    </ul>
+                            </div>
+                        <div class="col-m-1by5 col-m-4">
+                                    <ul class="footer-links--big">
+                        <li>
+                            <a class="pl5" title="Restaurants in Turkey" href="https://www.zomato.com/turkey">
+                                Turkey
+                            </a>
+                        </li>
+                    </ul>
+                                    <ul class="footer-links--big">
+                        <li>
+                            <a class="pl5" title="Restaurants in UAE" href="https://www.zomato.com/uae">
+                                UAE
+                            </a>
+                        </li>
+                    </ul>
+                                    <ul class="footer-links--big">
+                        <li>
+                            <a class="pl5" title="Restaurants in United Kingdom" href="https://www.zomato.com/uk">
+                                United Kingdom
+                            </a>
+                        </li>
+                    </ul>
+                                    <ul class="footer-links--big">
+                        <li>
+                            <a class="pl5" title="Restaurants in United States" href="https://www.zomato.com/united-states">
+                                United States
+                            </a>
+                        </li>
+                    </ul>
+                            </div>
+                    </div>
+        
+        <div class="footer_divider mt5"></div>
+        <div class="row footer_policy_links">
+            <div class="col-m-12">
+                <ul class="footer_horiz_list">
+                   <li>
+                        <a href="https://www.zomato.com/privacy">
+                            Privacy
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.zomato.com/conditions">
+                            Terms
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.zomato.com/api_policy">
+                            API Policy
+                        </a>
+                    </li>
+                     <li>
+                        <a href="https://www.zomato.com/corporate-social-responsibility">
+                            CSR
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.zomato.com/security">
+                            Security
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.zomato.com/directory">
+                            Sitemap
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="social-container col-m-4">
+                <a target="_blank" href="https://twitter.com/zomato"><div class="social-icons twitter" data-icon="&#x74;"></div></a>
+                <a target="_blank" href="https://www.instagram.com/zomato/"><div class="social-icons instagrm" data-icon="&#x34;"></div></a>
+                <a target="_blank" href="https://www.facebook.com/zomato"><div class="social-icons facebook" data-icon="&#xb6;"></div></a>
+            </div>
+        </div>
+
+        <div class="footer_divider"></div>
+        <div class="footer-bottom row">
+            <div class="footer-msg">
+                                   By continuing past this page, you agree to our <a href='http://www.zomato.com/conditions' rel='nofollow'>Terms of Service</a>, <a href='http://www.zomato.com/cookiepolicy' rel='nofollow'>Cookie Policy</a>, <a href='http://www.zomato.com/privacy' rel='nofollow'>Privacy Policy</a> and <a href='http://www.zomato.com/policies' rel='nofollow'>Content Policies</a>. All trademarks are properties of their respective owners. &copy; 2008-2017 - <a href='http://www.zomato.com'>Zomato</a>&trade; Media Pvt Ltd. All rights reserved.
+                            </div>
+        </div>
+        <a href="https://plus.google.com/104017429609258707097" rel="publisher" class="hidden">Find us on Google+</a>
+    </div>
+</footer>
+<div class="search-container" id="search-container"></div>
+<div id="photoviewer_container"></div>
+<div class="clear" id="fb-root"></div>
+
+<script type="text/javascript">
+if (typeof console != "undefined") {
+    console.log("Zomato - For the love of food!");
+    console.log("If looking under the hood is what you like, we\'d love to chat. www.zomato.com/careers");
+}
+</script>
+
+
+<script type="text/javascript">
+    var zomato = zomato || {};
+    zomato.device = zomato.device || {};
+    zomato.device.isMobile = Boolean();
+    zomato.device.isTablet = Boolean();
+    window.isSearchMobile = false;
+    function loadJSnew(path, func) {
+        var s = document.createElement("script");
+        s.src = path;
+        if (typeof func != 'undefined') {
+            s.onload = func;
+        }
+        document.body.appendChild(s);
+    }
+
+    function loadRest() {
+
+        window._B = window._B || {};
+        $(document).on('zreadyPageScripts', function() {
+        ;
+    if (!window.zomato) {
+        window.zomato = {};
+    }
+    window.zomato.O2_SELECTED_ADDRESS_REMEMBER_DURATION = 1/4;
+ window.minstamp = 1506185028;
+                                  window.maxstamp = 1509255665; 
+        if (typeof contextTracker !== "undefined") {
+            contextTracker.init({"page_type":"user","location_id":"6","location_type":"city"});
+        }
+                if(typeof Auth != 'undefined') {
+                if( window.howdy.m == 'facebook' || window.fbst.IS_FB_CONNECTED == true ){
+                    Auth.facebook.loggedin = true;
+                }
+                if ( window.howdy.m == "google" || window.gplus.IS_GPLUS_CONNECTED == true ){
+                    Auth.google.loggedin = true;
+                }
+                if(!window._B.ismobile ){
+                    Auth.doFirstLogin();
+                }
+            }
+        });
+
+        $(document).on('zready', function() {
+        window._B.ismobile = false;window._B.user_device = "desktop";        });
+    }
+
+    function loadjQuery() {
+        loadJSnew("https://static.zmtcdn.com/application/javascript/vendor/require_2.2.0.min.js",function(){
+            require.config({
+                waitSeconds : 30,
+                paths: {
+                    react : '//cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react-with-addons.min',
+                    jquery : '//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min',
+                    reactDom : '//cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react-dom.min',
+                    raven : '//cdn.ravenjs.com/3.3.0/raven.min',
+                    localizedStrings : 'https://www.zomato.com/genjs/t-3a9fdffcc18eaf6ed62ffb81a9abf6b8/l-H4sIAAAAAAAAA0tJLc4uyS-ILyhP1M_JT07MyaxKTYkvLinKzEsv1svNzNPLKgYAdosQTyQAAAA/cl-en/h-3290dd9fa2e350ef3b9e4652c6191630',
+                    adWordRemarketing: "//www.googleadservices.com/pagead/conversion_async"
+                }
+            });
+            require(['jquery'],function($){
+                window.$ = window.jQuery = window.jquery = $;
+                var jscripts = ["https:\/\/static.zmtcdn.com\/genjs\/t-30bf9ddb8d2f2660b02a5a51675b1cba\/l-H4sIAAAAAAAAA32SS3bDMAhFN9Qmi2lHnehgi8gkWLgSSmqvvvIvxRl0Ji6Cx09pyOOpp3i65rdJelA5McRQIOCMWul7iWeFECgG8ynhnfCRDckdpCWmF18Y87lDHjDNxBOwBOur5qq5CbQiN8J8DAe_hu_kWvpGLACfXRAJvOhevwum8TR9SFv1ZjJwqTI1cPUwTCMLeKMLEXhUavOhFmZslSRaineMegA_msDYF2ixqW0Y9NfCBpa2XaYQy2Dw0ImKzT2wjBditixhfi9KL-y5hb0KRO-gVn8nHQ3PCKntLHhO6QBcRH1Ium3b3vcvrkHnkVHRjk8fpHrosOSjWQs-9P8ykAbam6vvAZQatie3X2H1Rq2zNq6vz1TDbJ5_1lISuw6i5_U_U5Mg1VM71yPCFGna0iwiJrHOT0eXBP1S1kSR5iJ-AaJllK4yAwAA\/cl-en\/h-3290dd9fa2e350ef3b9e4652c6191630","https:\/\/static.zmtcdn.com\/genjs\/t-fb29d5e7475c71504e45a8fe5bddebd4\/l-H4sIAAAAAAAAA1WOUQ7CMAxDL8QKk-A8U-lCybQkpUnp2OlZERPiy9KzHecGMLpJD1bRDPJQcYxg6gi54aKQm06PAvnl7kbzpaRZ_KeU5hKR9TiFLGmvZHgi1CEIEbDpoCVGUENhbfaWNx-zpy3BDMH-4SrkTX6TXcGud_3JnV0oakL7zPcjrZjgKktDKzK2c28bflzu1AAAAA\/cl-en\/h-3290dd9fa2e350ef3b9e4652c6191630",2];
+                zomato._loadedScripts = 0;
+                zomato._totalScripts = jscripts[jscripts.length - 1];
+                loadRest();
+                window.onloadScripts = window.onloadScripts || [];
+                require(jscripts);
+                require(window.onloadScripts);
+            });
+                        require(['adWordRemarketing'],function(){
+                /* <![CDATA[ */
+                var google_conversion_id = 955006599;
+                var google_custom_params = window.google_tag_params;
+                var google_remarketing_only = true;
+                window.google_trackConversion({
+                    google_conversion_id,
+                    google_custom_params,
+                    google_remarketing_only
+                });
+                /* ]]> */
+            });
+                        
+            var requireArray = ['react','reactDom','jquery'];
+            
+            require(requireArray, function(React,ReactDOM,$){
+                window.React = React;
+                window.ReactDOM = ReactDOM;
+                var reactScripts = ["https:\/\/static.zmtcdn.com\/genjs\/t-a34236c423d0167ab5a69a333b2e8923\/l-H4sIAAAAAAAAAyvIyC_JL8tMLU8tis9NzMzTyyoGAIkOu2ETAAAA\/cl-en\/h-3290dd9fa2e350ef3b9e4652c6191630",1];
+                require(reactScripts);
+            });
+            
+            
+                require(['raven'],function(Raven){
+                    Raven.config('https://f34d1b6fdb8e400fa09d135b66c2b391@app.getsentry.com/90119').install();
+                });
+
+                    });
+    }
+
+    var zomato = zomato || {};
+    if (window.addEventListener) {
+        window.addEventListener("load", loadjQuery, false);
+    } else if (window.attachEvent) {
+        window.attachEvent("onload", loadjQuery);
+    } else {
+        window.onload = loadjQuery;
+    }
+
+</script>
+
+<script>
+            function trackUserAction(data, type){}
+        </script><script type="text/javascript" >
+            var tdata = tdata || {};tdata["regime"] = "-1";tdata["category"] = "0";tdata["adref"] = "";
+            tdata["fbtrack"] = "29a8ac5aa7540576e82d9562991d4734";
+            tdata["userid"] = "0";
+            tdata["city_id"] = "6";
+            tdata["res_id"] = "";
+            tdata["ref"] = document.referrer;
+            tdata["page"] = document.location.href;
+
+            if (typeof(userActionType) == "undefined") {
+                var userActionType = "pageview";
+            }
+
+            var iscat = getQueryVariable("category", document.referrer);
+            if (iscat != -1) {
+                tdata["category"] = iscat;
+            }
+
+            function trackUserAction(data, type) {
+                data["type"] = type;
+                var get = "";
+                for(i in data) {
+                    if(data[i] != "")
+                        get += encodeURIComponent(i)+"="+encodeURIComponent(data[i])+"&";
+                }
+                (function(d, s) {
+                    var len = document.querySelectorAll("head > script").length;
+                    len = (len > 0) ? len - 1 : 0;
+                    var js, fjs = d.getElementsByTagName(s)[len];
+                    js = d.createElement(s);
+                    js.src = "https://track.zomato.com/php/tracking.php?"+get;
+                    js.async = "true";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, "script"));
+            }
+
+            function getQueryVariable(variable, query) {
+                var query = query.substring(query.indexOf("?") + 1);
+                var vars = query.split("&");
+                for (var i = 0; i < vars.length; i++) {
+                    var pair = vars[i].split("=");
+                    if (decodeURIComponent(pair[0]) == variable) {
+                        return decodeURIComponent(pair[1]);
+                    }
+                }
+                return -1;
+            }
+
+            </script><script>
+                trackUserAction(tdata, userActionType);
+            </script>    <script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"700b8cfba9","applicationID":"5980739","transactionName":"blFbNhZQWkVWUxVaXFcbehcXRVtbGEUSVkEXRFES","queueTime":0,"applicationTime":327,"atts":"QhZMQF5KSRoVUUMJSERJ","errorBeacon":"bam.nr-data.net","agent":""}</script></body>
+</html>
+
+

@@ -80,7 +80,7 @@ def matrix_factorize(R, U, V, C, K, steps=400, alpha=0.1, beta=0.001,w=0.4):
 			eij = a - val
 			ra[i,j] = eij*b
 		ra = ra.tocsc()
-		print "sm"
+		# print "sm"
 		# sys.exit()
 		for i,j,val in zip(R.row, R.col, R.data):
 			v = ra[i,j]
@@ -94,7 +94,7 @@ def matrix_factorize(R, U, V, C, K, steps=400, alpha=0.1, beta=0.001,w=0.4):
 			tot = row.dot(U)
 			V[:,j] = V[:,j] - alpha*(v*(w*U[i,:] + (1-w)*tot) + beta*V[:,j])
 			ne += beta * (np.dot(U[i,:],U[i,:]) + np.dot(V[:,j], V[:,j]))
-		print "hola"
+		# print "hola"
 		ne *= 0.5
 		if ne < 0.001:
 			break
@@ -182,8 +182,8 @@ flag = 1
 if flag == 1:
 	n_u = 3
 	print "for",n_u*1000, "users and", n_u*3000, "items"
-	r_data = np.genfromtxt('rating_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
-	t_data = np.genfromtxt('trust_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
+	r_data = np.genfromtxt('rating3_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
+	t_data = np.genfromtxt('trust3_short_'+ str(n_u)+'_'+ str(3*n_u)+'.txt', dtype=float, delimiter=' ')
 else:
 	print "For full dataset"
 	r_data = np.genfromtxt('dataset/ratings_data.txt', dtype=float, delimiter=' ')
