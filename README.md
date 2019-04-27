@@ -2,21 +2,26 @@
 Trust Based Recommendation systems
 
 Read the following in order:
-TrustAwareRecommenderSystems_Report.pdf
-Trust Aware Recommendation Systems.pdf
-BTP Report 2.pdf
-BTP Evaluation 3.pdf
-BTP Final Report.pdf	
+
+1. TrustAwareRecommenderSystems_Report.pdf
+2. Trust Aware Recommendation Systems.pdf
+3. BTP Report 2.pdf
+4. BTP Evaluation 3.pdf
+5. BTP Final Report.pdf	
 
 I basically implemented multiple papers on trust recommendations:
-ste.py
-sorec.py
-socialmf.py
+
+- ste.py
+- sorec.py
+- socialmf.py
+
 You'll find the PDF of each of the papers in here as well.
 
 Them I made optimised version of them, which take waaay less time to run:
-este.py
-esorec.py
+
+- este.py
+- esorec.py
+
 ("e" here stands for efficiency)
 
 I made a hybrid approach which "I think" gave better results than both, don't remember exactly.
